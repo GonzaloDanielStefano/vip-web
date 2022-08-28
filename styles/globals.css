@@ -14,3 +14,11 @@ a {
 * {
   box-sizing: border-box;
 }
+
+.css-8je8zh-MuiTouchRipple-root {
+  overflow: visible;
+}
+
+.span{
+  overflow: 'visible' !important;
+}
