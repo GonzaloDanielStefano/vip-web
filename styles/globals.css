@@ -22,3 +22,14 @@ a {
 .span{
   overflow: 'visible' !important;
 }
+
+.backgroundNosotros{
+  background: linear-gradient(to right,#2EA082,#2EA082,#2EA082,#477979,#334444,#334444,#334444);
+  /*background-image: url('../public/backgroundNosotros.jpg');*/
+}
+
+.imgNosotros{
+  opacity: 0.6;
+  
+  
+}

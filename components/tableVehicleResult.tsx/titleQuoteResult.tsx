@@ -4,7 +4,7 @@ import "@fontsource/montserrat";
 const TitleQuoteResult = () => {
 
     return(
-        <Grid container sx={{border:'1px solid',textAlign:'start',
+        <Grid container sx={{textAlign:'start',
                 }} columnSpacing={0} 
                 xs={12}>
                     <Grid item 
