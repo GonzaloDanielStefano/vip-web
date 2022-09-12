@@ -245,6 +245,22 @@ export type HealthQuoterRequest = {
   dependents: Dependent [] | null
 }
 
+export type HomeQuoterRequest ={
+  id: string | null
+  typeOfCliente: string | null
+  whatQuote: string | null
+  wayToSecure: string | null
+  typeOfHouse: string | null
+  currency: string | null
+  valueOfHouse: Number | null
+  contentValue: Number | null
+  province: string | null
+  district: string | null
+  phone: string | null
+  email: string | null
+
+}
+
 export type Dependent = {
   born_at: string | null
   relationship: string | null

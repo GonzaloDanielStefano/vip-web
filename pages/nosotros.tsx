@@ -3,11 +3,12 @@ import Image from 'next/image';
 import "@fontsource/montserrat";
 import Card from "../components/nosotros/Card";
 import CardNosotros from "../components/nosotros/Card";
+import { HomeLayout } from "../components/layouts";
 
 const Nosotros = () =>{
 
     return(
-        <>
+        <HomeLayout title={"Corredor de Seguros Vip"} pageDescription={""}>
         <Grid container height={685}  className='backgroundNosotros'>
             
             <Grid item xs={1}>
@@ -302,18 +303,92 @@ const Nosotros = () =>{
                                 ¿Por qué elerginos?
                             </Typography>
                         </Grid>
+                        
+                        <Grid container marginTop={3}>
+                            <Grid item xs={0.8}>
+                                <Image src='/../public/checkIcon.png' width={27} height={27}/>
+                            </Grid>
 
-                        <Grid item xs={2}>
-                            <Image src='/../public/checkIcon.png' width={27} height={27}/>
+                            <Grid item xs={10}>
+                                <Typography
+                                sx={{
+                                    fontFamily:'Montserrat',
+                                    fontStyle:'normal',
+                                    fontSize:'18px',
+                                    lineHeight:'22px',
+                                    color: '#000000'
+                                }}>
+                                Por nuestra experiencia en el mercado asegurador.
+
+                                </Typography>
+                            </Grid>
                         </Grid>
+                        
 
                     </Grid>
 
                     </Box>
                 </Grid>
+
+                <Grid item xs={4} marginLeft={20}>
+                    <Image src='/../public/nosotrosTwoPersonChat.png' width={400} height={390}/>
+                </Grid>
+            </Grid>
+
+            <Grid container marginTop={15}>
+
+                <Grid item xs={6}>
+                    <Typography
+                        sx={{
+                            fontFamily:'Montserrat',
+                            fontStyle:'normal',
+                            fontSize:'25px',
+                            lineHeight:'42px',
+                            color: '#151F6D',
+                            letterSpacing:'-0.02em',
+                            fontWeight:700
+                            }}>
+                            Supervisado por:
+                    </Typography>
+                </Grid>
+
+                <Grid item xs={6}>
+                    <Typography
+                        sx={{
+                            fontFamily:'Montserrat',
+                            fontStyle:'normal',
+                            fontSize:'25px',
+                            lineHeight:'42px',
+                            color: '#151F6D',
+                            letterSpacing:'-0.02em',
+                            fontWeight:700
+                            }}>
+                            Miembro de:
+                    </Typography>
+                </Grid>
+            </Grid>
+
+            <Grid container marginTop={5}>
+                <Grid item xs={5}>
+                    <Image src='/../public/superintendenciaseguro.png' width={315} height={88}/>
+                </Grid>
+
+                <Grid container xs={7} spacing={0}>
+                    <Grid item xs={3}>
+                        <Image src='/../public/apecose.png' width={200} height={85}/>
+                    </Grid>
+
+                    <Grid item xs={3} marginLeft={2}>
+                        <Image src='/../public/copaprose.png' width={200} height={85}/>
+                    </Grid>
+
+                    <Grid item xs={3}  marginLeft={2}>
+                        <Image src='/../public/ccl.png' width={200} height={85}/>
+                    </Grid>
+                </Grid>
             </Grid>
         </Grid>
-        </>
+        </HomeLayout>
     );
 }
 

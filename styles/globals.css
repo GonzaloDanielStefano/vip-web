@@ -33,3 +33,30 @@ a {
   
   
 }
+
+.menu-cross{
+  background:'black';
+  height:'2px';
+  width:'100%';
+  borderRadius: 5px;
+  transition: 'all .5s';
+  transformOrigin:'left';
+}
+/* RESPONSIVE WEB */
+
+
+/*******************************************************NAVBAR*******************************************/
+@media (max-width:1400px){
+      .typeOfUseField {
+        width: 79%;
+      }
+}
+
+@media (max-width:400px){
+  .typeOfUseField {
+    width: 52%;
+    margin-left:18%;
+    margin-top:3%
+  }
+}
+/****************************************FIN RESPONSIVE NAVBAR*******************************************/

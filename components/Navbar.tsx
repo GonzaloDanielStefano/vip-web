@@ -3,7 +3,7 @@ import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Hidden from '@mui/material/Hidden';
 import Toolbar from '@mui/material/Toolbar';
-import {createTheme, ThemeProvider, Grid, Tabs, Menu, MenuItem, Divider,Typography, Tab} from '@mui/material';
+import {createTheme, ThemeProvider, Grid, Tabs, Menu, MenuItem, Divider,Typography, Tab, Button} from '@mui/material';
 import Image from 'next/image'
 import "@fontsource/montserrat";
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
@@ -12,6 +12,7 @@ import TypographyNavBar from './ui/TypographyNavBar';
 import TypographyNavBarImage from './ui/TypographyNavBarImage';
 import { useState } from 'react';
 import { KeyboardArrowRight } from '@mui/icons-material';
+import Link from 'next/link';
 
 
 
@@ -26,7 +27,7 @@ import { KeyboardArrowRight } from '@mui/icons-material';
        // setOpen(!open);
     }
     const [value, setValue] = useState();
-    async function handleChange (event) {
+    async function handleChange (event:any) {
         setValue(event.target.value);
       };
   return (
@@ -38,53 +39,142 @@ import { KeyboardArrowRight } from '@mui/icons-material';
       }}>
         <Toolbar>
             <Grid container>
-                <Grid item xs={6} lg={3}>
-                    <div style={{width:"138.3px", height:"57", marginLeft:"12.19%", marginRight:"10%"}}>
-                    <Image src={'/../public/logoVipHeader.jpg'} width={138.3} height={57} 
-                    />
-                    </div>
+
+                
+                <Grid item xs={1} sm={1} md={0.5} lg={0.5} xl={0}>
+
                 </Grid>
                 
-                <Hidden xsDown smDown >
-                <Grid item xs={4} lg={4}>
-                    <Tabs  >
-                    <TypographyNavBar title={'Nosotros'} color={'primary'} />
-                    
 
+                <Grid item xs={4} sm={3} md={2} lg={2.5} xl={2} margin='0px auto'>
+                    <Link href='/'>
+                        <a>
+                            <Image src={'/../public/logoVipHeader.jpg'} width={138.3} height={57}/>
+                        </a>
+                    </Link>
                     
-                    <TypographyNavBarImage src={'/../public/flechaDesplegable.jpg'}
-                     title={'Seguro personas'} color={'primary'} id={'insurancePeople'}/>
-                    
-
-                    
-                    <TypographyNavBarImage src={'/../public/flechaDesplegable.jpg'} 
-                    title={'Seguro empresas'} color={'primary'} id={'insuranceCompany'}/>
-                    </Tabs>
-            
-
                 </Grid>
-                </Hidden>
                 
-               
-                <Grid item xs={6} lg={4}>
+                <Grid item xs={1} sm={2} md={1.1} lg={0.9} xl={0} 
+                display={{ xs:'none',sm:'none',md:'block',lg:'block'}}>
+                
                     <Tabs>
-                    <Hidden xsDown smDown >
-                    <TypographyNavBar title={'Blog'} color={'primary'} />
+                        <Link href="/nosotros">
+                            <a>
+                            <TypographyNavBar title={'Nosotros'} color={'primary'} />
+                            </a>
+                        </Link>
+                        
+                    </Tabs>
+                </Grid>
 
-                    <TypographyNavBar title={'Trabaja con nosotros'}  color={'primary'}/>
-                    </Hidden>
-                    <div style={{width:"141px", background:"#2EA082",
-                    borderRadius:"10px", textAlign:"center", marginRight:"1%", marginTop:"0.5%"}} >
-                    <TypographyNavBar title={'Contáctanos'} color={"info"} />
+                <Grid item xs={4} sm={3.4} md={2.1} lg={1.5} xl={0}
+                 display={{ xs:'none',sm:'block',md:'block',lg:'block'}}>
+                    <Tabs>
+                        <TypographyNavBarImage src={'/../public/flechaDesplegable.jpg'}
+                        title={'Seguro personas'} color={'primary'} id={'insurancePeople'}/>
+                    </Tabs>
+                </Grid>
+
+                <Grid item xs={4} sm={3.5} md={2.8} lg={1.7} xl={0}
+                display={{ xs:'none',sm:'none',md:'block',lg:'block'}}>
+                     <Tabs>
+                        <TypographyNavBarImage src={'/../public/flechaDesplegable.jpg'} 
+                        title={'Seguro empresas'} color={'primary'} id={'insuranceCompany'}/>
+                    </Tabs>
+                </Grid>
+                
+                
+                <Grid item xs={1} sm={0.6} md={0.6} lg={0.7} xl={0}
+                display={{ xs:'none',sm:'none',md:'none',lg:'block'}}>
+                    <Tabs>
+                        <TypographyNavBar title={'Blog'} color={'primary'} />
+                    </Tabs>
+                </Grid>
+
+                <Grid item xs={5} sm={0} md={1.9} lg={1.7} xl={0}
+                display={{ xs:'none',sm:'none',md:'none',lg:'block'}}>
+                    <Tabs>
+                        <Link href='/trabaja-con-nosotros'>
+                            <a>
+                                <TypographyNavBar title={'Trabaja con nosotros'}  color={'primary'}/>
+                            </a>
+                        </Link>
+                    |
+                    </Tabs>
+                </Grid>
+
+                <Grid item xs={4} sm={3} md={2.5} lg={1.5} xl={0}  margin='0px auto'>
+                    <Tabs>
+                    <div 
+                    style={{
+                        width:"141px",
+                        background:"#2EA082",
+                        borderRadius:"10px",
+                        textAlign:"center",
+                        marginRight:"1%",
+                        marginTop:"0.5%"
+                        }}>
+                    
+                    <Link href='/contacto'>
+                        <a>
+                            <TypographyNavBar title={'Contáctanos'} color={"info"} />
+                        </a>
+                    </Link>
                     </div>
                     </Tabs>
                 </Grid> 
-                
-
-                <Grid item xs={1} lg={1}>
+  
+                <Grid item xs={2} sm={1} md={1} lg={1}>
                     <div style={{marginTop:"7%",marginLeft:"5%"}}>
                     <Image src={'/../public/phoneIcon.jpg'} width={40} height={40}/>
                     </div>
+                </Grid>
+
+                <Grid item xs={1} sm={1} md={0.5} lg={0.5} xl={0} marginTop={1.6}
+                display={{ xs:'block',sm:'none',md:'none',lg:'none'}}>
+                        <button style={{
+                            display:'flex',
+                            flexDirection:'column',
+                            width:'3rem',
+                            height:'3rem',
+                            border:'0px',
+                            background:'transparent',
+                            gap:'.65rem'
+                        }}>
+                            <div className='menu-cross'
+                            style={{
+                                background:'black',
+                                height:'2px',
+                                width:'100%',
+                                borderRadius:'5px',
+                                transition: 'all .5s',
+                                transformOrigin:'left'
+                            }}>
+
+                            </div>
+
+                            <div className='menu-cross' style={{
+                                background:'black',
+                                height:'2px',
+                                width:'100%',
+                                borderRadius:'5px',
+                                transition: 'all .5s',
+                                transformOrigin:'left'
+                            }}>
+                            </div>
+
+                            <div className='menu-cross' style={{
+                                background:'black',
+                                height:'2px',
+                                width:'100%',
+                                borderRadius:'5px',
+                                transition: 'all .5s',
+                                transformOrigin:'left'
+                            }}>
+                            </div>
+
+                        </button>
                 </Grid>
             </Grid>
         </Toolbar>

@@ -22,9 +22,22 @@ const ButtonNextBack = ({buttonName,setActiveStep,activeStep,quoterData}:Props) 
         if(buttonName == 'COTIZAR'){
 
             localStorage.setItem("quoterData",JSON.stringify(quoterData));
-            const quoteVehicle = await cotizarVehicle(quoterData);
-            localStorage.setItem("quoteResult",JSON.stringify(quoteVehicle));
-            //return router.push({pathname:'/quoteVehicleResult'});
+            const quoteResult = await cotizarVehicle(quoterData);
+            localStorage.setItem("quoteResult",JSON.stringify(quoteResult));
+            return router.push({
+                pathname:'/quoteVehicleResultt',
+                query:{
+                    email:quoterData?.email,
+                    name:quoterData?.name,
+                    phone:quoterData?.phone,
+                    dni:quoterData?.dni,
+                    vehicle:quoterData?.vehicle?.id,
+                    department:quoterData?.department?.id,
+                    produced_at:quoterData?.produced_at,
+                    use_type:quoterData?.use_type?.id,
+                    promotional_code:quoterData?.promotional_code
+                }
+            });
         
             
         }

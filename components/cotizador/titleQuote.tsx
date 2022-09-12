@@ -1,7 +1,12 @@
 import { Grid, Typography } from "@mui/material";
 import Image from 'next/image';
 import "@fontsource/montserrat";
-const TitleQuote = () => {
+
+interface Props{
+  title: String
+  image: String
+}
+const TitleQuote = ({title,image}:Props) => {
 
     return(
         <Grid container direction="row" sx={{
@@ -19,7 +24,7 @@ const TitleQuote = () => {
               marginTop:'5%',
               
             }}>
-              <Image src={'/../public/vehicle.JPG'} width={67.7} height={67.7} />
+              <Image src={`${image}`} width={67.7} height={67.7} />
             </Grid>
             
             <Grid item xs={6}
@@ -30,7 +35,7 @@ const TitleQuote = () => {
               <Typography  fontSize={25} fontFamily='Montserrat' sx={{
                  color:'#151F6D',fontWeight: 'bold'
               }}>
-                ¡Cotiza en segundos tu seguro vehicular!
+                {title}
               </Typography>
             </Grid>
             

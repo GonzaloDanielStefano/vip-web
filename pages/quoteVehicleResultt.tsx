@@ -1,17 +1,65 @@
-import { Box, Button, Divider, Grid, Typography,Input, Paper, OutlinedInput  } from "@mui/material";
+import { Box, Button, Divider, Grid, Typography,Input, OutlinedInput  } from "@mui/material";
 import { HomeLayout } from "../components/layouts";
 import "@fontsource/montserrat";
 import "@fontsource/raleway";
 import TitleQuoteResult from "../components/tableVehicleResult.tsx/titleQuoteResult";
 import CreateIcon from '@mui/icons-material/Create';
 import QuestionMarkIcon from '@mui/icons-material/QuestionMark';
-import Header from "../components/tableVehicleResult.tsx/header";
 import { Phone } from "@mui/icons-material";
 import Image from 'next/image';
-import ImageFooterGreenBlue from '../public/footerGreenBlue.png'
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
+import {Department, QuoteData, QuoteResult, UseType, Vehicle, VehicularQuoterRequest} from '../interfaces';
+import { cotizarVehicle, getDepartment, getUseType, getVehicle } from "./api/data";
+
+
 
 const QuoteVehicleResultt = () => {
 
+    const router = useRouter();
+    const [vehicle, setVehicle] = useState<Vehicle>();
+    const [department, setDepartment] = useState<Department>();
+    const [useType, setUseType] = useState<UseType>();
+    const [quoteResult,setQuoterResult] = useState<QuoteResult>();
+    const [quoteData,setQuoteData] = useState<VehicularQuoterRequest>();
+    useEffect(() => {
+        setQuoteData({...setQuoteData,name:router.query.name});
+        setQuoteData({...setQuoteData,email:router.query.email});
+        setQuoteData({...setQuoteData,phone:router.query.phone});
+        setQuoteData({...setQuoteData,dni:router.query.dni});
+        setQuoteData({...setQuoteData,produced_at:router.query.produced_at});
+        setQuoteData({...setQuoteData,promotional_code:router.query.promotional_code});
+        if(quoteData !== undefined){
+        setQuoterResult(cotizarVehicle(quoteData));}
+       if(router.query.vehicle !== undefined){
+            getVehicle(router.query.vehicle)
+                .then((response)=>{
+                    if(response){
+                        setVehicle(response);
+                        setQuoteData({...setQuoteData,vehicle:response});
+                    }
+                });
+       }
+
+       if(router.query.department !== undefined){
+        getDepartment(router.query.department)
+            .then((response)=>{
+                if(response){
+                    setDepartment(response);
+                    setQuoteData({...setQuoteData,department:response});
+                }
+            });
+        }
+        if(router.query.use_type !== undefined){
+        getUseType(router.query.use_type)
+            .then((response)=>{
+                if(response){
+                    setUseType(response);
+                    setQuoteData({...setQuoteData,use_type:response});
+                }
+            });
+        }
+    }, [])
     
     return(
         <HomeLayout title={'Corredor de Seguros VIP'} pageDescription={'Seguros'}>
@@ -43,7 +91,7 @@ const QuoteVehicleResultt = () => {
                             color:'#151F6D',
                             justifyContent:'center'
                             }}>
-                            ¡Hola Bruno!
+                            ¡Hola {router.query.name}!
                         </Typography>
                     </Grid>
 
@@ -74,7 +122,7 @@ const QuoteVehicleResultt = () => {
                            textAlign:'center',
                            color:'#151F6D'
                        }}>
-                            Uso Particular - Lima
+                            {useType?.use_type} - {department?.description_for_client}
                             
                         </Typography>  
                         
@@ -86,7 +134,8 @@ const QuoteVehicleResultt = () => {
                             textAlign:'center',
                             color:'#151F6D'
                         }}>
-                            Audi / Q5 / Sport / 2022
+                            {vehicle?.brand?.brand_name} / {vehicle?.model?.model_name}
+                             / {vehicle?.model?.sub_model} / {router.query.produced_at}
                         </Typography>
                 </Grid>
 

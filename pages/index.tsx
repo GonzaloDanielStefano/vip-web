@@ -1,8 +1,7 @@
-
-import { Box,Grid,Typography } from '@mui/material';
-import Image from 'next/image';
+import { Grid } from '@mui/material';
 import { HomeLayout } from '../components/layouts'
-import React, { SetStateAction, useState } from 'react';
+import "@fontsource/montserrat";
+import React, { useState } from 'react';
 import StepOne from '../components/cotizador/stepOne';
 import StepTwo from '../components/cotizador/stepTwo';
 import StepOneSinPlaca from '../components/cotizador/stepOneSinPlaca';
@@ -11,6 +10,13 @@ import { Brand, Department, FuelType, UseType, Vehicle, VehicularQuoterRequest }
 import WaitResult from '../components/cotizador/waitResult';
 import { getBrands, getDepartments, getFuelTypes, getUseTypes, getVehicles } from './api/data';
 import { GetServerSideProps } from 'next';
+import HomeImage from '../components/ui/HomeImage';
+import CarouselInsurance from '../components/ui/CarouselInsurance';
+import QuoteHeader from '../components/cotizador/quoteHeader';
+import QuoteHeaderFloat from '../components/cotizador/quoteHeaderFloat';
+import StepOneHealth from '../components/cotizador/stepOneHealth';
+import StepTwoHealth from '../components/cotizador/stepTwoHealth';
+import StepOneHome from '../components/cotizador/stepOneHome';
 
 interface Props {
   vechiularQuoterRequest? : VehicularQuoterRequest
@@ -21,16 +27,19 @@ interface Props {
   fuelTypes: FuelType[]
 }
 
-function Home ({vechiularQuoterRequest, useTypes,vehicles,brands,departments,fuelTypes}:Props){
+function Home ({useTypes,vehicles,brands,departments,fuelTypes}:Props){
 
+  const steps = ['1', '2', '3'];
   const [activeStep, setActiveStep] = React.useState(0);
   const [noPatent, setNoPatent] = React.useState<boolean>(false);
   const [completed, setCompleted] = React.useState<{
     [k: number]: boolean;
   }>({});
 
-  const steps = ['1', '2', '3'];
-
+  
+  const [quoteHeaderVehicular,setQuoteHeaderVehicular] = useState<boolean>(true);
+  const [quoteHeaderSalud,setQuoteHeaderSalud] = useState<boolean>(false);
+  const [quoteHeaderHogar,setQuoteHeaderHogar] = useState<boolean>(false);
 
   /*DATOS*/
   const [quoterData, setQuoterData] = useState<VehicularQuoterRequest>();
@@ -38,64 +47,54 @@ function Home ({vechiularQuoterRequest, useTypes,vehicles,brands,departments,fue
     <HomeLayout title={'Corredor de Seguros VIP'} pageDescription={'Seguros'}>
       <div style={{background:'#0F206C', width:'100%',height:'900px'}}>
           <Grid container>
-             <Grid item xs={6} style={{background:'#0F206C'}}>
-                 
+             <Grid item xs={1}  md={6} lg={6} style={{background:'#0F206C'}}
+             display={{xs:'none',sm:'none',md:'block',lg:'block'}}>
+                 <HomeImage/>
              </Grid>
 
              <Grid item xs={2} >
-                <Box display={'flex'} sx={{marginTop:'30px',marginLeft:'11px',width:'567px'}}>
-
-                <Box sx={{width:'33.33%',background:'#2E9F82',height:'50px',alignItems:'center'
-                ,borderRadius:'10px 10px 0px 0px',marginRight:'1px',fontFamily:'Montserrat'}} display={'flex'}>
-
-                  <Box sx={{marginLeft:'40px',
-                  marginRight:'0px',position:'relative'}}>
-                    <Image src={'/../public/vehicular.PNG'} width={27.5} height={27.5} 
-                      /> </Box>
-
-                    <Typography fontFamily='Montserrat' fontSize={13}
-                    sx={{ marginLeft:'3%', color:'white'}}>SEGURO VEHICULAR</Typography></Box>
-                  
-
-                <Box sx={{width:'33.33%',background:'#2E9F82',height:'50px'
-                ,borderRadius:'10px 10px 0px 0px',marginRight:'1px',fontFamily:'Montserrat',
-                alignItems:'center', position:'relative'}} display={'flex'}>
-
-                  <Box sx={{marginLeft:'24px',
-                  marginRight:'0px',position:'relative'}}>
-                  <Image src={'/../public/hogar.PNG'} width={26} height={22} 
-                    />
-                  </Box>
-                  
-                    <Typography fontFamily='Montserrat' fontSize={13}
-                    sx={{textAlign:'end', marginLeft:'3%', color:'white'}}>SEGURO HOGAR</Typography></Box>
-
-                  <Box sx={{width:'33.33%',background:'#2E9F82',height:'50px'
-                ,borderRadius:'10px 10px 0px 0px',marginRight:'1px',fontFamily:'Montserrat',
-                alignItems:'center', position:'relative'}} display={'flex'}>
-
-                  <Box sx={{marginLeft:'30px',
-                  marginRight:'0px',position:'relative'}}>
-                  <Image src={'/../public/salud.PNG'} width={26} height={22} 
-                    />
-                  </Box>
-                  
-                    <Typography fontFamily='Montserrat' fontSize={13}
-                    sx={{textAlign:'end', marginLeft:'3%', color:'white'}}>SEGURO SALUD</Typography></Box>
-              </Box>
-              {activeStep == 0 && noPatent != true ?
+                <QuoteHeader 
+                setQuoteHeaderVehicular={setQuoteHeaderVehicular} 
+                setQuoteHeaderSalud={ setQuoteHeaderSalud} 
+                setQuoteHeaderHogar={setQuoteHeaderHogar }/>
+              
+              {activeStep == 0 && noPatent != true && quoteHeaderVehicular == true ?
               <StepOne steps={steps} setActiveStep={setActiveStep} activeStep={activeStep}
               completed={Array.isArray(completed) ? completed : []} useTypes={useTypes} quoterData={
                 quoterData
               } setQuoterData={setQuoterData} noPatent={noPatent} setNoPatent={setNoPatent}/>
               :''}
 
+              {activeStep == 0 && quoteHeaderSalud == true ?
+              <StepOneHealth steps={steps} setActiveStep={setActiveStep} activeStep={activeStep}
+              completed={Array.isArray(completed) ? completed : []} useTypes={useTypes} quoterData={
+                quoterData
+              } setQuoterData={setQuoterData} noPatent={noPatent} setNoPatent={setNoPatent}/>
+              :''}
 
-                {activeStep == 1 ?
+              {activeStep == 0 && quoteHeaderHogar == true ?
+              <StepOneHome steps={steps} setActiveStep={setActiveStep} activeStep={activeStep}
+              completed={Array.isArray(completed) ? completed : []} useTypes={useTypes} quoterData={
+                quoterData
+              } setQuoterData={setQuoterData} noPatent={noPatent} setNoPatent={setNoPatent}/>
+              :''}
+
+
+                {activeStep == 1 && quoteHeaderVehicular == true?
               <StepTwo steps={steps} setActiveStep={setActiveStep} activeStep={activeStep}
               completed={Array.isArray(completed) ? completed : []} quoterData={quoterData} 
               setQuoterData={setQuoterData} departments={departments} 
               fuelTypes={fuelTypes}/>:''}
+
+              {activeStep == 1 && quoteHeaderSalud == true?
+              <StepTwoHealth 
+                  steps={steps} 
+                  setActiveStep={setActiveStep} 
+                  activeStep={activeStep}
+                  completed={Array.isArray(completed) ? completed : []} 
+                  quoterData={quoterData} 
+                  setQuoterData={setQuoterData}
+              />:''}
 
                 {activeStep == 0 && noPatent == true?
               <StepOneSinPlaca steps={steps} setActiveStep={setActiveStep} 
@@ -118,6 +117,15 @@ function Home ({vechiularQuoterRequest, useTypes,vehicles,brands,departments,fue
              </Grid>
           </Grid>
       </div>
+
+      <Grid container lg={12} sx={{position:'absolute',top:'145%'}}>
+        <CarouselInsurance/>
+      </Grid>
+      
+      
+      <QuoteHeaderFloat/>
+     
+     
     </HomeLayout>
   )
 }

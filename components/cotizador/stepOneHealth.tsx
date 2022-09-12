@@ -1,4 +1,4 @@
-import { Box, FormControl, FormControlLabel, Grid, MenuItem, Select, Step, StepButton, Stepper, TextField, Radio, InputLabel, SelectChangeEvent } from "@mui/material";
+import { Box, FormControl, FormControlLabel, Grid, MenuItem, Select, Step, StepButton, Stepper, TextField, Radio, InputLabel, SelectChangeEvent, OutlinedInput } from "@mui/material";
 import { Dispatch, SetStateAction } from "react";
 import React from "react";
 import QontoConnector from "./quontoConnector";
@@ -6,10 +6,11 @@ import TitleQuote from "./titleQuote";
 import QuoteButtonNext from "../button/quoteButtonNext";
 import "@fontsource/montserrat";
 import { UseType, VehicularQuoterRequest } from "../../interfaces";
+import TitleQuoteHealth from "./titleQuoteHealth";
 
 
 interface Props{
-    steps: Array<string>
+   
     useTypes: UseType[];
     setActiveStep: Dispatch<SetStateAction<number>>
     activeStep:number
@@ -20,10 +21,13 @@ interface Props{
     setNoPatent: Dispatch<SetStateAction<boolean>>
 }
 
-function StepOne  ({steps,activeStep,completed,setActiveStep,
+function StepOneHealth  ({activeStep,completed,setActiveStep,
   setQuoterData,quoterData,useTypes, noPatent,setNoPatent}:Props)  {
 
-  
+    const steps = ['1','2']
+    async function handleChangePhone(event: React.ChangeEvent<HTMLInputElement>){
+        setQuoterData({...quoterData,phone:event.target.value});
+      }
 
   async function handleChangeUseType(event: SelectChangeEvent){
     var newUseType = useTypes.find(useType => useType.id === event.target.value);
@@ -35,11 +39,17 @@ function StepOne  ({steps,activeStep,completed,setActiveStep,
     
   };
 
+  async function handleChangeName(event:any){
+    setQuoterData({...quoterData, name:event.target.value});
+    
+  }
   async function handleChangeEmail(event:any){
     setQuoterData({...quoterData, email:event.target.value});
   }
 
-  
+  async function handleChangeDni(event: React.ChangeEvent<HTMLInputElement>){
+    setQuoterData({...quoterData,dni:event.target.value});
+  }
 
   async function handleChangePromotionalCode(event: any){
     setQuoterData({...quoterData, promotional_code:event.target.value});
@@ -47,18 +57,18 @@ function StepOne  ({steps,activeStep,completed,setActiveStep,
   }
   
 return(
-<Box style={{background:'white',width:'567px',height:'565px',marginTop:'0px',marginLeft:'5%'
+<Box style={{background:'white',width:'567px',height:'505px',marginTop:'0px',marginLeft:'5%'
               ,borderRadius: '0px 0px 20px 20px'}}>
                       
-                      <TitleQuote title={'¡Cotiza en segundos tu seguro vehicular!'} 
-                      image={'/../public/vehicle.JPG'}/>
+                      <TitleQuote title={'¡Cotiza en segundos tu seguro de salud!'} 
+                      image={'/../public/healthIconQuoteHeader.png'}/>
 
                       <Grid container direction={'row'}>
-                        <Grid item xs={12} lg={6}
-                        sx={{
-                          marginLeft: '9%'
-                        }}>
-                        <TextField id="outlined-basic" label="Código promocional 
+                        
+                      
+                      <Grid item xs={4.67}
+                      sx={{marginLeft:'9%',marginTop:'1%'}}>
+                      <TextField id="outlined-basic" label="Código promocional 
                         (opcional)" 
                         value={quoterData?.promotional_code}
                         variant="outlined" multiline={false}
@@ -74,34 +84,50 @@ return(
                         onChange={(event)=>handleChangePromotionalCode(event)}/>
                         </Grid>
 
-                        <Grid item xs={12} lg={6}
-                         sx={{
-                          marginLeft: '-9%'
+                        <Grid item xs={3.1}
+                        sx={{
+                          marginLeft: '2.4%',
+                          marginTop:'1%'
                         }}>
-                        <FormControl className="typeOfUseField" size="small">
-                          <InputLabel
-                          id="useType"
-                          sx={{
-                            marginTop:'3%',
-                            marginLeft:'30%'
-                          }}>Uso</InputLabel>
-                          <Select
-                            labelId="useType"
-                            id="useType"
-                            label="useType"
-                            onChange={handleChangeUseType}
-                            value={quoterData?.use_type?.id}
-                            sx={{height:'55px'}}
-                          >
-                          {Array.isArray(useTypes) ? useTypes.map((useTypeIterator) => (
-
-                          <MenuItem value={useTypeIterator.id}>{useTypeIterator.use_type}</MenuItem>
-                          )) : []}
-                   
-                    
-                          </Select>
-                        </FormControl>
+                        <TextField id="dni-number" label="DNI"
+                        onChange={handleChangeDni}
+                        value={quoterData?.dni}
+                        variant="outlined" multiline={false}
+                        sx={{
+                          width:'151%',
+                          alignItem: 'center',
+                          wordBreak: 'break-all',
+                          "& .MuiInputBase-root": {
+                            height: "0%",
+                            display: "flex",
+                            alignItems: "start"
+                          }
+                        }}/>
                         </Grid>
+                        
+
+                        
+                      </Grid>
+
+                    
+                      <Grid container>
+                        
+                        <Grid item xs={6}>
+                          <TextField id="outlined-basic" label="Nombre" variant="outlined" fullWidth
+                          onChange={handleChangeName}
+                          value={quoterData?.name}
+                          sx={{width:'78.5%', marginLeft:'17%',marginTop:'5%'}} />
+                        </Grid>
+
+                        <Grid item xs={6} alignItems='center' alignContent={'center'}>
+                          <TextField id="phone" label="Télefono" variant="outlined"
+                          onChange={handleChangePhone}
+                          value={quoterData?.phone}
+                           sx={{width:'78.5%', marginLeft:'0%',marginTop:'5%'}} />
+                        </Grid>
+
+                        
+                        
                       </Grid>
 
                       <Grid container>
@@ -113,48 +139,21 @@ return(
                           sx={{width:'80.5%', marginLeft:'9%',marginTop:'3%'}} />
                         </Grid>
 
-                        <Grid item xs={12} alignItems='center' alignContent={'center'}>
-                          <TextField id="outlined-basic" label="Placa" variant="outlined"
-                           sx={{width:'80.5%', marginLeft:'9%',marginTop:'3%'}} />
-                        </Grid>
+                        
                         
                       </Grid>
 
                       <Grid container flexDirection={'row'}>
-                        <Grid item xs={4}>
-                        <FormControlLabel 
-                        sx={{
-                          marginLeft: '24.5%',
-                          
-                          marginTop: '9%',
-                          
-                        }} value={'checked'} 
-                           
-                           control={<Radio />}
-                           label={undefined}
-                           onChange = {handleRadioChange} 
-                         />
-                         
-                        </Grid>
+                        
 
-                        <Grid item xs={8}>
-                        <InputLabel
-                        sx={{
-                          marginTop:'7.2%',
-                          marginLeft:'-25%',
-                          fontFamily:"Montserrat",
-                          fontWeight: 'bold',
-                          
-                        }}>0KM / SIN PLACA POR EL MOMENTO </InputLabel>
-                        </Grid>
 
                         <QuoteButtonNext setActiveStep={setActiveStep} setNoPatent={setNoPatent}
                          activeStep={activeStep} completed={[]} noPatent={noPatent}/>
                       </Grid>
 
-                      <Box sx={{ width: '90%', marginTop:'6%', marginLeft:'5%'}} >
+                      <Box sx={{ width: '40%',margin:'auto',marginTop:'5%'}} >
                         <Stepper nonLinear activeStep={activeStep} connector={<QontoConnector />} >
-                          {steps.map((label) => (
+                          {steps.map((label, index) => (
                             <Step key={label} /*completed={completed[index]} */
                             sx={{
                               '& .MuiStepLabel-root .Mui-completed': {
@@ -189,4 +188,4 @@ return(
 
     );}
 
-export default StepOne;
+export default StepOneHealth;
