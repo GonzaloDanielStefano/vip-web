@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Brand, Category, Coverage, CoverageCategory, CoverageType, Currency, Department, ExceptionMessage, Factor, FuelType, Insurance, Model, Product, QuoteData, Rate, RoleType, User, UseType, Vehicle, VehicularQuoterRequest, QuoteResult, Funding, Installment, Deductible, DeductibleType, DeductibleCategory, HealthDependent } from "../interfaces";
+import { Brand, Category, Coverage, CoverageCategory, CoverageType, Currency, Department, ExceptionMessage, Factor, FuelType, Insurance, Model, Product, QuoteData, Rate, RoleType, User, UseType, Vehicle, VehicularQuoterRequest, QuoteResult, Funding, Installment, Deductible, DeductibleType, DeductibleCategory, HealthDependent, HomeQuoterRequest } from "../interfaces";
 
 export abstract class BuildersMethods {
 
@@ -740,6 +740,30 @@ export abstract class BuildersMethods {
         return quoteResult;
     }
 
+    static buildHomeQuoterRequest(theId: string | null, theTypeOfClient: string | null,
+        theWhatQuote: string | null, theWayToSecure:  string | null, theTypeOfHouse: string | null,
+        theCurrency:  string | null, theValueOfHouse: number | null, theContentValue: number | null,
+        theProvince:  string | null, theDistrict:  string | null, thePhone: string | null,
+        theEmail:  string | null):HomeQuoterRequest{
+        
+        let homeQuoterRequest:HomeQuoterRequest ={
+            id: theId,
+            typeOfCliente: theTypeOfClient,
+            whatQuote: theWhatQuote,
+            wayToSecure: theWayToSecure,
+            typeOfHouse: theTypeOfHouse,
+            currency: theCurrency,
+            valueOfHouse: theValueOfHouse,
+            contentValue: theContentValue,
+            province: theProvince,
+            district: theDistrict,
+            phone: thePhone,
+            email: theEmail
+        }
+
+        return homeQuoterRequest;
+    }
+    
     static buildError(error: any) {
         const { response } = error;
         if (axios.isAxiosError(error) && response?.data) {
