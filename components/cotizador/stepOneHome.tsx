@@ -1,11 +1,12 @@
-import { Box, FormControl, FormControlLabel, Grid, MenuItem, Select, Step, StepButton, Stepper, TextField, Radio, InputLabel, SelectChangeEvent, OutlinedInput } from "@mui/material";
+import { Box, FormControl, FormControlLabel, Grid, MenuItem, Select, Step, StepButton, Stepper, TextField, Radio, InputLabel, SelectChangeEvent, OutlinedInput, InputAdornment } from "@mui/material";
 import { Dispatch, SetStateAction } from "react";
 import React from "react";
 import QontoConnector from "./quontoConnector";
 import TitleQuote from "./titleQuote";
 import QuoteButtonNext from "../button/quoteButtonNext";
 import "@fontsource/montserrat";
-import { UseType, VehicularQuoterRequest } from "../../interfaces";
+import { HomeQuoterRequest, UseType, VehicularQuoterRequest } from "../../interfaces";
+import { CancelRounded } from "@mui/icons-material";
 
 
 interface Props{
@@ -14,69 +15,76 @@ interface Props{
     setActiveStep: Dispatch<SetStateAction<number>>
     activeStep:number
     completed: Array<number>
-    quoterData: VehicularQuoterRequest
-    setQuoterData: Dispatch<SetStateAction<VehicularQuoterRequest>>
+    homeQuoterData: HomeQuoterRequest
+    setHomeQuoterData: Dispatch<SetStateAction<HomeQuoterRequest>>
     noPatent: boolean
     setNoPatent: Dispatch<SetStateAction<boolean>>
 }
 
 function StepOneHome  ({activeStep,completed,setActiveStep,
-  setQuoterData,quoterData,useTypes, noPatent,setNoPatent}:Props)  {
+    setHomeQuoterData,homeQuoterData,useTypes, noPatent,setNoPatent}:Props)  {
 
     const steps = ['1','2']
     async function handleChangePhone(event: React.ChangeEvent<HTMLInputElement>){
-        setQuoterData({...quoterData,phone:event.target.value});
+        setHomeQuoterData({...homeQuoterData,phone:event.target.value});
       }
 
   async function handleChangeName(event:any){
-    setQuoterData({...quoterData, name:event.target.value});
+    setHomeQuoterData({...homeQuoterData, name:event.target.value});
     
   }
   async function handleChangeEmail(event:any){
-    setQuoterData({...quoterData, email:event.target.value});
+    setHomeQuoterData({...homeQuoterData, email:event.target.value});
   }
 
-  async function handleChangeDni(event: React.ChangeEvent<HTMLInputElement>){
-    setQuoterData({...quoterData,dni:event.target.value});
+  
+  async function handleChangeTypeOfClient(event:SelectChangeEvent){
+    setHomeQuoterData({...homeQuoterData, typeOfCliente:event.target.value});
   }
 
+  async function handleChangeValueOfHouse(event:any){
+      setHomeQuoterData({...homeQuoterData, valueOfHouse:event.target.value});
+  }
+
+  async function handleChangeContentValue(event:any){
+    setHomeQuoterData({...homeQuoterData, contentValue:event.target.value});
+  }
   const typeOfClienteOptions = ['Opcion 1', 'Opcion 2'];
-  const 
+  
   
 return(
-<Box style={{background:'white',width:'567px',height:'505px',marginTop:'0px',marginLeft:'5%'
-              ,borderRadius: '0px 0px 20px 20px'}}>
+<Box className="boxQuote">
                       
                       <TitleQuote title={'¡recibe información de seguro hogar!'} 
                       image={'/../public/homeIconQuoteHeader.png'}/>
 
                       <Grid container direction={'row'}>
                         
-                      <Grid item xs={6}
+                      <Grid item xs={12}
                          sx={{
-                          marginLeft: '-9%'
+                          marginLeft: '8.7%'
                         }}>
-                        <FormControl sx={{
-                          width:'79%',
+                        <FormControl className="homeField" sx={{
+                          width:'88%',
                           
                         }} size="small">
                           <InputLabel
-                          id="useType"
+                          id="typeOfClient"
                           sx={{
-                            marginTop:'3%',
-                            marginLeft:'30%'
-                          }}>Uso</InputLabel>
+                            marginTop:'2%',
+                            
+                          }}>Tipo de cliente</InputLabel>
                           <Select
-                            labelId="useType"
-                            id="useType"
-                            label="useType"
-                            onChange={handleChangeUseType}
-                            value={quoterData?.use_type?.id}
+                            labelId="typeOfClient"
+                            id="typeOfClient"
+                            label="typeOfClient"
+                            onChange={handleChangeTypeOfClient}
+                            value={homeQuoterData?.typeOfCliente}
                             sx={{height:'55px'}}
                           >
-                          {Array.isArray(useTypes) ? useTypes.map((useTypeIterator) => (
+                          {Array.isArray(typeOfClienteOptions) ? typeOfClienteOptions.map((typeOfClienteOption) => (
 
-                          <MenuItem value={useTypeIterator.id}>{useTypeIterator.use_type}</MenuItem>
+                          <MenuItem value={typeOfClienteOption}>{typeOfClienteOption}</MenuItem>
                           )) : []}
                    
                     
@@ -84,65 +92,178 @@ return(
                         </FormControl>
                         </Grid>
 
-                        <Grid item xs={3.1}
-                        sx={{
-                          marginLeft: '2.4%',
-                          marginTop:'1%'
-                        }}>
-                        <TextField id="dni-number" label="DNI"
-                        onChange={handleChangeDni}
-                        value={quoterData?.dni}
-                        variant="outlined" multiline={false}
-                        sx={{
-                          width:'151%',
-                          alignItem: 'center',
-                          wordBreak: 'break-all',
-                          "& .MuiInputBase-root": {
-                            height: "0%",
-                            display: "flex",
-                            alignItems: "start"
-                          }
-                        }}/>
-                        </Grid>
                         
 
-                        
+                        <Grid item xs={12} lg={5.1}
+                         sx={{
+                          
+                          marginLeft:'8.8%',
+                          marginTop:'2%'
+                        }}>
+                        <FormControl className="homeField" sx={{
+                          width:'88%',
+                          
+                        }} size="small">
+                          <InputLabel
+                          id="typeOfClient"
+                          sx={{
+                            marginTop:'2%',
+                            
+                          }}>¿Qué desea cotizar?</InputLabel>
+                          <Select
+                            labelId="typeOfClient"
+                            id="typeOfClient"
+                            label="typeOfClient"
+                            onChange={handleChangeTypeOfClient}
+                            value={homeQuoterData?.typeOfCliente}
+                            sx={{height:'55px'}}
+                          >
+                          {Array.isArray(typeOfClienteOptions) ? typeOfClienteOptions.map((typeOfClienteOption) => (
+
+                          <MenuItem value={typeOfClienteOption}>{typeOfClienteOption}</MenuItem>
+                          )) : []}
+                   
+                    
+                          </Select>
+                        </FormControl>
+                        </Grid>
+
+                        <Grid item xs={12} lg={5.15}
+                         sx={{
+                            marginTop:'2%'
+                        }}>
+                        <FormControl  className="homeFieldCurrency" >
+                          <InputLabel
+                          id="typeOfClient"
+                          sx={{
+                            marginTop:'2%',
+                            
+                          }}>Modo a asegurar</InputLabel>
+                          <Select
+                            labelId="typeOfClient"
+                            id="typeOfClient"
+                            label="typeOfClient"
+                            onChange={handleChangeTypeOfClient}
+                            value={homeQuoterData?.typeOfCliente}
+                            sx={{height:'55px'}}
+                          >
+                          {Array.isArray(typeOfClienteOptions) ? typeOfClienteOptions.map((typeOfClienteOption) => (
+
+                          <MenuItem value={typeOfClienteOption}>{typeOfClienteOption}</MenuItem>
+                          )) : []}
+                   
+                    
+                          </Select>
+                        </FormControl>
+                        </Grid>
+
+                        <Grid item xs={12} lg={5.15}
+                         sx={{
+                          marginLeft: '8.7%',
+                          marginTop:'2%'
+                        }}>
+                        <FormControl className="homeField" sx={{
+                          width:'88%',
+                          
+                        }} size="small">
+                          <InputLabel
+                          id="typeOfClient"
+                          sx={{
+                            marginTop:'2%',
+                            
+                          }}>Tipo de vivienda</InputLabel>
+                          <Select
+                            labelId="typeOfClient"
+                            id="typeOfClient"
+                            label="typeOfClient"
+                            onChange={handleChangeTypeOfClient}
+                            value={homeQuoterData?.typeOfCliente}
+                            sx={{height:'55px'}}
+                          >
+                          {Array.isArray(typeOfClienteOptions) ? typeOfClienteOptions.map((typeOfClienteOption) => (
+
+                          <MenuItem value={typeOfClienteOption}>{typeOfClienteOption}</MenuItem>
+                          )) : []}
+                   
+                    
+                          </Select>
+                        </FormControl>
+                        </Grid>
+
+                        <Grid item xs={12} lg={5.15}
+                         sx={{
+                          
+                          marginTop:'2%'
+                        }}>
+                        <FormControl className="homeFieldCurrency">
+                          <InputLabel
+                          id="typeOfClient"
+                          sx={{
+                            marginTop:'2%',
+                            
+                          }}>Moneda</InputLabel>
+                          <Select
+                            labelId="typeOfClient"
+                            id="typeOfClient"
+                            label="typeOfClient"
+                            onChange={handleChangeTypeOfClient}
+                            value={homeQuoterData?.typeOfCliente}
+                            sx={{height:'55px'}}
+                          >
+                          {Array.isArray(typeOfClienteOptions) ? typeOfClienteOptions.map((typeOfClienteOption) => (
+
+                          <MenuItem value={typeOfClienteOption}>{typeOfClienteOption}</MenuItem>
+                          )) : []}
+                   
+                    
+                          </Select>
+                        </FormControl>
+                        </Grid>
+
+                        <Grid item xs={12} lg={4.6}
+                         sx={{
+                          marginLeft: '8.5%',
+                          marginTop:'2%'
+                        }}>
+                            <TextField className="homeField" id="outlined-basic" label="Valor del inmueble"
+                            value={homeQuoterData?.valueOfHouse}
+                            variant="outlined" multiline={false}
+                            sx={{
+                            alignItem: 'center',
+                            wordBreak: 'break-all',
+                            "& .MuiInputBase-root": {
+                                height: "100%",
+                                display: "flex",
+                                alignItems: "start"
+                            }
+                            }}
+                            onChange={(event)=>handleChangeValueOfHouse(event)}/>
+                        </Grid>
+
+                        <Grid item xs={12} lg={4.6}
+                         sx={{
+                          
+                          marginTop:'2%',
+                          marginLeft:'4.7%'
+                        }}>
+                            <TextField className="homeField" id="outlined-basic" label="Valor del contenido"
+                            value={homeQuoterData?.contentValue}
+                            variant="outlined" multiline={false}
+                            sx={{
+                            alignItem: 'center',
+                            wordBreak: 'break-all',
+                            "& .MuiInputBase-root": {
+                                height: "100%",
+                                display: "flex",
+                                alignItems: "start"
+                            }
+                            }}
+                            onChange={(event)=>handleChangeContentValue(event)}/>
+                        </Grid>
                       </Grid>
 
                     
-                      <Grid container>
-                        
-                        <Grid item xs={6}>
-                          <TextField id="outlined-basic" label="Nombre" variant="outlined" fullWidth
-                          onChange={handleChangeName}
-                          value={quoterData?.name}
-                          sx={{width:'78.5%', marginLeft:'17%',marginTop:'5%'}} />
-                        </Grid>
-
-                        <Grid item xs={6} alignItems='center' alignContent={'center'}>
-                          <TextField id="phone" label="Télefono" variant="outlined"
-                          onChange={handleChangePhone}
-                          value={quoterData?.phone}
-                           sx={{width:'78.5%', marginLeft:'0%',marginTop:'5%'}} />
-                        </Grid>
-
-                        
-                        
-                      </Grid>
-
-                      <Grid container>
-                        <Grid item xs={12}>
-                          <TextField id="outlined-basic" label="E-mail" variant="outlined" fullWidth
-                          type="email"
-                          onChange={handleChangeEmail}
-                          value={quoterData?.email}
-                          sx={{width:'80.5%', marginLeft:'9%',marginTop:'3%'}} />
-                        </Grid>
-
-                        
-                        
-                      </Grid>
-
+                      
                       <Grid container flexDirection={'row'}>
                         
 

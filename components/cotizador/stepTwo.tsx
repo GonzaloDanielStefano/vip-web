@@ -23,7 +23,7 @@ function StepTwo  ({steps,activeStep,completed,setActiveStep,quoterData,setQuote
     var newDepartment = departments.find(department => department.id === event.target.value);
     if(newDepartment != null){
     setQuoterData({...quoterData, department:newDepartment});}
-    debugger;
+    
   }
 
   async function handleChangeFuelType(event:SelectChangeEvent){

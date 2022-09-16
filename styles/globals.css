@@ -50,6 +50,18 @@ a {
       .typeOfUseField {
         width: 79%;
       }
+
+      .boxQuote{
+        background: white;
+        width: 567px;
+        height: 535px;
+        margin-left: 5%;
+        border-radius: 0px 0px 20px 20px;
+      }
+
+      .homeFieldCurrency{
+        width:88%
+      }
 }
 
 @media (max-width:400px){
@@ -57,6 +69,27 @@ a {
     width: 52%;
     margin-left:18%;
     margin-top:3%
+  }
+
+
+  .boxQuote{
+    background: white;
+    width: 330px;
+    height: 710px;
+    margin-left: 30%;
+    border-radius: 0px 0px 20px 20px;
+  }
+
+  .homeField{
+    width: 90%;
+    margin-top:2%;
+    margin-left: 2%;
+  }
+
+  .homeFieldCurrency{
+    width:83%;
+    margin-left:10%;
+    margin-top:2%;
   }
 }
 /****************************************FIN RESPONSIVE NAVBAR*******************************************/

@@ -21,6 +21,10 @@ const ButtonNextBack = ({buttonName,setActiveStep,activeStep,quoterData}:Props) 
         
         if(buttonName == 'COTIZAR'){
 
+
+
+
+
             localStorage.setItem("quoterData",JSON.stringify(quoterData));
             const quoteResult = await cotizarVehicle(quoterData);
             localStorage.setItem("quoteResult",JSON.stringify(quoteResult));

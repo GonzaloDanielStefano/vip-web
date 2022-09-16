@@ -35,17 +35,35 @@ export type Insurance = {
 export type Product = {
   id: string | null
   name: string
+  department: Department | null
   category: Category | null
   product_priority: number | null
-  department: Department | null
   currency: Currency | null
-  use_type: UseType | null
-  fuel_type: FuelType | null
   funding: Funding | null
-  factors: Factor[] | null
+  benefits: Benefit[] | null
+  promotions: Promotion[] | null
   created_at: string | null
   updated_at: string | null
 }
+
+export type Promotion = {
+  id: string | null
+  name: string
+  description: string | null
+  image: string | null
+  created_at: string | null
+  updated_at: string | null
+}
+
+export type Benefit = {
+  id: string | null
+  name: string
+  description: string | null
+  image: string | null
+  created_at: string | null
+  updated_at: string | null
+}
+
 
 export type Funding = {
   id: string | null
@@ -53,6 +71,12 @@ export type Funding = {
   installments: Installment[] | null
   created_at: string | null
   updated_at: string | null
+}
+
+export type RiskFactor = Factor & {
+  minimum_rate: number
+  vehicles: Vehicle[] | null
+  rates: Rate[] | null
 }
 
 export type Installment = {
@@ -225,7 +249,7 @@ export type VehicularQuoterRequest = {
   name: string | null
   phone: string | null
   dni: string | null
-  vehicle: Vehicle
+  vehicle: Vehicle 
   use_type: UseType
   promotional_code: string | null
   produced_at: string | null
@@ -245,6 +269,29 @@ export type HealthQuoterRequest = {
   dependents: Dependent [] | null
 }
 
+export type VehicularProduct = Product & {
+  use_type: UseType | null
+  fuel_type: FuelType | null
+  risk_factors: RiskFactor[] | null
+}
+
+export type HealthProduct = Product & {
+  clinics: Clinic[]
+  health_factors: HealthFactor[]
+}
+
+export type HealthFactor = Factor & {
+  health_dependents: HealthDependent[]
+}
+
+export type Clinic = {
+  id: string | null
+  name: string
+  description: string
+  created_at: string | null
+  updated_at: string | null
+}
+
 export type HomeQuoterRequest ={
   id: string | null
   typeOfCliente: string | null
@@ -256,6 +303,7 @@ export type HomeQuoterRequest ={
   contentValue: Number | null
   province: string | null
   district: string | null
+  name: string | null
   phone: string | null
   email: string | null
 

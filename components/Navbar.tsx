@@ -1,23 +1,13 @@
-import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Hidden from '@mui/material/Hidden';
 import Toolbar from '@mui/material/Toolbar';
-import {createTheme, ThemeProvider, Grid, Tabs, Menu, MenuItem, Divider,Typography, Tab, Button} from '@mui/material';
+import {Grid, Tabs, Menu, Divider,Typography, Tab} from '@mui/material';
 import Image from 'next/image'
 import "@fontsource/montserrat";
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
-
 import TypographyNavBar from './ui/TypographyNavBar';
 import TypographyNavBarImage from './ui/TypographyNavBarImage';
 import { useState } from 'react';
-import { KeyboardArrowRight } from '@mui/icons-material';
 import Link from 'next/link';
-
-
-
-
-
 
   const Navbar = () => {
 

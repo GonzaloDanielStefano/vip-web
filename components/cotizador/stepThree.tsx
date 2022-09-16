@@ -34,7 +34,8 @@ return(
 <Box style={{background:'white',width:'567px',height:'565px',marginTop:'0px',marginLeft:'5%'
               ,borderRadius: '0px 0px 20px 20px'}}>
                       
-              <TitleQuote/>
+                      <TitleQuote title={'¡Cotiza en segundos tu seguro vehicular!'} 
+                      image={'/../public/vehicle.JPG'}/>
                       <Grid container direction={'row'}>
                         
                         <Grid item xs={4}>
