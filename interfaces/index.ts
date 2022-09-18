@@ -27,7 +27,31 @@ export type Insurance = {
   insurance_name: string
   description: string
   trade_mark: string
-  products: Product[] | null
+  health_products: HealthProduct[]
+  vehicular_products: VehicularProduct[]
+  created_at: string | null
+  updated_at: string | null
+}
+
+export type VehicularProduct = Product & {
+  use_type: UseType | null
+  fuel_type: FuelType | null
+  risk_factors: RiskFactor[] | null
+}
+
+export type HealthProduct = Product & {
+  clinics: Clinic[]
+  health_factors: HealthFactor[]
+}
+
+export type HealthFactor = Factor & {
+  health_dependents: HealthDependent[]
+}
+
+export type Clinic = {
+  id: string | null
+  name: string
+  description: string
   created_at: string | null
   updated_at: string | null
 }
@@ -46,37 +70,12 @@ export type Product = {
   updated_at: string | null
 }
 
-export type Promotion = {
-  id: string | null
-  name: string
-  description: string | null
-  image: string | null
-  created_at: string | null
-  updated_at: string | null
-}
-
-export type Benefit = {
-  id: string | null
-  name: string
-  description: string | null
-  image: string | null
-  created_at: string | null
-  updated_at: string | null
-}
-
-
 export type Funding = {
   id: string | null
   tax: number
   installments: Installment[] | null
   created_at: string | null
   updated_at: string | null
-}
-
-export type RiskFactor = Factor & {
-  minimum_rate: number
-  vehicles: Vehicle[] | null
-  rates: Rate[] | null
 }
 
 export type Installment = {
@@ -103,14 +102,16 @@ export type Rate = {
 export type Factor = {
   id: string | null
   name: string
-  minimum_rate: number
-  vehicles: Vehicle[] | null
-  rates: Rate[] | null
-  health_dependents: HealthDependent[] | null
   coverage: Coverage | null
   deductible: Deductible | null
   created_at: string | null
   updated_at: string | null
+}
+
+export type RiskFactor = Factor & {
+  minimum_rate: number
+  vehicles: Vehicle[] | null
+  rates: Rate[] | null
 }
 
 export type HealthDependent = {
@@ -207,6 +208,24 @@ export type Currency = {
   updated_at: string | null
 }
 
+export type Benefit = {
+  id: string | null
+  name: string
+  description: string | null
+  image: string | null
+  created_at: string | null
+  updated_at: string | null
+}
+
+export type Promotion = {
+  id: string | null
+  name: string
+  description: string | null
+  image: string | null
+  created_at: string | null
+  updated_at: string | null
+}
+
 export type Department = {
   id: string | null
   name: string
@@ -249,7 +268,7 @@ export type VehicularQuoterRequest = {
   name: string | null
   phone: string | null
   dni: string | null
-  vehicle: Vehicle 
+  vehicle: Vehicle
   use_type: UseType
   promotional_code: string | null
   produced_at: string | null
@@ -265,51 +284,11 @@ export type HealthQuoterRequest = {
   dni: string | null
   promotional_code: string | null
   born_at: string | null
-  use_type: UseType
-  dependents: Dependent [] | null
-}
-
-export type VehicularProduct = Product & {
-  use_type: UseType | null
-  fuel_type: FuelType | null
-  risk_factors: RiskFactor[] | null
-}
-
-export type HealthProduct = Product & {
-  clinics: Clinic[]
-  health_factors: HealthFactor[]
-}
-
-export type HealthFactor = Factor & {
-  health_dependents: HealthDependent[]
-}
-
-export type Clinic = {
-  id: string | null
-  name: string
-  description: string
-  created_at: string | null
-  updated_at: string | null
-}
-
-export type HomeQuoterRequest ={
-  id: string | null
-  typeOfCliente: string | null
-  whatQuote: string | null
-  wayToSecure: string | null
-  typeOfHouse: string | null
-  currency: string | null
-  valueOfHouse: Number | null
-  contentValue: Number | null
-  province: string | null
-  district: string | null
-  name: string | null
-  phone: string | null
-  email: string | null
-
+  dependents: Dependent[] | null
 }
 
 export type Dependent = {
+  id: number | null
   born_at: string | null
   relationship: string | null
 }

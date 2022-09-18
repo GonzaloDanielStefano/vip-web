@@ -1,8 +1,7 @@
 import axios from "axios";
-import { Brand, Category, Coverage, CoverageCategory, CoverageType, Currency, Department, ExceptionMessage, Factor, FuelType, Insurance, Model, Product, QuoteData, Rate, RoleType, User, UseType, Vehicle, VehicularQuoterRequest, QuoteResult, Funding, Installment, Deductible, DeductibleType, DeductibleCategory, HealthDependent, HomeQuoterRequest, Benefit, HealthProduct, Clinic, HealthFactor, RiskFactor } from "../interfaces";
+import { Brand, Category, Coverage, CoverageCategory, CoverageType, Currency, Department, ExceptionMessage, Factor, FuelType, Insurance, Model, Product, QuoteData, Rate, RoleType, User, UseType, Vehicle, VehicularQuoterRequest, QuoteResult, Funding, Installment, Deductible, DeductibleType, DeductibleCategory, HealthDependent, RiskFactor, HealthFactor, VehicularProduct, HealthProduct, Benefit, Clinic, Promotion } from "../interfaces";
 
 export abstract class BuildersMethods {
-
     static buildCategories(theCategories: Category[]) {
         let categories: Category[] = [];
         if (theCategories?.length > 0) {
@@ -71,7 +70,7 @@ export abstract class BuildersMethods {
         return fuelTypes;
     }
 
-    static buildFuelType(theId: string | null, theName: string, theDescription: string | null, theAmount: number,
+    static buildFuelType(theId: string | null, theName: string, theDescription: string, theAmount: number,
         thePercentage: number, theCreated_at: string | null, theUpdated_at: string | null): FuelType {
 
         let fuelType: FuelType = {
@@ -117,6 +116,96 @@ export abstract class BuildersMethods {
         return currency;
     }
 
+    static buildPromotions(thePromotions: Promotion[]) {
+        let promotions: Promotion[] = [];
+        if (thePromotions?.length > 0) {
+            for (let promotion of thePromotions) {
+                promotions.push(this.buildPromotion(
+                    promotion.id,
+                    promotion.name,
+                    promotion.description,
+                    promotion.image,
+                    promotion.created_at,
+                    promotion.updated_at));
+            }
+        }
+
+        return promotions;
+    }
+
+    static buildPromotion(theId: string | null, theName: string, theDescription: string | null, theImage: string | null, theCreated_at: string | null, theUpdated_at: string | null): Promotion {
+        let promotion: Promotion = {
+            id: theId,
+            name: theName,
+            image: theImage,
+            description: theDescription,
+            created_at: theCreated_at,
+            updated_at: theUpdated_at
+        }
+
+        return promotion;
+    }
+
+    static buildBenefits(theBenefits: Benefit[]) {
+        let benefits: Benefit[] = [];
+        if (theBenefits?.length > 0) {
+            for (let benefit of theBenefits) {
+                benefits.push(this.buildBenefit(
+                    benefit.id,
+                    benefit.name,
+                    benefit.description,
+                    benefit.image,
+                    benefit.created_at,
+                    benefit.updated_at));
+            }
+        }
+
+        return benefits;
+    }
+
+    static buildBenefit(theId: string | null, theName: string, theDescription: string | null, theImage: string | null, theCreated_at: string | null,
+        theUpdated_at: string | null): Benefit {
+        let benefit: Benefit = {
+            id: theId,
+            name: theName,
+            image: theImage,
+            description: theDescription,
+            created_at: theCreated_at,
+            updated_at: theUpdated_at
+        }
+
+        return benefit;
+    }
+
+    static buildClinics(theClinics: Clinic[]) {
+        let clinics: Clinic[] = [];
+        if (theClinics?.length > 0) {
+            for (let clinic of theClinics) {
+                clinics.push(this.buildClinic(
+                    clinic.id,
+                    clinic.name,
+                    clinic.description,
+                    clinic.created_at,
+                    clinic.updated_at));
+            }
+        }
+
+        return clinics;
+    }
+
+    static buildClinic(theId: string | null, theName: string, theDescription: string | null, theCreated_at: string | null,
+        theUpdated_at: string | null): Clinic {
+        let clinic: Clinic = {
+            id: theId,
+            name: theName,
+            description: theDescription,
+            created_at: theCreated_at,
+            updated_at: theUpdated_at
+        }
+
+        return clinic;
+    }
+
 
     static buildUseTypes(theUseTypes: UseType[]) {
         let useTypes: UseType[] = [];
@@ -153,7 +242,8 @@ export abstract class BuildersMethods {
                     insurance.insurance_name,
                     insurance.description,
                     insurance.trade_mark,
-                    insurance.products,
+                    insurance.vehicular_products,
+                    insurance.health_products,
                     insurance.created_at,
                     insurance.updated_at));
             }
@@ -163,20 +253,18 @@ export abstract class BuildersMethods {
     }
 
     static buildInsurance(theId: string | null, theInsuranceName: string, theDescription: string,
-        theTradeMark: string, theProducts: Product[], theCreated_at: string | null,
-        theUpdated_at: string | null) {
-
+        theTradeMark: string, theVehicularProducts: VehicularProduct[], theHealthsProducts: HealthProduct[],
+        theCreated_at: string | null, theUpdated_at: string | null) {
         let insurance: Insurance = {
             id: theId,
             insurance_name: theInsuranceName,
             description: theDescription,
-            products: this.buildProducts(theProducts),
+            vehicular_products: this.buildVehicularProducts(theVehicularProducts),
+            health_products: this.buildHealthProducts(theHealthsProducts),
             trade_mark: theTradeMark,
             created_at: theCreated_at,
             updated_at: theUpdated_at
         };
-
-
 
         return insurance;
     }
@@ -200,6 +288,7 @@ export abstract class BuildersMethods {
                         vehicularProduct.funding,
                         vehicularProduct.risk_factors,
                         vehicularProduct.benefits,
+                        vehicularProduct.promotions,
                         vehicularProduct.created_at,
                         vehicularProduct.updated_at))
                 } else {
@@ -215,6 +304,7 @@ export abstract class BuildersMethods {
                         healthProduct.clinics,
                         healthProduct.health_factors,
                         healthProduct.benefits,
+                        healthProduct.promotions,
                         healthProduct.created_at,
                         healthProduct.updated_at))
                 }
@@ -223,6 +313,31 @@ export abstract class BuildersMethods {
         }
     }
 
+    static buildHealthProducts(theHealthsProducts: HealthProduct[]): HealthProduct[] {
+        let products: HealthProduct[] = [];
+
+        if (theHealthsProducts?.length > 0) {
+            for (let product of theHealthsProducts) {
+                products.push(this.buildHealthProduct(
+                    product.id,
+                    product.name,
+                    product.department,
+                    product.category,
+                    product.product_priority,
+                    product.currency,
+                    product.funding,
+                    product.clinics,
+                    product.health_factors,
+                    product.benefits,
+                    product.promotions,
+                    product.created_at,
+                    product.updated_at
+                ));
+            }
+        }
+
+        return products;
+    }
     static buildVehicularProducts(theVehicularProducts: VehicularProduct[]): VehicularProduct[] {
         let products: VehicularProduct[] = [];
 
@@ -240,6 +355,7 @@ export abstract class BuildersMethods {
                     product.funding,
                     product.risk_factors,
                     product.benefits,
+                    product.promotions,
                     product.created_at,
                     product.updated_at
                 ));
@@ -250,7 +366,7 @@ export abstract class BuildersMethods {
     }
 
     static buildVehicularProduct(theId: string, theName: string, theCategory: Category, theProductPriority: number, theDepartment: Department, theCurrency: Currency, theUseType: UseType, theFuelType: FuelType, theFunding: Funding, theFactors: RiskFactor[],
-        theBenefits: Benefit[], theCreated_at: string | null, theUpdated_at: string | null): VehicularProduct {
+        theBenefits: Benefit[], thePromotions: Promotion[], theCreated_at: string | null, theUpdated_at: string | null): VehicularProduct {
         let product: VehicularProduct = {
             id: theId,
             name: theName,
@@ -296,6 +412,7 @@ export abstract class BuildersMethods {
                 theFunding.updated_at) : null,
             risk_factors: this.buildRiskFactors(theFactors),
             benefits: this.buildBenefits(theBenefits),
+            promotions: this.buildPromotions(thePromotions),
             created_at: theCreated_at,
             updated_at: theUpdated_at
         }
@@ -303,23 +420,8 @@ export abstract class BuildersMethods {
         return product;
     }
 
-    static buildRiskFactor(theId: string, theName: string, theMinimum_rate: number, theVehicles: Vehicle[], theRates: Rate[], theCoverage: Coverage, theDeductible: Deductible, theCreated_at: string, theUpdated_at: string): RiskFactor {
-        let factor: RiskFactor = {
-            id: theId,
-            name: theName,
-            minimum_rate: theMinimum_rate,
-            vehicles: theVehicles !== null ? this.buildVehicles(theVehicles) : [],
-            rates: theRates !== null ? this.buildRates(theRates) : [],
-            coverage: theCoverage !== null ? this.buildCoverage(theCoverage) : null,
-            deductible: theDeductible !== null ? this.buildDeductible(theDeductible) : null,
-            created_at: theCreated_at,
-            updated_at: theUpdated_at
-        }
-
-        return factor;
-    }
-    
-    static buildHealthProduct(theId: string, theName: string, theDepartment: Department, theCategory: Category, theProductPriority: number, theCurrency: Currency, theFunding: Funding, theClinics: Clinic[], theFactors: HealthFactor[], theBenefits: Benefit[], theCreated_at: string | null, theUpdated_at: string | null): HealthProduct {
+    static buildHealthProduct(theId: string, theName: string, theDepartment: Department, theCategory: Category, theProductPriority: number, theCurrency: Currency, theFunding: Funding, theClinics: Clinic[], theFactors: HealthFactor[], theBenefits: Benefit[],
+        thePromotions: Promotion[], theCreated_at: string | null, theUpdated_at: string | null): HealthProduct {
         let product: HealthProduct = {
             id: theId,
             name: theName,
@@ -353,149 +455,7 @@ export abstract class BuildersMethods {
                 theFunding.updated_at) : null,
             health_factors: this.buildHealthFactors(theFactors),
             benefits: this.buildBenefits(theBenefits),
-            created_at: theCreated_at,
-            updated_at: theUpdated_at
-        }
-
-        return product;
-    }
-
-    static buildHealthFactors(theFactors: HealthFactor[]): HealthFactor[] {
-        let factors: HealthFactor[] = [];
-
-        if (theFactors?.length > 0) {
-            for (let factor of theFactors) {
-                factors.push(this.buildHealthFactor(
-                    factor.id,
-                    factor.name,
-                    factor.health_dependents,
-                    factor.coverage,
-                    factor.deductible,
-                    factor.created_at,
-                    factor.updated_at
-                ))
-            }
-        }
-
-        return factors;
-    }
-    
-    static buildHealthFactor(theId: string, theName: string, theHealthDependents: HealthDependent[], theCoverage: Coverage, theDeductible: Deductible, theCreated_at: string, theUpdated_at: string): HealthFactor {
-        let factor: HealthFactor = {
-            id: theId,
-            name: theName,
-            health_dependents: theHealthDependents !== null ? this.buildHealthDependents(theHealthDependents) : [],
-            coverage: theCoverage !== null ? this.buildCoverage(theCoverage) : null,
-            deductible: theDeductible !== null ? this.buildDeductible(theDeductible) : null,
-            created_at: theCreated_at,
-            updated_at: theUpdated_at
-        }
-
-        return factor;
-    }
-
-    static buildClinics(theClinics: Clinic[]) {
-        let clinics: Clinic[] = [];
-        if (theClinics?.length > 0) {
-            for (let clinic of theClinics) {
-                clinics.push(this.buildClinic(
-                    clinic.id,
-                    clinic.name,
-                    clinic.description,
-                    clinic.created_at,
-                    clinic.updated_at));
-            }
-        }
-
-        return clinics;
-    }
-    
-    static buildClinic(theId: string | null, theName: string, theDescription: string | null, theCreated_at: string | null,
-        theUpdated_at: string | null): Clinic {
-        let clinic: Clinic = {
-            id: theId,
-            name: theName,
-            description: theDescription,
-            created_at: theCreated_at,
-            updated_at: theUpdated_at
-        }
-
-        return clinic;
-    }
-
-    static buildHealthProducts(theHealthsProducts: HealthProduct[]): HealthProduct[] {
-        let products: HealthProduct[] = [];
-
-        if (theHealthsProducts?.length > 0) {
-            for (let product of theHealthsProducts) {
-                products.push(this.buildHealthProduct(
-                    product.id,
-                    product.name,
-                    product.department,
-                    product.category,
-                    product.product_priority,
-                    product.currency,
-                    product.funding,
-                    product.clinics,
-                    product.health_factors,
-                    product.benefits,
-                    product.created_at,
-                    product.updated_at
-                ));
-            }
-        }
-
-        return products;
-    }
-
-    static buildProduct(theId: string | null, theName: string, theCategory: Category | null, 
-        theProductPriority: number | null, theDepartment: Department, theCurrency: Currency, theUseType: UseType, 
-        theFuelType: FuelType, theFunding: Funding, theFactors: Factor[], theCreated_at: string | null,
-         theUpdated_at: string | null): Product {
-        let product: Product = {
-            id: theId,
-            name: theName,
-            category: this.buildCategory(
-                theCategory.id,
-                theCategory.name,
-                theCategory.created_at,
-                theCategory.updated_at),
-            product_priority: theProductPriority,
-            department: theDepartment !== null ? this.buildDepartment(
-                theDepartment.id,
-                theDepartment.name,
-                theDepartment.description,
-                theDepartment.grouped_departments,
-                theDepartment.disabled,
-                theDepartment.description_for_client,
-                theDepartment.created_at,
-                theDepartment.updated_at) : null,
-            currency: this.buildCurrency(
-                theCurrency.id,
-                theCurrency.name,
-                theCurrency.description,
-                theCurrency.created_at,
-                theCurrency.updated_at),
-            use_type: this.buildUseType(
-                theUseType.id,
-                theUseType.use_type,
-                theUseType.created_at,
-                theUseType.updated_at),
-            fuel_type: this.buildFuelType(
-                theFuelType.id,
-                theFuelType.name,
-                theFuelType.description,
-                theFuelType.amount,
-                theFuelType.percentage,
-                theFuelType.created_at,
-                theFuelType.updated_at),
-            funding: theFunding !== null ? this.buildFunding(
-                theFunding.id,
-                theFunding.tax,
-                theFunding.installments,
-                theFunding.created_at,
-                theFunding.updated_at) : null,
-            factors: this.buildFactors(theFactors),
+            promotions: this.buildPromotions(thePromotions),
             created_at: theCreated_at,
             updated_at: theUpdated_at
         }
@@ -556,17 +516,36 @@ export abstract class BuildersMethods {
         return installment;
     }
 
-    static buildFactors(theFactors: Factor[]): Factor[] {
-        let factors: Factor[] = [];
+    static buildRiskFactors(theFactors: RiskFactor[]): RiskFactor[] {
+        let factors: RiskFactor[] = [];
 
         if (theFactors?.length > 0) {
             for (let factor of theFactors) {
-                factors.push(this.buildFactor(
+                factors.push(this.buildRiskFactor(
                     factor.id,
                     factor.name,
                     factor.minimum_rate,
                     factor.vehicles,
                     factor.rates,
+                    factor.coverage,
+                    factor.deductible,
+                    factor.created_at,
+                    factor.updated_at
+                ))
+            }
+        }
+
+        return factors;
+    }
+
+    static buildHealthFactors(theFactors: HealthFactor[]): HealthFactor[] {
+        let factors: HealthFactor[] = [];
+
+        if (theFactors?.length > 0) {
+            for (let factor of theFactors) {
+                factors.push(this.buildHealthFactor(
+                    factor.id,
+                    factor.name,
                     factor.health_dependents,
                     factor.coverage,
                     factor.deductible,
@@ -579,15 +558,27 @@ export abstract class BuildersMethods {
         return factors;
     }
 
-    static buildFactor(theId: string, theName: string, theMinimum_rate: number, theVehicles: Vehicle[],
-        theRates: Rate[], theHealthDependents: HealthDependent[], theCoverage: Coverage, theDeductible: Deductible, theCreated_at: string, theUpdated_at: string): Factor {
-        let factor: Factor = {
+    static buildHealthFactor(theId: string, theName: string, theHealthDependents: HealthDependent[], theCoverage: Coverage, theDeductible: Deductible, theCreated_at: string, theUpdated_at: string): HealthFactor {
+        let factor: HealthFactor = {
+            id: theId,
+            name: theName,
+            health_dependents: theHealthDependents !== null ? this.buildHealthDependents(theHealthDependents) : [],
+            coverage: theCoverage !== null ? this.buildCoverage(theCoverage) : null,
+            deductible: theDeductible !== null ? this.buildDeductible(theDeductible) : null,
+            created_at: theCreated_at,
+            updated_at: theUpdated_at
+        }
+
+        return factor;
+    }
+
+    static buildRiskFactor(theId: string, theName: string, theMinimum_rate: number, theVehicles: Vehicle[], theRates: Rate[], theCoverage: Coverage, theDeductible: Deductible, theCreated_at: string, theUpdated_at: string): RiskFactor {
+        let factor: RiskFactor = {
             id: theId,
             name: theName,
             minimum_rate: theMinimum_rate,
             vehicles: theVehicles !== null ? this.buildVehicles(theVehicles) : [],
             rates: theRates !== null ? this.buildRates(theRates) : [],
-            health_dependents: theHealthDependents !== null ? this.buildHealthDependents(theHealthDependents) : [],
             coverage: theCoverage !== null ? this.buildCoverage(theCoverage) : null,
             deductible: theDeductible !== null ? this.buildDeductible(theDeductible) : null,
             created_at: theCreated_at,
@@ -599,7 +590,7 @@ export abstract class BuildersMethods {
 
     static buildHealthDependents(theHealthDependents: HealthDependent[]): HealthDependent[] {
         let healthDependents: HealthDependent[] = [];
-        
+
         if (theHealthDependents?.length > 0) {
             for (let healthDependent of theHealthDependents) {
                 healthDependents.push(this.buildHealthDependent(
@@ -615,9 +606,8 @@ export abstract class BuildersMethods {
 
         return healthDependents;
     }
-    
-    static buildHealthDependent(theId: string | null, theAge: number, theTitular_age_amount: number, 
-        theDependent_age_amount: number, theCreated_at: string | null, theUpdated_at: string | null): HealthDependent {
+
+    static buildHealthDependent(theId: string, theAge: number, theTitular_age_amount: number, theDependent_age_amount: number, theCreated_at: string, theUpdated_at: string): HealthDependent {
         let healthDependent: HealthDependent = {
             id: theId,
             age: theAge,
@@ -684,8 +674,8 @@ export abstract class BuildersMethods {
     }
 
 
-    static buildDeductibleCategory(theId: string | null, theDeductibleCategoryName: string,
-        theCreated_at: string | null, theUpdated_at: string | null): DeductibleCategory {
+    static buildDeductibleCategory(theId: string, theDeductibleCategoryName: string,
+        theCreated_at: string, theUpdated_at: string): DeductibleCategory {
         let deductibleCategory: DeductibleCategory = {
             id: theId,
             name: theDeductibleCategoryName,
@@ -763,8 +753,8 @@ export abstract class BuildersMethods {
     }
 
 
-    static buildCoverageCategory(theId: string | null, theCoverageCategoryName: string,
-        theCreated_at: string | null, theUpdated_at: string | null): CoverageCategory {
+    static buildCoverageCategory(theId: string, theCoverageCategoryName: string,
+        theCreated_at: string, theUpdated_at: string): CoverageCategory {
         let coverageCategory: CoverageCategory = {
             id: theId,
             name: theCoverageCategoryName,
@@ -775,8 +765,8 @@ export abstract class BuildersMethods {
         return coverageCategory;
     }
 
-    static buildCoverageType(theId: string | null, theCoverageCategory: CoverageCategory,
-        theDescription: string, theCreated_at: string | null, theUpdated_at: string | null): CoverageType {
+    static buildCoverageType(theId: string, theCoverageCategory: CoverageCategory,
+        theDescription: string, theCreated_at: string, theUpdated_at: string): CoverageType {
         let coverageType: CoverageType = {
             id: theId,
             coverage_category: theCoverageCategory,
@@ -806,8 +796,8 @@ export abstract class BuildersMethods {
         return rates;
     }
 
-    static buildRate(theId: string | null, theYear: number, theRate_amount: number, theCreated_at: string |null,
-        theUpdated_at: string | null): Rate {
+    static buildRate(theId: string, theYear: number, theRate_amount: number, theCreated_at: string,
+        theUpdated_at: string): Rate {
         let rate: Rate = {
             id: theId,
             year: theYear,
@@ -864,8 +854,7 @@ export abstract class BuildersMethods {
 
         return quotesData;
     }
-    static buildQuoteData(theId: string | null, theYear: number, theAmount: number, 
-        theCreated_at: string | null, theUpdated_at: string | null): QuoteData {
+    static buildQuoteData(theId: string, theYear: number, theAmount: number, theCreated_at: string, theUpdated_at: string): QuoteData {
         let quoteData: QuoteData = {
             id: theId,
             year: theYear,
@@ -878,8 +867,7 @@ export abstract class BuildersMethods {
     }
 
 
-    static buildModel(theId: string | null, theModel_name: string, theSubmodel: string, 
-        theCreated_at: string | null, theUpdated_at: string | null): Model {
+    static buildModel(theId: string, theModel_name: string, theSubmodel: string, theCreated_at: string, theUpdated_at: string): Model {
         let model: Model = {
             id: theId,
             model_name: theModel_name,
@@ -891,8 +879,7 @@ export abstract class BuildersMethods {
         return model;
     }
 
-    static buildBrand(theId: string | null, theBrand_name: string, theCreated_at: string | null
-        , theUpdated_at: string | null): Brand {
+    static buildBrand(theId: string, theBrand_name: string, theCreated_at: string, theUpdated_at: string): Brand {
         let brand: Brand = {
             id: theId,
             brand_name: theBrand_name,
@@ -903,8 +890,7 @@ export abstract class BuildersMethods {
         return brand;
     }
 
-    static buildCategory(theId: string | null, theName: string, theCreated_at: string | null, 
-        theUpdated_at: string | null): Category {
+    static buildCategory(theId: string, theName: string, theCreated_at: string, theUpdated_at: string): Category {
         let category: Category = {
             id: theId,
             name: theName,
@@ -979,63 +965,6 @@ export abstract class BuildersMethods {
         return quoteResult;
     }
 
-    static buildHomeQuoterRequest(theId: string | null, theTypeOfClient: string | null,
-        theWhatQuote: string | null, theWayToSecure:  string | null, theTypeOfHouse: string | null,
-        theCurrency:  string | null, theValueOfHouse: number | null, theContentValue: number | null,
-        theProvince:  string | null, theDistrict:  string | null,theName: string | null,
-         thePhone: string | null,
-        theEmail:  string | null):HomeQuoterRequest{
-        
-        let homeQuoterRequest:HomeQuoterRequest ={
-            id: theId,
-            typeOfCliente: theTypeOfClient,
-            whatQuote: theWhatQuote,
-            wayToSecure: theWayToSecure,
-            typeOfHouse: theTypeOfHouse,
-            currency: theCurrency,
-            valueOfHouse: theValueOfHouse,
-            contentValue: theContentValue,
-            province: theProvince,
-            district: theDistrict,
-            name: theName,
-            phone: thePhone,
-            email: theEmail
-        }
-
-        return homeQuoterRequest;
-    }
-    
-    static buildBenefits(theBenefits: Benefit[]) {
-        let benefits: Benefit[] = [];
-        if (theBenefits?.length > 0) {
-            for (let benefit of theBenefits) {
-                benefits.push(this.buildBenefit(
-                    benefit.id,
-                    benefit.name,
-                    benefit.description,
-                    benefit.image,
-                    benefit.created_at,
-                    benefit.updated_at));
-            }
-        }
-
-        return benefits;
-    }
-
-    static buildBenefit(theId: string | null, theName: string, theDescription: string | null, theImage: string | null, theCreated_at: string | null,
-        theUpdated_at: string | null): Benefit {
-        let benefit: Benefit = {
-            id: theId,
-            name: theName,
-            image: theImage,
-            description: theDescription,
-            created_at: theCreated_at,
-            updated_at: theUpdated_at
-        }
-
-        return benefit;
-    }
-    
     static buildError(error: any) {
         const { response } = error;
         if (axios.isAxiosError(error) && response?.data) {

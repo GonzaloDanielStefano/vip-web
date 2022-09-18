@@ -3,6 +3,7 @@ import "@fontsource/montserrat";
 import Image from 'next/image';
 import { QuoteResult, VehicularProduct } from "../../interfaces";
 import { useEffect, useState } from "react";
+import Link from "next/link";
 
 interface Props {
     quoteSelected: QuoteResult
@@ -109,7 +110,12 @@ const Beneficios = ({ quoteSelected }: Props) => {
                     marginTop: '3.5%'
 
                 }}>
-                    COMPARAR PLANES
+                    <Link href='/quoteVehicleComparative'>
+                        <a>
+                            COMPARAR PLANES
+                        </a>
+                    </Link>
+                    
                 </Button>
             </Grid>
 

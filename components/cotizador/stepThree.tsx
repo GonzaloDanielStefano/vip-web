@@ -39,7 +39,7 @@ return(
                       <Grid container direction={'row'}>
                         
                         <Grid item xs={4}>
-                          <TextField id="outlined-basic" label="Nombre" variant="outlined" fullWidth
+                          <TextField id="outlined-basic" label="Nombre" variant="outlined" 
                           onChange={handleChangeName}
                           value={quoterData?.name}
                           sx={{width:'100.5%', marginLeft:'26%',marginTop:'3%'}} />

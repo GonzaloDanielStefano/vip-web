@@ -114,7 +114,7 @@ return(
 
                       <Grid container>
                         <Grid item xs={12}>
-                          <TextField id="outlined-basic" label="E-mail" variant="outlined" fullWidth
+                          <TextField id="outlined-basic" label="E-mail" variant="outlined" 
                           type="email"
                           onChange={handleChangeEmail}
                           value={quoterData?.email}
@@ -188,7 +188,7 @@ return(
                             sx={{height:'55px'}} >
                             {Array.isArray(vehiclesByBrand) ? vehiclesByBrand.map((model)=>(
                               
-                                <MenuItem value={model.model.id}>{model.model.model_name}</MenuItem>
+                                <MenuItem value={model.model.id}>{model.model.sub_model}</MenuItem>
                             )):[]}
                           </Select>
                         </FormControl>

@@ -1,7 +1,7 @@
 import { Button, Grid } from "@mui/material";
 import "@fontsource/montserrat";
 import Image from 'next/image';
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 
 interface Props{
   setActiveStep: Dispatch<SetStateAction<number>>
@@ -9,18 +9,26 @@ interface Props{
   activeStep:number
   completed: Array<number>
   noPatent: boolean
+  isFieldComplete: boolean
 }
 
-const QuoteButtonNext = ({setActiveStep,activeStep}:Props) => {
+const QuoteButtonNext = ({setActiveStep,activeStep,isFieldComplete}:Props) => {
 
+  const [disabled,setDisabled] = useState<boolean>(true);
     async function nextStep(){
         setActiveStep(activeStep + 1);
         
     }
+
+    useEffect(() => {
+      setDisabled(isFieldComplete);
+    }, [])
+    
     return(
         <Grid item xs={12}>
                           <Button variant="contained" 
-                          onClick={nextStep} 
+                          onClick={nextStep}
+                          disabled={disabled}
                           sx={{
                             marginLeft: '8.7%',
                             marginTop: '3%',

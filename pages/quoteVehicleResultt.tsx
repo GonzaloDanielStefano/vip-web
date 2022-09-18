@@ -33,7 +33,7 @@ const QuoteVehicleResultt = () => {
     const [useType, setUseType] = useState<UseType>();
     const [quoteResult, setQuoterResult] = useState<QuoteResult[]>();
     const [quoteData, setQuoteData] = useState<VehicularQuoterRequest>();
-    const localResult: any = JSON.parse(localStorage.getItem('quoteResult'));
+    const localResult = JSON.parse(localStorage.getItem('quoteResult') || '{}');
     const [anualPrice, setAnualPrice] = useState<number>();
     const [quoteSelected, setQuoteSelected] = useState<QuoteResult>();
     const [quoteResultIndex, setQuoteResulIndex] = useState<number>(0);
@@ -42,8 +42,8 @@ const QuoteVehicleResultt = () => {
     useEffect(() => {
 
 
-        setQuoteData({ ...quoteData, name: router.query.name });
-        setQuoteData({ ...quoteData, email: router.query.email });
+        setQuoteData({ ...quoteData, name: router.query.name ? router.query.name : null });
+        setQuoteData({ ...quoteData, email: router.query.email || null});
         setQuoteData({ ...quoteData, phone: router.query.phone });
         setQuoteData({ ...quoteData, dni: router.query.dni });
         setQuoteData({ ...quoteData, produced_at: router?.query?.produced_at });
@@ -167,7 +167,7 @@ const QuoteVehicleResultt = () => {
                                 Tipos de Cobertura:
                             </Typography>
 
-                            <TiposDeCobertura quoteResult={quoteResult} />
+                            <TiposDeCobertura quoteResult={quoteResult} setQuoterResult={setQuoterResult} />
 
 
 
@@ -184,7 +184,7 @@ const QuoteVehicleResultt = () => {
 
                                     {
 
-                                        Array.isArray(quoteResult) ? quoteResult.map((result, index) => (
+                                        Array.isArray(quoteResult) ? quoteResult.map((result,index) => (
                                             <HeaderTableResult
                                                 setAnualPrice={setAnualPrice}
                                                 quoteResult={result}
@@ -194,9 +194,7 @@ const QuoteVehicleResultt = () => {
                                                 quoteResultIndex={quoteResultIndex}
                                                 setQuoteResulIndex={setQuoteResulIndex}
                                                 title={result?.product?.category?.name}
-                                                pago={""}
-                                                cuotas={`${index}`}
-                                                monto={""}
+                                               
                                             />
                                         )) : []
                                     }

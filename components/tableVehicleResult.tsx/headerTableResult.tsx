@@ -15,27 +15,44 @@ interface Props {
     quoteResult: QuoteResult
     setAnualPrice: Dispatch<SetStateAction<number>>
 }
-const HeaderTableResult = ({ title,quoteSelected, setAnualPrice,
-    setQuoteSelected, quoteResultIndex, setQuoteResulIndex, index, quoteResult }: Props) => {
+ function HeaderTableResult({ title,quoteSelected, setAnualPrice,
+    setQuoteSelected, quoteResultIndex, setQuoteResulIndex, index, quoteResult }: Props)  {
 
     const [vehicularProduct, setVehicularProduct] = useState<VehicularProduct>();
     const [funding, setFunding] = useState<Funding>();
     const [installment, setInstallment] = useState<Installment>();
     const [installmentIndex,setInstallmentIndex] = useState<number>(0);
+    const [opacity,setOpacity] = useState<string>('0.5');
+    const [background,setBackground] = useState<string>('rgba(21, 31, 109, 0.11)');
+    const [border,setBorder] = useState<string>('3px solid #C1C1C1');
+    const [borderColor,setBorderColor] = useState<string>('#C1C1C1');
     
+
+    async function changeQuoteSelected(){
+        setQuoteSelected(quoteResult);
+        setQuoteResulIndex(index);
+    }
     useEffect(() => {
         if (index == quoteResultIndex) {
             setQuoteSelected(quoteResult);
             setAnualPrice(quoteResult?.quote);
-        }
-        if ('risk_factors' in quoteSelected.product) {
+            setOpacity('1');
+            setBackground('#151F6D');
+            setBorder('3px solid #0F206C');
+            setBorderColor('#0F206C');
+        } 
+        if (quoteSelected && 'risk_factors' in quoteSelected?.product) {
             setVehicularProduct(quoteSelected.product as VehicularProduct)}
-        if(vehicularProduct !== undefined && vehicularProduct?.funding){
-            setFunding(vehicularProduct.funding);
-            var installmentSelected = funding?.installments?.find(installment => 
-                installment?.installments > installmentIndex);
-            setInstallment(installmentSelected);
-        }
+        // if(vehicularProduct !== undefined && vehicularProduct?.funding){
+        //     setFunding(vehicularProduct.funding);
+        //     var installmentSelected = funding?.installments?.find(installment => 
+        //         installment?.installments > installmentIndex);
+        //     setInstallment(installmentSelected);
+        // }
+
+        var installmentSelected = quoteResult?.product?.funding?.installments?.find(installment => 
+            installment?.installments > installmentIndex);
+        setInstallment(installmentSelected);
         
         
         
@@ -53,21 +70,23 @@ const HeaderTableResult = ({ title,quoteSelected, setAnualPrice,
                         borderStyle: 'solid',
                         borderWidth: 'thin'
                     }} src={trade_mark} alt='Img' />
-                    {'Logo'}
+                    
                 </div>);
         }
         return <div>Sin imagen</div>
     }
     return (
-        <Grid item xs={4}>
-            <Button sx={{
+        <Grid item xs={4} >
+            <Button 
+            onClick={changeQuoteSelected}
+            sx={{
                 boxSizing: 'border-box',
                 width: '378px',
                 height: '59px',
                 marginLeft: '-1px',
                 padding: '0px',
-                background: '#151F6D',
-                border: '1px solid #0F206C',
+                background: `${background}`,
+                border: `1px solid ${borderColor}`,
                 borderRadius: '20px 20px 0px 0px',
                 fontFamily: 'Montserrat',
                 fontStyle: 'normal',
@@ -82,8 +101,9 @@ const HeaderTableResult = ({ title,quoteSelected, setAnualPrice,
 
             <Box width={'378px'} height={213}
                 sx={{
-                    border: '3px solid #0F206C',
+                    border: `${border}`,
                     marginLeft: '0px',
+                    opacity:`${opacity}`
                 }}>
                 <Grid container xs={12} sx={{ padding: '20px' }}>
                     <Grid item xs={5}>
@@ -96,7 +116,8 @@ const HeaderTableResult = ({ title,quoteSelected, setAnualPrice,
                             light={true} />
                     </Grid>
 
-                    <Grid item xs={5} flexDirection={'row'} sx={{ marginLeft: '15px' }}>
+                    {installment !== undefined ?
+                        <Grid item xs={5} flexDirection={'row'} sx={{ marginLeft: '15px' }}>
                         <Typography variant="h6" 
                         sx={{ 
                             fontSize: '16px',
@@ -129,7 +150,7 @@ const HeaderTableResult = ({ title,quoteSelected, setAnualPrice,
                             color:'#151F6D'}}>
                             US${installment?.minimum_amount_installment}
                         </Typography>
-                    </Grid>
+                    </Grid>:''}
                 </Grid>
 
                 <Grid container>
@@ -144,7 +165,8 @@ const HeaderTableResult = ({ title,quoteSelected, setAnualPrice,
                             lineHeight: '15.04px',
                             width: '250px',
                             height: '45px',
-                            borderRadius: '10px 10px 10px 10px'
+                            borderRadius: '10px 10px 10px 10px',
+                            
 
                         }}>
                             CONTRATAR

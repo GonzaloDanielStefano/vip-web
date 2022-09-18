@@ -113,7 +113,7 @@ return(
                       <Grid container>
                         
                         <Grid item xs={6}>
-                          <TextField id="outlined-basic" label="Nombre" variant="outlined" fullWidth
+                          <TextField id="outlined-basic" label="Nombre" variant="outlined" 
                           onChange={handleChangeName}
                           value={quoterData?.name}
                           sx={{width:'78.5%', marginLeft:'17%',marginTop:'5%'}} />
@@ -132,7 +132,7 @@ return(
 
                       <Grid container>
                         <Grid item xs={12}>
-                          <TextField id="outlined-basic" label="E-mail" variant="outlined" fullWidth
+                          <TextField id="outlined-basic" label="E-mail" variant="outlined" 
                           type="email"
                           onChange={handleChangeEmail}
                           value={quoterData?.email}
