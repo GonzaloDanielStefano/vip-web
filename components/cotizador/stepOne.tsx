@@ -34,18 +34,18 @@ function StepOne({ steps, activeStep, completed, setActiveStep,
     var newUseType = useTypes.find(useType => useType.id === event.target.value);
     if (newUseType != null) {
       setQuoterData({ ...quoterData, use_type: newUseType });
-     
+
     }
   };
   const handleRadioChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setNoPatent((event.target as HTMLInputElement).checked);
-    
+
 
   };
 
   async function handleChangeEmail(event: any) {
     setQuoterData({ ...quoterData, email: event.target.value });
-    
+
   }
 
 
@@ -55,7 +55,7 @@ function StepOne({ steps, activeStep, completed, setActiveStep,
 
   }
 
-  async function handleChangeLicense(event:any){
+  async function handleChangeLicense(event: any) {
     /* implementar cotizacion con placa */
     checkIsButtonDisabled();
   }
@@ -69,7 +69,7 @@ function StepOne({ steps, activeStep, completed, setActiveStep,
   useEffect(() => {
     checkIsButtonDisabled()
   }, [quoterData])
-  
+
 
   return (
     <Box className="stepQuote">
@@ -78,7 +78,9 @@ function StepOne({ steps, activeStep, completed, setActiveStep,
         image={'/vehicle.png'} />
 
       <Grid container direction={'row'}>
-        <Grid item xs={12} lg={6} className="promotion-code-field-step-v">
+        <Grid item xs={12} lg={6} sx={{
+          marginLeft: '9%'
+        }}>
           <TextField
             id="promotionCodeField"
             className="promotionCodeField"
@@ -107,7 +109,7 @@ function StepOne({ steps, activeStep, completed, setActiveStep,
           sx={{
             marginLeft: '-9%'
           }}>
-          <FormControl className="use-type-field-v" size="small">
+          <FormControl  size="small">
             <InputLabel
               id="useType"
               sx={{
@@ -118,7 +120,7 @@ function StepOne({ steps, activeStep, completed, setActiveStep,
               labelId="useType"
               id="useType"
               label="useType"
-             
+
               //error={quoterData?.use_type === undefined}
               onChange={handleChangeUseType}
               value={quoterData?.use_type?.id}
