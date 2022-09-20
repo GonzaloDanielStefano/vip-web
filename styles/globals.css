@@ -111,12 +111,13 @@ a {
 
   .promotion-code-field-step-v{
     margin-left: 9%;
+    width: 466px;
     
   }
 
-  .promotionCodeField{
+  /* .promotionCodeField{
     width: 466px;
-  }
+  } */
 
   .use-type-field-v{
     width: 466px;
