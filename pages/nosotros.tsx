@@ -112,7 +112,7 @@ const Nosotros = () => {
                 </Grid>
 
                 <Grid item xs={5} className='imgNosotros' >
-                    <Image src='/../public/backgroundNosotros.jpg' height={1585} width={1300} alt="background" />
+                    <Image src='/backgroundNosotros.jpg' height={1585} width={1300} alt="background" />
                 </Grid>
 
 
@@ -126,13 +126,13 @@ const Nosotros = () => {
                     <CardNosotros message="Dar a nuestros clientes la cobertura de seguridad que necesitan 
                 para sus negocios y su vida personal,priorizando la calidad del servicio con productos 
                 adaptados a la medida de las necesidades de cada 
-                uno de ellos." image={'/../public/mision.jpg'} />
+                uno de ellos." image={'/mision.jpg'} />
                 </Grid>
                 <Grid item xs={6}>
                     <CardNosotros message="Ser corredores de seguros líderes en calidad y servicio personalizado,
                  con un equipo humano altamente calificado, trabajando con responsabilidad, profesionalismo y 
                  honestidad para satisfacer las necesidades de nuestros clientes."
-                        image={'/../public/vision.jpg'} />
+                        image={'/vision.jpg'} />
                 </Grid>
             </Grid>
 
@@ -190,7 +190,7 @@ const Nosotros = () => {
 
                 <Grid container xs={6} sx={{ marginTop: '3%', paddingLeft: '40px' }}>
                     <Grid item xs={2}>
-                        <Image src='/../public/phoneNosotros.png' width={70} height={70} alt="phoneIcon" />
+                        <Image src='/public/phoneNosotros.png' width={70} height={70} alt="phoneIcon" />
                     </Grid>
 
                     <Grid item xs={3}>
@@ -211,7 +211,7 @@ const Nosotros = () => {
                     </Grid>
 
                     <Grid item xs={2}>
-                        <Image src='/../public/reportingNosotros.png' width={70} height={70} alt="reportIcon" />
+                        <Image src='/reportingNosotros.png' width={70} height={70} alt="reportIcon" />
                     </Grid>
 
                     <Grid item xs={3.5}>
@@ -233,7 +233,7 @@ const Nosotros = () => {
                     </Grid>
 
                     <Grid item xs={2}>
-                        <Image src='/../public/costNosotros.png' width={70} height={70} alt="costIcon" />
+                        <Image src='/costNosotros.png' width={70} height={70} alt="costIcon" />
                     </Grid>
 
                     <Grid item xs={3}>
@@ -254,7 +254,7 @@ const Nosotros = () => {
                     </Grid>
 
                     <Grid item xs={2}>
-                        <Image src='/../public/paperNosotros.png' width={70} height={70} alt="paperIcon" />
+                        <Image src='/paperNosotros.png' width={70} height={70} alt="paperIcon" />
                     </Grid>
 
                     <Grid item xs={3}>
@@ -306,7 +306,7 @@ const Nosotros = () => {
 
                                 <Grid container marginTop={3}>
                                     <Grid item xs={0.8}>
-                                        <Image src='/../public/checkIcon.png' width={27} height={27} alt="checkIcon" />
+                                        <Image src='/checkIcon.png' width={27} height={27} alt="checkIcon" />
                                     </Grid>
 
                                     <Grid item xs={10}>
@@ -331,7 +331,7 @@ const Nosotros = () => {
                     </Grid>
 
                     <Grid item xs={4} marginLeft={20}>
-                        <Image src='/../public/nosotrosTwoPersonChat.png' width={400} height={390} alt="peopleChat" />
+                        <Image src='/nosotrosTwoPersonChat.png' width={400} height={390} alt="peopleChat" />
                     </Grid>
                 </Grid>
 
@@ -370,21 +370,21 @@ const Nosotros = () => {
 
                 <Grid container marginTop={5}>
                     <Grid item xs={5}>
-                        <Image src='/../public/superintendenciaseguro.png' width={315} height={88}
+                        <Image src='/superintendenciaseguro.png' width={315} height={88}
                             alt="super intendencia de seguros" />
                     </Grid>
 
                     <Grid container xs={7} spacing={0}>
                         <Grid item xs={3}>
-                            <Image src='/../public/apecose.png' width={200} height={85} alt="apecose" />
+                            <Image src='/apecose.png' width={200} height={85} alt="apecose" />
                         </Grid>
 
                         <Grid item xs={3} marginLeft={2}>
-                            <Image src='/../public/copaprose.png' width={200} height={85} alt="copaprose" />
+                            <Image src='/copaprose.png' width={200} height={85} alt="copaprose" />
                         </Grid>
 
                         <Grid item xs={3} marginLeft={2}>
-                            <Image src='/../public/ccl.png' width={200} height={85} alt="camara de comercio lima" />
+                            <Image src='/ccl.png' width={200} height={85} alt="camara de comercio lima" />
                         </Grid>
                     </Grid>
                 </Grid>
