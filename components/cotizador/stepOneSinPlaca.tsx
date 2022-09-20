@@ -1,5 +1,5 @@
 import { Box, FormControl, FormControlLabel,Grid, MenuItem, Select, Step, StepButton, Stepper, TextField, OutlinedInput, Radio, InputLabel, SelectChangeEvent } from "@mui/material";
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import React from "react";
 import TitleQuote from "./titleQuote";
 import QuoteButtonNext from "../button/quoteButtonNext";
@@ -18,11 +18,13 @@ interface Props{
     quoterData: VehicularQuoterRequest 
     setQuoterData: Dispatch<SetStateAction<VehicularQuoterRequest>> 
     brands: Brand[];
+    
 }
-function StepOneSinPlaca  ({steps,activeStep,completed,setActiveStep,
-     noPatent,setNoPatent, useTypes,brands,quoterData,setQuoterData}:Props)  {
+function StepOneSinPlaca  ({steps,activeStep,completed,setActiveStep
+  ,useTypes,brands,quoterData,setQuoterData,setNoPatent}:Props)  {
     
     const [vehiclesByBrand, setVehiclesByBrand] = React.useState<Vehicle[]>();
+    const [isFieldComplete,setIsFieldComplete] = useState<boolean>(false);
 
     const handleRadioChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setNoPatent((event.target as HTMLInputElement).checked);
@@ -105,7 +107,7 @@ return(
                           >
                           {Array.isArray(useTypes) ? useTypes.map((useTypeIterator)=>(
                               
-                              <MenuItem value={useTypeIterator.id}>{useTypeIterator.use_type}</MenuItem>
+                              <MenuItem key={useTypeIterator.id} value={useTypeIterator.id}>{useTypeIterator.use_type}</MenuItem>
                           )):[]}
                           </Select>
                         </FormControl>
@@ -139,7 +141,7 @@ return(
                             value={quoterData?.vehicle?.id}>
                             {Array.isArray(brands) ? brands.map((brand)=>(
                               
-                                <MenuItem value={brand.id}>{brand.brand_name}</MenuItem>
+                                <MenuItem key={brand.id} value={brand.id}>{brand.brand_name}</MenuItem>
                             )):[]}
                           </Select>
                         </FormControl>
@@ -164,7 +166,7 @@ return(
                             onChange={handleChangeModel}>
                             {Array.isArray(vehiclesByBrand) ? vehiclesByBrand.map((model)=>(
                               
-                                <MenuItem value={model.model.id}>{model.model.model_name}</MenuItem>
+                                <MenuItem key={model.id} value={model.model.id}>{model.model.model_name}</MenuItem>
                             )):[]}
                           </Select>
                         </FormControl>
@@ -188,7 +190,7 @@ return(
                             sx={{height:'55px'}} >
                             {Array.isArray(vehiclesByBrand) ? vehiclesByBrand.map((model)=>(
                               
-                                <MenuItem value={model.model.id}>{model.model.sub_model}</MenuItem>
+                                <MenuItem key={model.id} value={model.model.id}>{model.model.sub_model}</MenuItem>
                             )):[]}
                           </Select>
                         </FormControl>
@@ -248,8 +250,8 @@ return(
                         }}>0KM / SIN PLACA POR EL MOMENTO </InputLabel>
                         </Grid>
 
-                        <QuoteButtonNext setActiveStep={setActiveStep} setNoPatent={setNoPatent} 
-                        activeStep={activeStep} completed={[]} noPatent={noPatent}/>
+                        <QuoteButtonNext setActiveStep={setActiveStep}
+      activeStep={activeStep} completed={[]} isFieldComplete={isFieldComplete} quoterData={quoterData}/>
                       </Grid>
 
                       <Box sx={{ width: '90%', marginTop:'2.5%', marginLeft:'5%'}} >

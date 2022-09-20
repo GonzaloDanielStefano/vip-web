@@ -31,7 +31,7 @@ const Financiamiento = ({ quoteSelected }: Props) => {
                 {
                     Array.isArray(quoteSelected?.product?.funding?.installments)
                         ? quoteSelected?.product?.funding?.installments.map((installment) => (
-                            <Grid container xs={12} paddingLeft={'2%'}>
+                            <Grid container xs={12} paddingLeft={'2%'} key={installment.id}>
                             <Grid item xs={1}>
                                 <Image src={'/../public/check.png'} width={20} height={20} />
                             </Grid>

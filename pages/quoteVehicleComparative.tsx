@@ -9,3 +9,5 @@ const QuoteVehicleComparative = () =>{
         </HomeLayout>   
     )
 }
+
+export default QuoteVehicleComparative;

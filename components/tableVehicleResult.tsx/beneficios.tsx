@@ -70,7 +70,7 @@ const Beneficios = ({ quoteSelected }: Props) => {
                     Array.isArray(vehicularProduct?.benefits)
                         ? vehicularProduct?.benefits.map((benefit) => (
 
-                            <Grid container xs={2} marginLeft={0}>
+                            <Grid container xs={2} marginLeft={0} key={benefit.id}>
                                 <Grid item xs={5}>
                                     {drawImage(benefit.image)}
                                 </Grid>
@@ -115,7 +115,7 @@ const Beneficios = ({ quoteSelected }: Props) => {
                             COMPARAR PLANES
                         </a>
                     </Link>
-                    
+
                 </Button>
             </Grid>
 

@@ -63,7 +63,7 @@ return(
                           === false)
                           .map((department)=>(
                             
-                            <MenuItem value={department.id}>{department.name}</MenuItem>
+                            <MenuItem key={department.id} value={department.id}>{department.name}</MenuItem>
                           )):[]}
                             
                           </Select>
@@ -93,7 +93,7 @@ return(
                           >
                            {Array.isArray(fuelTypes) ? fuelTypes.map((fuelType)=>(
                             
-                            <MenuItem value={fuelType.id}>{fuelType.name}</MenuItem>
+                            <MenuItem key={fuelType.id} value={fuelType.id}>{fuelType.name}</MenuItem>
                           )):[]}
                             
                           </Select>

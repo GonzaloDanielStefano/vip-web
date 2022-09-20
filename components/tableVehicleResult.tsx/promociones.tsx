@@ -50,7 +50,7 @@ const Promociones = ({ quoteSelected }: Props) => {
                         Array.isArray(vehicularProduct?.promotions)
                             ? vehicularProduct?.promotions.map((promotion) => (
 
-                                <Grid container xs={6}>
+                                <Grid container xs={6} key={promotion.id}>
                                     <Grid item xs={4} alignContent='center'
                                         sx={{
                                             marginTop: '0%'

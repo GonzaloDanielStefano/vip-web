@@ -45,7 +45,7 @@ const Deducible = ({ quoteSelected }: Props) => {
                             Array.isArray(risk_factor?.deductible?.deductible_types)
                                 ? risk_factor?.deductible?.deductible_types.map((deductible) => (
 
-                                    <Grid container xs={12} paddingLeft={'2%'}>
+                                    <Grid container xs={12} paddingLeft={'2%'} key={deductible.id}>
                                         <Grid item xs={1}>
                                             <Image src={'/../public/check.png'} width={20} height={20} />
                                         </Grid>

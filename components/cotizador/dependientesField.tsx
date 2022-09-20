@@ -42,9 +42,9 @@ const DependientesField = ({setCantidadDependientes,cantidadDependientes}:Props)
                             value={parentescoValue}
                             onChange={handleChangeParentesco}
                           >
-                           {Array.isArray(parentesco) ? parentesco.map((value)=>(
+                           {Array.isArray(parentesco) ? parentesco.map((value,index)=>(
                             
-                            <MenuItem value={value}>{value}</MenuItem>
+                            <MenuItem key={index} value={value}>{value}</MenuItem>
                           )):[]}
                             
                           </Select>

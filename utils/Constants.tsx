@@ -60,6 +60,36 @@ export const REACT_APP_RATE = {
     GET_ALL: LOCAL + '/rates'
 }
 
+export const REACT_APP_HEALTH_FACTOR = {
+    BASE_URL: LOCAL + '/health_factor',
+    GET_BY_ID: LOCAL + '/health_factor/',
+    PUT: LOCAL + '/health_factor/',
+    UPDATE_FACTORS: LOCAL + '/health_factor/update_health_factors',
+    DELETE: LOCAL + '/health_factor/',
+    GET_ALL: LOCAL + '/health_factors',
+    FIND_BY_PRODUCT: LOCAL + '/factors/by_product/'
+}
+
+export const REACT_APP_RISK_FACTOR = {
+    BASE_URL: LOCAL + '/risk_factor',
+    GET_BY_ID: LOCAL + '/risk_factor/',
+    PUT: LOCAL + '/risk_factor/',
+    UPDATE_FACTORS: LOCAL + '/risk_factor/update_risk_factors',
+    DELETE: LOCAL + '/risk_factor/',
+    GET_ALL: LOCAL + '/risk_factors',
+    FIND_BY_PRODUCT: LOCAL + '/risk_factors/by_product/'
+}
+
+export const REACT_APP_VEHICULAR_PRODUCT = {
+    BASE_URL: LOCAL + '/vehicularProduct',
+    PUT: LOCAL + '/update_vehicular_product/',
+}
+
+export const REACT_APP_HEALTH_PRODUCT = {
+    BASE_URL: LOCAL + '/healthProduct',
+    PUT: LOCAL + '/update_health_product/'
+}
+
 export const REACT_APP_CATEGORY = {
     BASE_URL: LOCAL + '/category',
     GET_BY_ID: LOCAL + '/category/',

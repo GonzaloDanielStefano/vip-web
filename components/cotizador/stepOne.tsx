@@ -7,6 +7,10 @@ import QuoteButtonNext from "../button/quoteButtonNext";
 import "@fontsource/montserrat";
 import { QuoteData, UseType, VehicularQuoterRequest } from "../../interfaces";
 
+/*
+Falta validacion de campos
+Validar el campo email
+Placeholder campo promocional entre en todo el campo */
 
 interface Props {
   steps: Array<string>
@@ -25,22 +29,23 @@ function StepOne({ steps, activeStep, completed, setActiveStep,
 
   const [isFieldComplete, setIsFieldComplete] = useState<boolean>(true);
 
-  
+
   async function handleChangeUseType(event: SelectChangeEvent) {
     var newUseType = useTypes.find(useType => useType.id === event.target.value);
     if (newUseType != null) {
       setQuoterData({ ...quoterData, use_type: newUseType });
-      checkIsButtonDisabled();
+     
     }
   };
   const handleRadioChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setNoPatent((event.target as HTMLInputElement).checked);
+    
 
   };
 
   async function handleChangeEmail(event: any) {
     setQuoterData({ ...quoterData, email: event.target.value });
-    checkIsButtonDisabled();
+    
   }
 
 
@@ -50,12 +55,22 @@ function StepOne({ steps, activeStep, completed, setActiveStep,
 
   }
 
-  async function checkIsButtonDisabled(){
-    if(quoterData?.use_type !== undefined && quoterData?.email !== undefined){
+  async function handleChangeLicense(event:any){
+    /* implementar cotizacion con placa */
+    checkIsButtonDisabled();
+  }
+
+  async function checkIsButtonDisabled() {
+    if (quoterData?.use_type !== undefined && quoterData?.email !== undefined) {
       setIsFieldComplete(false);
     }
   }
+
+  useEffect(() => {
+    checkIsButtonDisabled()
+  }, [quoterData])
   
+
   return (
     <Box style={{
       background: 'white', width: '567px', height: '565px', marginTop: '0px', marginLeft: '5%'
@@ -70,10 +85,13 @@ function StepOne({ steps, activeStep, completed, setActiveStep,
           sx={{
             marginLeft: '9%'
           }}>
-          <TextField id="outlined-basic" label="Código promocional 
-                        (opcional)"
+          <TextField
+            id="promotionCodeField"
+            className="promotionCodeField"
+            label="Código promocional (opcional)"
             value={quoterData?.promotional_code}
             variant="outlined"
+            rows={2}
             sx={{
               fontFamily: 'Montserrat',
               fontStyle: 'normal',
@@ -81,12 +99,12 @@ function StepOne({ steps, activeStep, completed, setActiveStep,
               fontSize: '15px',
               lineHeight: '150%',
               color: '#848484',
-              // wordBreak: 'break-all',
-              // "& .MuiInputBase-root": {
-              //   height: "100%",
-              //   display: "flex",
-              //   alignItems: "start"
-              // }
+              wordBreak: 'break-all',
+              "& .MuiInputBase-root": {
+                height: "100%",
+                display: "flex",
+                alignItems: "start"
+              }
             }}
             onChange={(event) => handleChangePromotionalCode(event)} />
         </Grid>
@@ -106,14 +124,17 @@ function StepOne({ steps, activeStep, completed, setActiveStep,
               labelId="useType"
               id="useType"
               label="useType"
+              //error={quoterData?.use_type === undefined}
               onChange={handleChangeUseType}
               value={quoterData?.use_type?.id}
               sx={{ height: '55px' }}
             >
-              {Array.isArray(useTypes) ? useTypes.map((useTypeIterator) => (
+              {Array.isArray(useTypes) ?
+                useTypes.filter(useType => useType.use_type
+                  !== 'SALUD').map((useTypeIterator) => (
 
-                <MenuItem value={useTypeIterator.id}>{useTypeIterator.use_type}</MenuItem>
-              )) : []}
+                    <MenuItem key={useTypeIterator.id} value={useTypeIterator.id}>{useTypeIterator.use_type}</MenuItem>
+                  )) : []}
 
 
             </Select>
@@ -131,7 +152,8 @@ function StepOne({ steps, activeStep, completed, setActiveStep,
         </Grid>
 
         <Grid item xs={12} alignItems='center' alignContent={'center'}>
-          <TextField id="outlined-basic" label="Placa" variant="outlined"
+          <TextField id="license" label="Placa" variant="outlined"
+            onChange={handleChangeLicense}
             sx={{ width: '80.5%', marginLeft: '9%', marginTop: '3%' }} />
         </Grid>
 
@@ -165,8 +187,9 @@ function StepOne({ steps, activeStep, completed, setActiveStep,
             }}>0KM / SIN PLACA POR EL MOMENTO </InputLabel>
         </Grid>
 
-        <QuoteButtonNext setActiveStep={setActiveStep} setNoPatent={setNoPatent}
-          activeStep={activeStep} completed={[]} noPatent={noPatent} isFieldComplete={isFieldComplete} />
+        <QuoteButtonNext setActiveStep={setActiveStep}
+          activeStep={activeStep} completed={[]} isFieldComplete={isFieldComplete}
+          quoterData={quoterData} />
       </Grid>
 
       <Box sx={{ width: '90%', marginTop: '6%', marginLeft: '5%' }} >

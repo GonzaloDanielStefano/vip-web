@@ -1,17 +1,17 @@
 import { Button, Grid } from "@mui/material";
 import "@fontsource/montserrat";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
-import { VehicularQuoterRequest } from "../../interfaces";
+import { HealthQuoterRequest, HomeQuoteRequest } from "../../interfaces";
 
 interface Props {
   setActiveStep: Dispatch<SetStateAction<number>>
   activeStep: number
   completed: Array<number>
   isFieldComplete: boolean
-  quoterData: VehicularQuoterRequest
+  quoterData: HealthQuoterRequest
 }
 
-const QuoteButtonNext = ({ setActiveStep, activeStep, isFieldComplete,quoterData }: Props) => {
+const QuoteButtonNextHealth = ({ setActiveStep, activeStep, isFieldComplete,quoterData }: Props) => {
 
   const [disabled, setDisabled] = useState<boolean>(isFieldComplete);
   async function nextStep() {
@@ -46,4 +46,4 @@ const QuoteButtonNext = ({ setActiveStep, activeStep, isFieldComplete,quoterData
   );
 }
 
-export default QuoteButtonNext;
+export default QuoteButtonNextHealth;

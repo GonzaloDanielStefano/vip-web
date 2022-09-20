@@ -1,4 +1,4 @@
-import { Box, Button, Divider, Grid, Typography, OutlinedInput } from "@mui/material";
+import { Box, Divider, Grid, Typography } from "@mui/material";
 import { HomeLayout } from "../components/layouts";
 import "@fontsource/montserrat";
 import "@fontsource/raleway";
@@ -6,8 +6,8 @@ import TitleQuoteResult from "../components/tableVehicleResult.tsx/titleQuoteRes
 import Image from 'next/image';
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { Department, QuoteData, QuoteResult, UseType, Vehicle, VehicularQuoterRequest } from '../interfaces';
-import { cotizarVehicle, getDepartment, getUseType, getVehicle } from "./api/data";
+import { Department, QuoteResult, UseType, Vehicle, VehicularQuoterRequest } from '../interfaces';
+import { getDepartment, getUseType, getVehicle } from "./api/data";
 import NameInformation from "../components/tableVehicleResult.tsx/nameInformation";
 import HeaderTableResult from "../components/tableVehicleResult.tsx/headerTableResult";
 import Coberturas from "../components/tableVehicleResult.tsx/coberturas";
@@ -33,32 +33,48 @@ const QuoteVehicleResultt = () => {
     const [useType, setUseType] = useState<UseType>();
     const [quoteResult, setQuoterResult] = useState<QuoteResult[]>();
     const [quoteData, setQuoteData] = useState<VehicularQuoterRequest>();
-    const localResult = JSON.parse(localStorage.getItem('quoteResult') || '{}');
+    //const localResult = JSON.parse(typeof localStorage.getItem('quoteResult') == "undefined" ? '{}' : localStorage.getItem('quoteResult'));
     const [anualPrice, setAnualPrice] = useState<number>();
     const [quoteSelected, setQuoteSelected] = useState<QuoteResult>();
     const [quoteResultIndex, setQuoteResulIndex] = useState<number>(0);
     const [priceVehicle, setPriceVehicle] = useState<number>();
     const [gps, setGps] = useState<boolean>(false);
+
+
+
+    function parsedDataFunction() {
+
+        var rawData = localStorage.getItem("quoteResult");
+        var parsedData = null;  // set whatever the default value should be if there is no localStorage value
+        if (rawData) {
+            parsedData = JSON.parse(rawData);
+            return parsedData;
+        }
+        return parsedData;
+    }
     useEffect(() => {
 
 
-        setQuoteData({ ...quoteData, name: router.query.name ? router.query.name : null });
-        setQuoteData({ ...quoteData, email: router.query.email || null});
-        setQuoteData({ ...quoteData, phone: router.query.phone });
-        setQuoteData({ ...quoteData, dni: router.query.dni });
-        setQuoteData({ ...quoteData, produced_at: router?.query?.produced_at });
-        setQuoteData({ ...quoteData, promotional_code: router.query.promotional_code });
+        setQuoteData({ ...quoteData, name: typeof router.query.name == "string" ? router.query.name.toString() : '' });
+        setQuoteData({ ...quoteData, email: typeof router.query.email == "string" ? router.query.email.toString() : '' });
+        setQuoteData({ ...quoteData, phone: typeof router.query.phone == "string" ? router.query.phone.toString() : '' });
+        setQuoteData({ ...quoteData, dni: typeof router.query.dni == "string" ? router.query.dni.toString() : '' });
+        setQuoteData({ ...quoteData, produced_at: typeof router.query.produced_at == "string" ? router.query.produced_at.toString() : '' });
+        setQuoteData({ ...quoteData, promotional_code: typeof router.query.promotional_code == "string" ? router.query.promotional_code.toString() : '' });
+
+
+        const localData = parsedDataFunction();
+        if (localData != null) {
+            setQuoterResult(localData);
+        }
 
 
 
-        setQuoterResult(localResult);
 
-
-
-        if (router.query.vehicle !== undefined) {
-            getVehicle(router.query.vehicle)
+        if (typeof router.query.vehicle == "string") {
+            getVehicle(router.query.vehicle.toString())
                 .then((response) => {
-                    if (response) {
+                    if (typeof response === 'object') {
                         setVehicle(response);
                         setQuoteData({ ...quoteData, vehicle: response });
 
@@ -66,10 +82,10 @@ const QuoteVehicleResultt = () => {
                 });
         }
 
-        if (router.query.department !== undefined) {
-            getDepartment(router.query.department)
+        if (typeof router.query.department == "string") {
+            getDepartment(router.query.department.toString())
                 .then((response) => {
-                    if (response) {
+                    if (typeof response === 'object') {
                         setDepartment(response);
                         setQuoteData({ ...quoteData, department: response });
 
@@ -77,10 +93,10 @@ const QuoteVehicleResultt = () => {
                 });
         }
 
-        if (router.query.use_type !== undefined) {
-            getUseType(router.query.use_type)
+        if (typeof router.query.use_type == "string") {
+            getUseType(router.query.use_type.toString())
                 .then((response) => {
-                    if (response) {
+                    if (typeof response === 'object') {
                         setUseType(response);
                         setQuoteData({ ...quoteData, use_type: response });
 
@@ -103,7 +119,7 @@ const QuoteVehicleResultt = () => {
 
                 <Grid container gridTemplateRows={10} rowSpacing={0} columnSpacing={0}
                     sx={{
-                        /*espacio entre elementos de grid */
+
                         gridGap: '10px',
                         padding: '15px',
                         textAlign: 'center',
@@ -111,9 +127,9 @@ const QuoteVehicleResultt = () => {
                         gridTemplateRows: 10
                     }}>
 
-                    <TitleQuoteResult />
+                    <TitleQuoteResult isTableComparative={false} />
 
-                    <NameInformation name={router.query.name} />
+                    <NameInformation name={typeof router.query.name == "string" ? router.query.name.toString() : ''} />
 
                     <Grid item xs={12} >
                         <Divider sx={{ border: '1px solid #DEDEDE' }} />
@@ -151,7 +167,8 @@ const QuoteVehicleResultt = () => {
                     <Grid container xs={12} alignItems='center'>
 
                         <ChangeValueVehicle priceVehicle={priceVehicle}
-                            produced_at={router.query.produced_at} setPriceVehicle={setPriceVehicle} />
+                            produced_at={typeof router.query.name == "string" ? router.query.produced_at.toString() : ''} setPriceVehicle={setPriceVehicle}
+                            vehicle={vehicle} />
 
                         <Grid item xs={8} sx={{ marginLeft: '0px' }}  >
                             <Typography sx={{
@@ -184,8 +201,9 @@ const QuoteVehicleResultt = () => {
 
                                     {
 
-                                        Array.isArray(quoteResult) ? quoteResult.map((result,index) => (
+                                        Array.isArray(quoteResult) ? quoteResult.map((result, index) => (
                                             <HeaderTableResult
+                                                key={index}
                                                 setAnualPrice={setAnualPrice}
                                                 quoteResult={result}
                                                 index={index}
@@ -194,7 +212,7 @@ const QuoteVehicleResultt = () => {
                                                 quoteResultIndex={quoteResultIndex}
                                                 setQuoteResulIndex={setQuoteResulIndex}
                                                 title={result?.product?.category?.name}
-                                               
+
                                             />
                                         )) : []
                                     }
@@ -326,11 +344,11 @@ const QuoteVehicleResultt = () => {
             </Box>
 
 
-            <Glossary/>
+            <Glossary />
 
             <BeaforeFooter />
 
-            <Footer/>
+            <Footer />
 
         </HomeLayout>
 

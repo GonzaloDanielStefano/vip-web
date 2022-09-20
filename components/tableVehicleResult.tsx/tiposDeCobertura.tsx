@@ -5,7 +5,7 @@ import { SetStateAction, useState,Dispatch } from "react";
 
 interface Props {
     quoteResult: QuoteResult[]
-    setQuoterResult: Dispatch<SetStateAction<QuoteResult>>
+    setQuoterResult: Dispatch<SetStateAction<QuoteResult[]>>
 }
 const TiposDeCobertura = ({ quoteResult, setQuoterResult }: Props) => {
 
@@ -53,8 +53,23 @@ const TiposDeCobertura = ({ quoteResult, setQuoterResult }: Props) => {
                     </Button>
                 </Grid>
                 {
-                    Array.isArray(quoteResult) ? quoteResult.map((result) => (
-                        drawCategory(result?.product?.category?.name)
+                    Array.isArray(quoteResult) ? quoteResult.map((result,index) => (
+                        <Grid item xs={2.4} key={index}>
+                        <Button sx={{
+                            height: '54px',
+                            width: '133.87px',
+                            borderRadius: '10px 10px 10px 10px',
+                            lineHeight: ' 115.7%',
+                            fontyStyle: 'normal',
+                            color: '#151F6D',
+                            border: '2px solid #2EA082',
+                            fontFamily: 'Montserrat',
+                            fontWeight: 600,
+                            fontSize: '13px',
+                        }}>
+                            {result?.product?.category?.name}
+                        </Button>
+                    </Grid>
                     )) : []
                 }
 

@@ -1,12 +1,13 @@
 import { Box, FormControl, FormControlLabel, Grid, MenuItem, Select, Step, StepButton, Stepper, TextField, Radio, InputLabel, SelectChangeEvent, OutlinedInput } from "@mui/material";
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import React from "react";
 import QontoConnector from "./quontoConnector";
 import TitleQuote from "./titleQuote";
 import QuoteButtonNext from "../button/quoteButtonNext";
 import "@fontsource/montserrat";
-import { UseType, VehicularQuoterRequest } from "../../interfaces";
-import TitleQuoteHealth from "./titleQuoteHealth";
+import { HealthQuoterRequest, UseType, VehicularQuoterRequest } from "../../interfaces";
+import QuoteButtonNextHealth from "../button/quoteButtonNextHealth";
+
 
 
 interface Props{
@@ -15,8 +16,8 @@ interface Props{
     setActiveStep: Dispatch<SetStateAction<number>>
     activeStep:number
     completed: Array<number>
-    quoterData: VehicularQuoterRequest
-    setQuoterData: Dispatch<SetStateAction<VehicularQuoterRequest>>
+    quoterData: HealthQuoterRequest
+    setQuoterData: Dispatch<SetStateAction<HealthQuoterRequest>>
     noPatent: boolean
     setNoPatent: Dispatch<SetStateAction<boolean>>
 }
@@ -25,20 +26,13 @@ function StepOneHealth  ({activeStep,completed,setActiveStep,
   setQuoterData,quoterData,useTypes, noPatent,setNoPatent}:Props)  {
 
     const steps = ['1','2']
+    const [isFieldComplete,setIsFieldComplete] = useState<boolean>(false);
     async function handleChangePhone(event: React.ChangeEvent<HTMLInputElement>){
         setQuoterData({...quoterData,phone:event.target.value});
       }
 
-  async function handleChangeUseType(event: SelectChangeEvent){
-    var newUseType = useTypes.find(useType => useType.id === event.target.value);
-    if(newUseType != null){
-    setQuoterData({...quoterData, use_type:newUseType});}
-  };
-  const handleRadioChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setNoPatent((event.target as HTMLInputElement).checked);
-    
-  };
-
+  
+  
   async function handleChangeName(event:any){
     setQuoterData({...quoterData, name:event.target.value});
     
@@ -147,8 +141,9 @@ return(
                         
 
 
-                        <QuoteButtonNext setActiveStep={setActiveStep} setNoPatent={setNoPatent}
-                         activeStep={activeStep} completed={[]} noPatent={noPatent}/>
+                        <QuoteButtonNextHealth setActiveStep={setActiveStep}
+                         activeStep={activeStep} completed={[]} quoterData={quoterData} 
+                         isFieldComplete={isFieldComplete}/>
                       </Grid>
 
                       <Box sx={{ width: '40%',margin:'auto',marginTop:'5%'}} >

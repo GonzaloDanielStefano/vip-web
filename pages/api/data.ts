@@ -1,6 +1,6 @@
 import axios from "axios";
 import Cookies from "js-cookie";
-import { Brand, Category, CoverageCategory, Currency, Department, Factor, FuelType, Insurance, Model, Product, QuoteResult, User, UseType, Vehicle, VehicularQuoterRequest } from "../../interfaces";
+import { Brand, Category, CoverageCategory, Currency, Department, Factor, FuelType, HealthFactor, HealthProduct, Insurance, Model, Product, QuoteResult, RiskFactor, User, UseType, Vehicle, VehicularProduct, VehicularQuoterRequest } from "../../interfaces";
 import { BuildersMethods } from "../../utils/BuildersMethods";
 import {
   REACT_APP_AUTH_URL,
@@ -20,7 +20,9 @@ import {
   REACT_APP_BRAND,
   REACT_APP_VEHICLE,
   REACT_APP_MODELS,
-  REACT_APP_QUOTE
+  REACT_APP_QUOTE,
+  REACT_APP_HEALTH_FACTOR,
+  REACT_APP_RISK_FACTOR
 } from "../../utils/Constants";
 
 
@@ -83,13 +85,12 @@ export async function getInsurance(id: string) {
     const { data } = await axios.get<Insurance>(REACT_APP_INSURANCE.BASE_URL + `/${id}`);
     if (data !== undefined) {
       return BuildersMethods.buildInsurance(data.id, data.insurance_name,
-        data.description, data.trade_mark, data.products, data.created_at, data.updated_at);
+        data.description, data.trade_mark, data.vehicular_products, data.health_products, data.created_at, data.updated_at);
     }
   } catch (error) {
     return BuildersMethods.buildError(error);
   }
 }
-
 
 export async function saveInsaurance(insurance: Insurance) {
   try {
@@ -189,67 +190,141 @@ export async function getUseTypes() {
 
 /******************************************************
 *                                                     *
-*                       FACTORS                       *
+*                   RISK FACTORS                      *
 *                                                     *
 ******************************************************/
 
-export async function getFactor(id: string) {
+
+export async function getRiskFactor(id: string) {
   try {
-    const { data } = await axios.get<Factor>(REACT_APP_FACTOR.GET_BY_ID + `${id}`);
+    const { data } = await axios.get<RiskFactor>(REACT_APP_RISK_FACTOR.GET_BY_ID + `${id}`);
     if (data !== undefined) {
-      return BuildersMethods.buildFactor(data.id, data.name, data.minimum_rate,
-        data.vehicles, data.rates, data.coverage, data.created_at, data.updated_at);
+      return BuildersMethods.buildRiskFactor(data.id, data.name, data.minimum_rate,
+        data.vehicles, data.rates, data.coverage, data.deductible, data.created_at, data.updated_at);
     }
   } catch (error) {
     return BuildersMethods.buildError(error);
   }
 }
 
-export async function editFactor(factor: Factor) {
+export async function editRiskFactor(factor: RiskFactor) {
   try {
-    const response = await axios.put<Factor>(REACT_APP_FACTOR.PUT + `${factor.id}`, factor);
+    const response = await axios.put<RiskFactor>(REACT_APP_RISK_FACTOR.PUT + `${factor.id}`, factor);
     if (response.status === 200) {
       return true;
     }
-    return false;
+
+    return response.data;
   } catch (error) {
     return BuildersMethods.buildError(error);
   }
 }
 
-export async function updateFactors(factors: Factor[]) {
+export async function updateRiskFactors(factors: RiskFactor[]) {
   try {
-    const response = await axios.put<Factor[]>(REACT_APP_FACTOR.UPDATE_FACTORS, factors);
+    const response = await axios.put<RiskFactor[]>(REACT_APP_RISK_FACTOR.UPDATE_FACTORS, factors);
     if (response.status === 200) {
       return true;
     }
-    return false;
+
+    return response.data;
   } catch (error) {
     return BuildersMethods.buildError(error);
   }
 }
 
-export async function getFactors() {
+export async function getRiskFactors() {
   try {
-    const { data } = await axios.get<Factor[]>(REACT_APP_FACTOR.GET_ALL);
+    const { data } = await axios.get<RiskFactor[]>(REACT_APP_RISK_FACTOR.GET_ALL);
     if (data !== undefined) {
-      return BuildersMethods.buildFactors(data);
+      return BuildersMethods.buildRiskFactors(data);
     }
   } catch (error) {
     return BuildersMethods.buildError(error);
   }
 }
 
-export async function findFactorsByProduct(productId) {
+export async function findRiskFactorsByProduct(productId) {
   try {
-    const { data } = await axios.get<Factor[]>(REACT_APP_FACTOR.FIND_BY_PRODUCT + `${productId}`);
+    const { data } = await axios.get<RiskFactor[]>(REACT_APP_RISK_FACTOR.FIND_BY_PRODUCT + `${productId}`);
     if (data !== undefined) {
-      return BuildersMethods.buildFactors(data);
+      return BuildersMethods.buildRiskFactors(data);
     }
   } catch (error) {
     return BuildersMethods.buildError(error);
   }
 }
+
+
+
+
+
+/******************************************************
+*                                                     *
+*                   HEALTH FACTORS                    *
+*                                                     *
+******************************************************/
+
+export async function getHealthFactor(id: string) {
+  try {
+    const { data } = await axios.get<HealthFactor>(REACT_APP_HEALTH_FACTOR.GET_BY_ID + `${id}`);
+    if (data !== undefined) {
+      return BuildersMethods.buildHealthFactor(data.id, data.name, data.health_dependents,
+        data.coverage, data.deductible, data.created_at, data.updated_at);
+    }
+  } catch (error) {
+    return BuildersMethods.buildError(error);
+  }
+}
+
+export async function editHealthFactor(factor: HealthFactor) {
+  try {
+    const response = await axios.put<HealthFactor>(REACT_APP_HEALTH_FACTOR.PUT + `${factor.id}`, factor);
+    if (response.status === 200) {
+      return true;
+    }
+
+    return response.data;
+  } catch (error) {
+    return BuildersMethods.buildError(error);
+  }
+}
+
+export async function updateHealthactors(factors: HealthFactor[]) {
+  try {
+    const response = await axios.put<HealthFactor[]>(REACT_APP_HEALTH_FACTOR.UPDATE_FACTORS, factors);
+    if (response.status === 200) {
+      return true;
+    }
+
+    return response.data;
+  } catch (error) {
+    return BuildersMethods.buildError(error);
+  }
+}
+
+export async function getHealthFactors() {
+  try {
+    const { data } = await axios.get<HealthFactor[]>(REACT_APP_HEALTH_FACTOR.GET_ALL);
+    if (data !== undefined) {
+      return BuildersMethods.buildHealthFactors(data);
+    }
+  } catch (error) {
+    return BuildersMethods.buildError(error);
+  }
+}
+
+export async function findHealthFactorsByProduct(productId) {
+  try {
+    const { data } = await axios.get<HealthFactor[]>(REACT_APP_HEALTH_FACTOR.FIND_BY_PRODUCT + `${productId}`);
+    if (data !== undefined) {
+      return BuildersMethods.buildHealthFactors(data);
+    }
+  } catch (error) {
+    return BuildersMethods.buildError(error);
+  }
+}
+
 
 
 
@@ -510,10 +585,18 @@ export async function getProduct(id: string) {
   try {
     const { data } = await axios.get<Product>(REACT_APP_PRODUCT.GET_BY_ID + `${id}`);
     if (data !== undefined) {
-      return BuildersMethods.buildProduct(data.id, data.name,
-        data.category, data.product_priority, data.department,
-        data.currency, data.use_type, data.fuel_type,
-        data.factors, data.created_at, data.updated_at);
+      if ("risk_factors" in data) {
+        let vehicularProduct = data as VehicularProduct
+        return BuildersMethods.buildVehicularProduct(vehicularProduct.id, vehicularProduct.name,
+          vehicularProduct.category, vehicularProduct.product_priority, vehicularProduct.department,
+          vehicularProduct.currency, vehicularProduct.use_type, vehicularProduct.fuel_type, vehicularProduct.funding,
+          vehicularProduct.risk_factors, vehicularProduct.benefits, vehicularProduct.promotions, vehicularProduct.created_at, vehicularProduct.updated_at);
+      } else {
+        let healthproduct = data as HealthProduct
+        return BuildersMethods.buildHealthProduct(healthproduct.id, healthproduct.name, healthproduct.department,
+          healthproduct.category, healthproduct.product_priority, healthproduct.currency, healthproduct.funding,
+          healthproduct.clinics, healthproduct.health_factors, healthproduct.benefits, healthproduct.promotions, healthproduct.created_at, healthproduct.updated_at);
+      }
     }
   } catch (error) {
     return BuildersMethods.buildError(error);

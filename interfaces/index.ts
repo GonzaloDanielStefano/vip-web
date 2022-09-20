@@ -293,6 +293,23 @@ export type Dependent = {
   relationship: string | null
 }
 
+export type HomeQuoteRequest ={
+  id: number | null
+  typeOfClient: string
+  wantToQuote: string
+  wayToSecure: string
+  typeOfHousing: string
+  currency: string
+  valueOfHouse: number
+  contentValue: number
+  province: string
+  district: string
+  name: string
+  phone: string
+  email: string
+}
+
+
 export type QuoteResult = {
   product: Product
   quote: number
