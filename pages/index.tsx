@@ -48,7 +48,7 @@ function Home({ useTypes, vehicles, brands, departments, fuelTypes }: Props) {
   const [healthQuoteData, setHealthQuoteData] = useState<HealthQuoterRequest>();
   return (
     <HomeLayout title={'Corredor de Seguros VIP'} pageDescription={'Seguros'}>
-      <div style={{ background: '#0F206C', width: '100%', height: '900px' }}>
+      <div  className="index-bg" style={{ background: '#0F206C', height: '900px' }}>
         <Grid container>
           <Grid item xs={1} md={6} lg={6} style={{ background: '#0F206C' }}
             display={{ xs: 'none', sm: 'none', md: 'block', lg: 'block' }}>

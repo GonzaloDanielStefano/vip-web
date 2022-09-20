@@ -27,11 +27,11 @@ import Link from 'next/link';
       <AppBar position="static" style={{
           background: "white"
       }}>
-        <Toolbar>
+        <Toolbar className="toolBar">
             <Grid container>
 
                 
-                <Grid item xs={1} sm={1} md={0.5} lg={0.5} xl={0}>
+                <Grid item xs={0.5} sm={1} md={0.5} lg={0.5} xl={0}>
 
                 </Grid>
                 

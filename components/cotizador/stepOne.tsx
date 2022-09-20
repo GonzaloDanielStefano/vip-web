@@ -72,19 +72,13 @@ function StepOne({ steps, activeStep, completed, setActiveStep,
   
 
   return (
-    <Box style={{
-      background: 'white', width: '567px', height: '565px', marginTop: '0px', marginLeft: '5%'
-      , borderRadius: '0px 0px 20px 20px'
-    }}>
+    <Box className="stepQuote">
 
       <TitleQuote title={'¡Cotiza en segundos tu seguro vehicular!'}
-        image={'/vehicle.JPG'} />
+        image={'/vehicle.png'} />
 
       <Grid container direction={'row'}>
-        <Grid item xs={12} lg={6}
-          sx={{
-            marginLeft: '9%'
-          }}>
+        <Grid item xs={12} lg={6} className="promotion-code-field-step-v">
           <TextField
             id="promotionCodeField"
             className="promotionCodeField"
@@ -113,7 +107,7 @@ function StepOne({ steps, activeStep, completed, setActiveStep,
           sx={{
             marginLeft: '-9%'
           }}>
-          <FormControl className="typeOfUseField" size="small">
+          <FormControl className="use-type-field-v" size="small">
             <InputLabel
               id="useType"
               sx={{
@@ -124,6 +118,7 @@ function StepOne({ steps, activeStep, completed, setActiveStep,
               labelId="useType"
               id="useType"
               label="useType"
+             
               //error={quoterData?.use_type === undefined}
               onChange={handleChangeUseType}
               value={quoterData?.use_type?.id}

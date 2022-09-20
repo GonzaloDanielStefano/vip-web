@@ -64,9 +64,64 @@ a {
       .homeFieldCurrency{
         width:88%
       }
+
+      .toolBar {
+        width:100%
+      }
+/* ************ STEP **********************************/
+      .stepQuote{
+        background: white;
+        width: 567px;
+        height: 565px;
+        margin-top: 0px;
+        margin-left: 5%;
+        border-radius: 0px 0px 20px 20px;
+      }
+
+      .promotion-code-field-step-v{
+        margin-left: 9%;
+        
+      }
+
+      .use-type-field-v{
+        width: 79%;
+      }
+/* ************ FIN STEP **********************************/
 }
 
 @media (max-width:400px){
+
+  .toolBar {
+    width:595px
+  }
+  /* ************ STEP **********************************/
+  .stepQuote{
+    background: white;
+    width: 580px;
+    height: 625px;
+    margin-top: 0px;
+    margin-left: 20px;
+    border-radius: 0px 0px 20px 20px;
+  }
+
+  .promotion-code-field-step-v{
+    margin-left: 9%;
+    
+  }
+
+  .promotionCodeField{
+    width: 466px;
+  }
+
+  .use-type-field-v{
+    width: 466px;
+    margin-left:18%;
+    margin-top:3%
+  }
+  /* ************ FIN STEP **********************************/
+  .index-bg{
+    width:620px
+  }
   .typeOfUseField {
     width: 52%;
     margin-left:18%;
