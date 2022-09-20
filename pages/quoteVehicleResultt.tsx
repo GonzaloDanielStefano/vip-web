@@ -39,6 +39,7 @@ const QuoteVehicleResultt = () => {
     const [quoteResultIndex, setQuoteResulIndex] = useState<number>(0);
     const [priceVehicle, setPriceVehicle] = useState<number>();
     const [gps, setGps] = useState<boolean>(false);
+    const [indexHeaderTable, setIndexHeaderTable] = useState<number>(1);
 
 
 
@@ -202,6 +203,9 @@ const QuoteVehicleResultt = () => {
                                     {
 
                                         Array.isArray(quoteResult) ? quoteResult.map((result, index) => (
+                                            
+                                            <Grid container xs={4}>
+                                            { indexHeaderTable >= index - 1 && indexHeaderTable <= index + 1 ?
                                             <HeaderTableResult
                                                 key={index}
                                                 setAnualPrice={setAnualPrice}
@@ -213,7 +217,9 @@ const QuoteVehicleResultt = () => {
                                                 setQuoteResulIndex={setQuoteResulIndex}
                                                 title={result?.product?.category?.name}
 
-                                            />
+                                            />:[]}
+
+                                            </Grid>
                                         )) : []
                                     }
 

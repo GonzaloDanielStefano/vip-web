@@ -44,10 +44,15 @@ a {
 }
 
 
-/* RESPONSIVE WEB */
 
 
-/*******************************************************NAVBAR*******************************************/
+@media (min-width:900px){
+  .promotion-code-field-step-v{
+    margin-left: 9%;
+    
+  }
+}
+
 @media (max-width:1400px){
       .typeOfUseField {
         width: 79%;
@@ -149,4 +154,4 @@ a {
     margin-top:2%;
   }
 }
-/****************************************FIN RESPONSIVE NAVBAR*******************************************/
+

@@ -59,7 +59,7 @@ const QuoteHeader = ({setQuoteHeaderHogar,setQuoteHeaderSalud,setQuoteHeaderVehi
                     marginTop:'auto',
                     position:'relative'
                     }}>
-                  <Image src={'/vehicular.PNG'} width={27.5} height={27.5} />
+                  <Image src={'/vehicular.png'} width={27.5} height={27.5} />
 
                 </Grid>
                 
@@ -84,7 +84,7 @@ const QuoteHeader = ({setQuoteHeaderHogar,setQuoteHeaderSalud,setQuoteHeaderVehi
                 position:'relative'}} >
 
                   <Box >
-                  <Image src={'/hogar.PNG'} width={26} height={22} 
+                  <Image src={'/hogar.png'} width={26} height={22} 
                     />
                   </Box>
                   
@@ -110,7 +110,7 @@ const QuoteHeader = ({setQuoteHeaderHogar,setQuoteHeaderSalud,setQuoteHeaderVehi
                     marginRight:'0px',
                     position:'relative'}}>
 
-                    <Image src={'/salud.PNG'} width={26} height={22} 
+                    <Image src={'/salud.png'} width={26} height={22} 
                     />
                 </Grid>
                 

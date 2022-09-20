@@ -35,7 +35,7 @@ return(
               ,borderRadius: '0px 0px 20px 20px'}}>
                       
                       <TitleQuote title={'¡Cotiza en segundos tu seguro vehicular!'} 
-                      image={'/vehicle.JPG'}/>
+                      image={'/vehicle.png'}/>
                       <Grid container direction={'row'}>
                         
                         <Grid item xs={4}>

@@ -26,17 +26,22 @@ function StepTwo  ({steps,activeStep,completed,setActiveStep,quoterData,setQuote
     
   }
 
-  async function handleChangeFuelType(event:SelectChangeEvent){
+  async function handleChangeFuelType(event) {
     var newFuelType = fuelTypes.find(fuelType => fuelType.id === event.target.value);
-    if(newFuelType != null){
-      setQuoterData({...quoterData, fuel_type: newFuelType});
+    if (event.target.value === 1) {
+        newFuelType.name = 'SI';
+        setQuoterData({ ...quoterData, fuel_type: newFuelType });
+        return;
     }
-  }
+
+    newFuelType.name = 'NO';
+    setQuoterData({ ...quoterData, fuel_type: newFuelType });
+}
 return(
 <Box style={{background:'white',width:'567px',height:'565px',marginTop:'0px',marginLeft:'5%'
               ,borderRadius: '0px 0px 20px 20px'}}>
                       <TitleQuote title={'¡Cotiza en segundos tu seguro vehicular!'} 
-                      image={'/vehicle.JPG'}/>
+                      image={'/vehicle.png'}/>
                       <Grid container>
                         
 
@@ -91,10 +96,8 @@ return(
                             value={quoterData?.fuel_type?.id}
                             onChange={handleChangeFuelType}
                           >
-                           {Array.isArray(fuelTypes) ? fuelTypes.map((fuelType)=>(
-                            
-                            <MenuItem key={fuelType.id} value={fuelType.id}>{fuelType.name}</MenuItem>
-                          )):[]}
+                           <MenuItem key={1} value={1}>SI</MenuItem>
+                           <MenuItem key={2} value={2}>NO</MenuItem>
                             
                           </Select>
                         </FormControl>

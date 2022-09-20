@@ -49,10 +49,10 @@ interface Props {
         //         installment?.installments > installmentIndex);
         //     setInstallment(installmentSelected);
         // }
-
-        var installmentSelected = quoteResult?.product?.funding?.installments?.find(installment => 
+        if(Array.isArray(quoteResult?.product?.funding?.installments)){
+        var installmentSelected = quoteResult?.product?.funding?.installments.find(installment => 
             installment?.installments > installmentIndex);
-        setInstallment(installmentSelected);
+        setInstallment(installmentSelected);}
         
         
         
