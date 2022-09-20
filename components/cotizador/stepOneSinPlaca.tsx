@@ -64,9 +64,9 @@ return(
                       image={'/vehicle.png'}/>
 
                       <Grid container direction={'row'}>
-                        <Grid item xs={12} lg={6}
+                        <Grid item xs={6} lg={6}
                         sx={{
-                          marginLeft: '-9%'
+                          marginLeft: '9%'
                         }}>
                         <TextField id="outlined-basic" label="Código promocional 
                         (opcional)" 
@@ -83,11 +83,11 @@ return(
                         }}/>
                         </Grid>
 
-                        <Grid item xs={12} lg={6}
+                        <Grid item xs={6} lg={6}
                          sx={{
                           marginLeft: '-9%'
                         }}>
-                        <FormControl sx={{
+                        <FormControl className="typeOfUseField" sx={{
                           width:'79%',
                           
                         }} size="small">

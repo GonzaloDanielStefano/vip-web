@@ -109,7 +109,7 @@ function StepOne({ steps, activeStep, completed, setActiveStep,
           sx={{
             marginLeft: '-9%'
           }}>
-          <FormControl  size="small">
+          <FormControl className="typeOfUseField" size="small">
             <InputLabel
               id="useType"
               sx={{
