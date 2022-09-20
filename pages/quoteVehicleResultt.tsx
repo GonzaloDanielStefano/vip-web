@@ -204,7 +204,7 @@ const QuoteVehicleResultt = () => {
 
                                         Array.isArray(quoteResult) ? quoteResult.map((result, index) => (
                                             
-                                            <Grid container xs={4}>
+                                            <Grid container xs={4} key={index}>
                                             { indexHeaderTable >= index - 1 && indexHeaderTable <= index + 1 ?
                                             <HeaderTableResult
                                                 key={index}
