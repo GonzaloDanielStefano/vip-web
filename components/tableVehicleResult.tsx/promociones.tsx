@@ -26,7 +26,7 @@ const Promociones = ({ quoteSelected }: Props) => {
                         marginLeft: '0%',
                         marginTop: '6%'
                     }}>
-                    <Image src={'/../public/promotionIcon.png'}
+                    <Image src={'/promotionIcon.png'}
                         style={{}}
                         width={35.76} height={35}
                     />

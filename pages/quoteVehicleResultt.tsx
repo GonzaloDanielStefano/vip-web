@@ -273,7 +273,7 @@ const QuoteVehicleResultt = () => {
                                                             marginLeft: '28%',
                                                             marginTop: '18%'
                                                         }}>
-                                                        <Image src={'/../public/yearCost.png'}
+                                                        <Image src={'/yearCost.png'}
                                                             style={{}}
                                                             width={35.76} height={35}
                                                         />

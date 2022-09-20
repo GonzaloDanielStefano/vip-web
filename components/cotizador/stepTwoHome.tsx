@@ -54,7 +54,7 @@ function StepTwoHome({ activeStep, completed, setActiveStep,
         <Box className="boxQuote">
 
             <TitleQuote title={'¡recibe información de seguro hogar!'}
-                image={'/../public/homeIconQuoteHeader.png'} />
+                image={'/homeIconQuoteHeader.png'} />
 
             <Grid container direction={'row'}>
 

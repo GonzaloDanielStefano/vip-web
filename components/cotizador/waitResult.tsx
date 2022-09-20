@@ -13,7 +13,7 @@ function WaitResult (){
                           marginLeft:'10%',
                           marginTop:'6%'
                         }}>
-                          <Image src={'/../public/waitCoute.png'} width={196.28} height={215} />
+                          <Image src={'/waitCoute.png'} width={196.28} height={215} />
 
                          
                         </Grid>
@@ -21,7 +21,7 @@ function WaitResult (){
                         <Grid item xs={4} sx={{
                             marginTop: '19%'
                         }}>
-                            <Image src={'/../public/cargando.png'} width={83.47} height={87.55} />
+                            <Image src={'/cargando.png'} width={83.47} height={87.55} />
                         </Grid>
 
                         <Grid item xs={6}

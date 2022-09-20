@@ -55,7 +55,7 @@ return(
               ,borderRadius: '0px 0px 20px 20px'}}>
                       
                       <TitleQuote title={'¡Cotiza en segundos tu seguro de salud!'} 
-                      image={'/../public/healthIconQuoteHeader.png'}/>
+                      image={'/healthIconQuoteHeader.png'}/>
 
                       <Grid container direction={'row'}>
                         

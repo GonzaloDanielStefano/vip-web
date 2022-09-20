@@ -49,7 +49,7 @@ const Header = () => {
         }}>
             <Grid container>
                 <Grid item xs={3} sx={{overflow:'visible'}}>
-                {/*<Image src={'/../public/logoPositiva.png'}
+                {/*<Image src={'/logoPositiva.png'}
                         
                         width={100} height={45}
                         style={{

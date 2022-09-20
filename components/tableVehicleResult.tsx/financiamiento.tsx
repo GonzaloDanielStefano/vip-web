@@ -33,7 +33,7 @@ const Financiamiento = ({ quoteSelected }: Props) => {
                         ? quoteSelected?.product?.funding?.installments.map((installment) => (
                             <Grid container xs={12} paddingLeft={'2%'} key={installment.id}>
                             <Grid item xs={1}>
-                                <Image src={'/../public/check.png'} width={20} height={20} />
+                                <Image src={'/check.png'} width={20} height={20} />
                             </Grid>
                                 <Grid item xs={6}>
                                     <Typography

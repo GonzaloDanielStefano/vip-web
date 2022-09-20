@@ -190,7 +190,7 @@ const Nosotros = () => {
 
                 <Grid container xs={6} sx={{ marginTop: '3%', paddingLeft: '40px' }}>
                     <Grid item xs={2}>
-                        <Image src='/public/phoneNosotros.png' width={70} height={70} alt="phoneIcon" />
+                        <Image src='/phoneNosotros.png' width={70} height={70} alt="phoneIcon" />
                     </Grid>
 
                     <Grid item xs={3}>

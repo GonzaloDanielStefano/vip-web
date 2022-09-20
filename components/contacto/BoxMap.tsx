@@ -44,7 +44,7 @@ const BoxMap = () =>{
 
                 <Grid item xs={6}>
                     <Button
-                    startIcon={<Image src='/../public/waze.png' width={20} height={18.75}/>}
+                    startIcon={<Image src='/waze.png' width={20} height={18.75}/>}
                     sx={{
                         height:'50px',
                         width:'195px',
@@ -64,7 +64,7 @@ const BoxMap = () =>{
 
                 <Grid item xs={6}>
                     <Button
-                    startIcon={<Image src='/../public/maps.png' width={20} height={18.75}/>}
+                    startIcon={<Image src='/maps.png' width={20} height={18.75}/>}
                     sx={{
                         height:'50px',
                         width:'195px',

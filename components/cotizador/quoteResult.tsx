@@ -14,7 +14,7 @@ const QuoteResult = ({vechiularQuoterRequest}:Props) => {
                 <Grid item>
                     <Box>
                         <h2>Cotizador Vehicular</h2>
-                        <Image src={'/../public/arrowLeft.png'} width={67.7} height={67.7} />
+                        <Image src={'/arrowLeft.png'} width={67.7} height={67.7} />
                         <h3>Resultados</h3>
 
                         <h4>¡Hola ${vechiularQuoterRequest.name?.split(' ')[0]}! Enviamos a tu correo 

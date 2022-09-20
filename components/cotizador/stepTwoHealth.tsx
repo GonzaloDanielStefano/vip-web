@@ -79,7 +79,7 @@ function StepTwoHealth({ activeStep, completed, setActiveStep, quoterData, setQu
       , borderRadius: '0px 0px 20px 20px'
     }}>
       <TitleQuote title={'¡Cotiza en segundos tu seguro vehicular!'}
-        image={'/../public/vehicle.JPG'} />
+        image={'/vehicle.JPG'} />
       <Grid container padding={2} paddingLeft={6}
         direction="row"
         spacing={1}

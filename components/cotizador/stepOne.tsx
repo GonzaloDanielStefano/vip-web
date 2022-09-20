@@ -78,7 +78,7 @@ function StepOne({ steps, activeStep, completed, setActiveStep,
     }}>
 
       <TitleQuote title={'¡Cotiza en segundos tu seguro vehicular!'}
-        image={'/../public/vehicle.JPG'} />
+        image={'/vehicle.JPG'} />
 
       <Grid container direction={'row'}>
         <Grid item xs={12} lg={6}

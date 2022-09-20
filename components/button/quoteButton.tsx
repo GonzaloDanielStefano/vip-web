@@ -88,7 +88,7 @@ const ButtonNextBack = ({ buttonName, setActiveStep, activeStep, quoterData }: P
                         borderRadius: '10px 10px 10px 10px'
                     }}
                 >
-                    <Image src={'/../public/arrowButtonBack.PNG'}
+                    <Image src={'/arrowButtonBack.PNG'}
                         style={{ marginRight: '1px', overflow: 'visible' }}
                         width={8} height={13} />
                     ATRAS
@@ -112,7 +112,7 @@ const ButtonNextBack = ({ buttonName, setActiveStep, activeStep, quoterData }: P
                 >
 
                     {buttonName}
-                    <Image src={'/../public/arrowButton.PNG'}
+                    <Image src={'/arrowButton.PNG'}
                         style={{ marginLeft: '0%', overflow: 'visible' }}
                         width={8} height={13} />
 

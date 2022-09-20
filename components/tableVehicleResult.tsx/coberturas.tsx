@@ -52,7 +52,7 @@ const Coberturas = ({ quoteSelected }: Props) => {
 
                                     <Grid container xs={12} paddingLeft={'2%'} key={coverage.id}>
                                         <Grid item xs={1}>
-                                            <Image src={'/../public/check.png'} width={20} height={20} />
+                                            <Image src={'/check.png'} width={20} height={20} />
                                         </Grid>
                                         <Grid item xs={6}>
                                             <Typography

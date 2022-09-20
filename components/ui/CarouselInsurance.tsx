@@ -23,7 +23,7 @@ const CarouselInsurance = () =>{
            {Array.isArray(imagenes)? imagenes.map((imagen,index)=>(
                 <Grid item key={index}
                 sx={{marginLeft:'auto',marginRight:'auto',marginTop:'2%'}}>
-                    <Image src={`/../public/${imagen}`} width={150} height={65} />
+                    <Image src={`/${imagen}`} width={150} height={65} />
                 </Grid>
            )):[]}
 

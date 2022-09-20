@@ -40,7 +40,7 @@ return (
                     marginLeft: '25%',
                     marginTop: '18%'
                 }}>
-                <Image src={'/../public/gpsIcon.png'}
+                <Image src={'/gpsIcon.png'}
                     style={{}}
                     width={35.76} height={35}
                 />

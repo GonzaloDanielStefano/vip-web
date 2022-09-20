@@ -5,7 +5,7 @@ const YearCost = () =>{
 
     return(
         <div>
-            <Image src={'/../public/yearCost.png'}
+            <Image src={'/yearCost.png'}
                         style={{}}
                         width={100} height={45}
                         /> 

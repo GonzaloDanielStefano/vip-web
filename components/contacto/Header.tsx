@@ -15,7 +15,7 @@ const Header = () => {
             second_message={''}/>
 
             <Grid item xs={6}>
-                <Image src='/../public/backgroundContacto.png' width={816} height={546}/>
+                <Image src='/backgroundContacto.png' width={816} height={546}/>
             </Grid>
 
             <Grid container xs={12} height={662} marginTop={-0.5}
@@ -26,7 +26,7 @@ const Header = () => {
             }}>
 
                 <Grid item xs={6} minHeight={457}>
-                    <Image src='/../public/contactoMap.png' width={600} height={457}
+                    <Image src='/contactoMap.png' width={600} height={457}
                     style={{
                       minHeight:'457px'  
                     }}/>

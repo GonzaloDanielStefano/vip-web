@@ -14,7 +14,7 @@ const BeaforeFooter = () => {
             <Grid container xs={2.5} sx={{ marginTop: '3%', marginLeft: '8.1%' }}>
 
                 <Grid item xs={12}>
-                    <Image src={'/../public/vipLogoFooter.png'} width={138.3} height={57} />
+                    <Image src={'/vipLogoFooter.png'} width={138.3} height={57} />
                 </Grid>
 
                 <Grid item xs={12}>
@@ -372,7 +372,7 @@ const BeaforeFooter = () => {
 
                                 padding: '25%'
                             }}>
-                                <Image src={'/../public/iconFacebook.png'}
+                                <Image src={'/iconFacebook.png'}
                                     width={17} height={17} />
                             </Grid>
 

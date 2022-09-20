@@ -39,7 +39,7 @@ import Link from 'next/link';
                 <Grid item xs={4} sm={3} md={2} lg={2.5} xl={2} margin='0px auto'>
                     <Link href='/'>
                         <a>
-                            <Image src={'/../public/logoVipHeader.jpg'} width={138.3} height={57}/>
+                            <Image src={'/logoVipHeader.jpg'} width={138.3} height={57}/>
                         </a>
                     </Link>
                     
@@ -61,7 +61,7 @@ import Link from 'next/link';
                 <Grid item xs={4} sm={3.4} md={2.1} lg={1.5} xl={0}
                  display={{ xs:'none',sm:'block',md:'block',lg:'block'}}>
                     <Tabs>
-                        <TypographyNavBarImage src={'/../public/flechaDesplegable.jpg'}
+                        <TypographyNavBarImage src={'/flechaDesplegable.jpg'}
                         title={'Seguro personas'} color={'primary'} id={'insurancePeople'}/>
                     </Tabs>
                 </Grid>
@@ -69,7 +69,7 @@ import Link from 'next/link';
                 <Grid item xs={4} sm={3.5} md={2.8} lg={1.7} xl={0}
                 display={{ xs:'none',sm:'none',md:'block',lg:'block'}}>
                      <Tabs>
-                        <TypographyNavBarImage src={'/../public/flechaDesplegable.jpg'} 
+                        <TypographyNavBarImage src={'/flechaDesplegable.jpg'} 
                         title={'Seguro empresas'} color={'primary'} id={'insuranceCompany'}/>
                     </Tabs>
                 </Grid>
@@ -117,7 +117,7 @@ import Link from 'next/link';
   
                 <Grid item xs={2} sm={1} md={1} lg={1}>
                     <div style={{marginTop:"7%",marginLeft:"5%"}}>
-                    <Image src={'/../public/phoneIcon.jpg'} width={40} height={40}/>
+                    <Image src={'/phoneIcon.jpg'} width={40} height={40}/>
                     </div>
                 </Grid>
 

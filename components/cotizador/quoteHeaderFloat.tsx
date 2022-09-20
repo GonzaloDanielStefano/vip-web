@@ -37,7 +37,7 @@ const QuoteHeaderFloat = () =>{
             <Grid container lg={12} sx={{marginLeft:'auto'}} padding={1}>
                 
                 <Grid item lg={12} margin='auto' marginLeft={1.2}>
-                <Image src={'/../public/vehicular-grey.PNG'} width={41} height={41}/>
+                <Image src={'/vehicular-grey.PNG'} width={41} height={41}/>
                 </Grid>
                 
                 <Typography
@@ -59,7 +59,7 @@ const QuoteHeaderFloat = () =>{
 
             <Grid item lg={12} sx={{marginLeft:'auto'}} padding={1}>
                 <Grid item lg={12} margin='auto' marginLeft={1.2}>
-                    <Image src={'/../public/hogarIconGrey.PNG'} width={41} height={41}/>
+                    <Image src={'/hogarIconGrey.PNG'} width={41} height={41}/>
                 </Grid>
                 <Typography
                 sx={{
@@ -80,7 +80,7 @@ const QuoteHeaderFloat = () =>{
             <Grid item lg={12} sx={{marginLeft:'auto'}} padding={1}>
 
                 <Grid item lg={12} margin='auto' marginLeft={1.2}>
-                    <Image src={'/../public/saludIconGrey.PNG'} width={41} height={41}/>
+                    <Image src={'/saludIconGrey.PNG'} width={41} height={41}/>
                 </Grid>
 
                 <Typography
