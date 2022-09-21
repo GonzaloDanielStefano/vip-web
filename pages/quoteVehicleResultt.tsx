@@ -7,7 +7,7 @@ import Image from 'next/image';
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { Department, QuoteResult, UseType, Vehicle, VehicularQuoterRequest } from '../interfaces';
-import { getDepartment, getUseType, getVehicle } from "./api/data";
+import { cotizarVehicle, getDepartment, getUseType, getVehicle } from "./api/data";
 import NameInformation from "../components/tableVehicleResult.tsx/nameInformation";
 import HeaderTableResult from "../components/tableVehicleResult.tsx/headerTableResult";
 import Coberturas from "../components/tableVehicleResult.tsx/coberturas";
@@ -32,6 +32,49 @@ const QuoteVehicleResultt = () => {
     const [department, setDepartment] = useState<Department>();
     const [useType, setUseType] = useState<UseType>();
     const [quoteResult, setQuoterResult] = useState<QuoteResult[]>();
+    const [x, setx] = useState<VehicularQuoterRequest>({
+        id: null,
+        email:typeof router.query.email == "string" ? router.query.email.toString() : '' ,
+        name: typeof router.query.name == "string" ? router.query.name.toString() : '' ,
+        phone: typeof router.query.phone == "string" ? router.query.phone.toString() : '' ,
+        dni:typeof router.query.dni == "string" ? router.query.dni.toString() : '' ,
+        vehicle: {
+            id: typeof router.query.vehicle == "string" ? router.query.vehicle.toString() : '',
+            brand:null,
+            model:null,
+            mandatory_gps: null,
+            quote_data:null,
+            plate:null,
+            created_at:null,
+            updated_at:null },
+        use_type: {
+            id: typeof router.query.use_type == "string" ? router.query.use_type.toString() : '',
+            use_type: null,
+            created_at:null,
+            updated_at:null
+          },
+        promotional_code: typeof router.query.promotional_code == "string" ? router.query.promotional_code.toString() : '' ,
+        produced_at: typeof router.query.produced_at == "string" ? router.query.produced_at.toString() : '' ,
+        department: {
+            id: typeof router.query.department == "string" ? router.query.department.toString() : '' ,
+            name: "string",
+            description:  "string",
+            grouped_departments: null,
+            disabled: false,
+            description_for_client: null,
+            created_at:null,
+            updated_at:null
+          },
+          fuel_type: {
+            id: typeof router.query.fuel_type == "string" ? router.query.fuel_type.toString() : '' ,
+            name: "string",
+            description:  "string",
+            amount: null,
+            created_at:null,
+            updated_at:null,
+            percentage:0
+          }
+    });
     const [quoteData, setQuoteData] = useState<VehicularQuoterRequest>();
     //const localResult = JSON.parse(typeof localStorage.getItem('quoteResult') == "undefined" ? '{}' : localStorage.getItem('quoteResult'));
     const [anualPrice, setAnualPrice] = useState<number>();
@@ -55,60 +98,86 @@ const QuoteVehicleResultt = () => {
     }
     useEffect(() => {
 
-
+      
         setQuoteData({ ...quoteData, name: typeof router.query.name == "string" ? router.query.name.toString() : '' });
         setQuoteData({ ...quoteData, email: typeof router.query.email == "string" ? router.query.email.toString() : '' });
         setQuoteData({ ...quoteData, phone: typeof router.query.phone == "string" ? router.query.phone.toString() : '' });
         setQuoteData({ ...quoteData, dni: typeof router.query.dni == "string" ? router.query.dni.toString() : '' });
+        //setQuoteData({ ...quoteData, dni: router.query.dni.toString() });
         setQuoteData({ ...quoteData, produced_at: typeof router.query.produced_at == "string" ? router.query.produced_at.toString() : '' });
         setQuoteData({ ...quoteData, promotional_code: typeof router.query.promotional_code == "string" ? router.query.promotional_code.toString() : '' });
 
 
-        const localData = parsedDataFunction();
-        if (localData != null) {
-            setQuoterResult(localData);
+        // const localData = parsedDataFunction();
+        // if (localData != null) {
+        //     debugger;
+        //     setQuoterResult(localData);
+        // }
+
+
+
+
+        // if (typeof router.query.vehicle == "string") {
+        //     getVehicle(router.query.vehicle.toString())
+        //         .then((response) => {
+        //             if (typeof response === 'object') {
+        //                 setVehicle(response);
+        //                 setQuoteData({ ...quoteData, vehicle: response });
+
+        //             }
+        //         });
+        // }
+
+        // if (typeof router.query.department == "string") {
+        //     getDepartment(router.query.department.toString())
+        //         .then((response) => {
+        //             if (typeof response === 'object') {
+        //                 setDepartment(response);
+        //                 setQuoteData({ ...quoteData, department: response });
+
+        //             }
+        //         });
+        // }
+
+        // if (typeof router.query.use_type == "string") {
+        //     getUseType(router.query.use_type.toString())
+        //         .then((response) => {
+        //             if (typeof response === 'object') {
+        //                 setUseType(response);
+        //                 setQuoteData({ ...quoteData, use_type: response });
+
+        //             }
+        //         });
+        // }
+        cotizar();
+        async function cotizar() {
+            const useType = await getUseType(x?.use_type?.id);
+            const department = await getDepartment(x?.department?.id);
+            const vehicle = await getVehicle(x?.vehicle?.id);
+            const quoteResult = await cotizarVehicle(x);
+            if (typeof useType != "string") {
+                setUseType(useType);
+                setQuoteData({ ...quoteData, use_type: useType });
+            }
+            if (typeof department != "string") {
+
+                setQuoteData({ ...quoteData, department: department });
+                setDepartment(department);
+            }
+            if (typeof vehicle != "string") {
+                setVehicle(vehicle);
+                setQuoteData({ ...quoteData, vehicle: vehicle });
+            }
+            if (typeof quoteResult != "string") {
+
+                setQuoterResult(quoteResult);
+            }
         }
 
 
 
 
-        if (typeof router.query.vehicle == "string") {
-            getVehicle(router.query.vehicle.toString())
-                .then((response) => {
-                    if (typeof response === 'object') {
-                        setVehicle(response);
-                        setQuoteData({ ...quoteData, vehicle: response });
-
-                    }
-                });
-        }
-
-        if (typeof router.query.department == "string") {
-            getDepartment(router.query.department.toString())
-                .then((response) => {
-                    if (typeof response === 'object') {
-                        setDepartment(response);
-                        setQuoteData({ ...quoteData, department: response });
-
-                    }
-                });
-        }
-
-        if (typeof router.query.use_type == "string") {
-            getUseType(router.query.use_type.toString())
-                .then((response) => {
-                    if (typeof response === 'object') {
-                        setUseType(response);
-                        setQuoteData({ ...quoteData, use_type: response });
-
-                    }
-                });
-        }
-
-
-
-
-    }, [])
+    }, [quoteData])
 
 
 
@@ -203,21 +272,21 @@ const QuoteVehicleResultt = () => {
                                     {
 
                                         Array.isArray(quoteResult) ? quoteResult.map((result, index) => (
-                                            
-                                            <Grid container xs={4} key={index}>
-                                            { indexHeaderTable >= index - 1 && indexHeaderTable <= index + 1 ?
-                                            <HeaderTableResult
-                                                key={index}
-                                                setAnualPrice={setAnualPrice}
-                                                quoteResult={result}
-                                                index={index}
-                                                quoteSelected={quoteSelected}
-                                                setQuoteSelected={setQuoteSelected}
-                                                quoteResultIndex={quoteResultIndex}
-                                                setQuoteResulIndex={setQuoteResulIndex}
-                                                title={result?.product?.category?.name}
 
-                                            />:[]}
+                                            <Grid container xs={4} key={index}>
+                                                {indexHeaderTable >= index - 1 && indexHeaderTable <= index + 1 ?
+                                                    <HeaderTableResult
+                                                        key={index}
+                                                        setAnualPrice={setAnualPrice}
+                                                        quoteResult={result}
+                                                        index={index}
+                                                        quoteSelected={quoteSelected}
+                                                        setQuoteSelected={setQuoteSelected}
+                                                        quoteResultIndex={quoteResultIndex}
+                                                        setQuoteResulIndex={setQuoteResulIndex}
+                                                        title={result?.product?.category?.name}
+
+                                                    /> : []}
 
                                             </Grid>
                                         )) : []

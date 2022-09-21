@@ -43,10 +43,12 @@ const ButtonNextBack = ({ buttonName, setActiveStep, activeStep, quoterData }: P
 
 
 
+            //setActiveStep(activeStep + 1);
             
-            localStorage.setItem("quoterData", JSON.stringify(quoterData,await censor(quoterData)));
-            const quoteResult = await cotizarVehicle(quoterData);
-            localStorage.setItem("quoteResult", JSON.stringify(quoteResult, await censor(quoterData)));
+            // localStorage.setItem("quoterData", JSON.stringify(quoterData,await censor(quoterData)));
+            // const quoteResult = await cotizarVehicle(quoterData);
+            // localStorage.setItem("quoteResult", JSON.stringify(quoteResult, await censor(quoterData)));
+           
             return router.push({
                 pathname: '/quoteVehicleResultt',
                 query: {
@@ -65,6 +67,7 @@ const ButtonNextBack = ({ buttonName, setActiveStep, activeStep, quoterData }: P
 
         }
         setActiveStep(activeStep + 1);
+       
     }
 
     async function backStep(){

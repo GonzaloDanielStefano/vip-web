@@ -55,6 +55,7 @@ function StepOneSinPlaca  ({steps,activeStep,completed,setActiveStep
 
     async function handleChangeProducedAt(event:SelectChangeEvent){
       setQuoterData({...quoterData, produced_at: event.target.value});
+      
     }
 
 return(
