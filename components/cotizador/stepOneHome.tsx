@@ -26,8 +26,11 @@ function StepOneHome({ activeStep, completed, setActiveStep,
   setHomeQuoterData, homeQuoterData, useTypes}: Props) {
 
   const steps = ['1', '2'];
-  
-
+  const typeOfClienteOptions = ['Dueño y vive en su hogar', 'Es dueño y alquila su vivienda','Vive en vivienda alquilada'];
+  const wantToQuoteOptions = ['Inmueble','Inmueble y contenido','Contenido'];
+  const wayToSecureOptions = ['A primer riesgo absoluto', 'A valor total'];
+  const typeOfHousingOptions = ['Casa','Departamento'];
+  const currencies = ['USD','Soles'];
   async function handleChangeTypeOfClient(event: SelectChangeEvent) {
     setHomeQuoterData({ ...homeQuoterData, typeOfClient: event.target.value });
   }
@@ -50,7 +53,7 @@ function StepOneHome({ activeStep, completed, setActiveStep,
   async function handleChangeCurrency(event:SelectChangeEvent){
     setHomeQuoterData({...homeQuoterData, currency:event.target.value});
   }
-  const typeOfClienteOptions = ['Opcion 1', 'Opcion 2'];
+  
 
 
   return (
@@ -112,16 +115,16 @@ function StepOneHome({ activeStep, completed, setActiveStep,
 
               }}>¿Qué desea cotizar?</InputLabel>
             <Select
-              labelId="typeOfClient"
-              id="typeOfClient"
-              label="typeOfClient"
+              labelId="wantToQuoteOptions"
+              id="wantToQuoteOptions"
+              label="wantToQuoteOptions"
               onChange={handleChangeWantToQuote}
               value={homeQuoterData?.wantToQuote}
               sx={{ height: '55px' }}
             >
-              {Array.isArray(typeOfClienteOptions) ? typeOfClienteOptions.map((typeOfClienteOption,index) => (
+              {Array.isArray(wantToQuoteOptions) ? wantToQuoteOptions.map((wanToQuoteOption,index) => (
 
-                <MenuItem key={index} value={typeOfClienteOption}>{typeOfClienteOption}</MenuItem>
+                <MenuItem key={index} value={wanToQuoteOption}>{wanToQuoteOption}</MenuItem>
               )) : []}
 
 
@@ -145,12 +148,12 @@ function StepOneHome({ activeStep, completed, setActiveStep,
               id="typeOfClient"
               label="typeOfClient"
               onChange={handleChangeTypeOfClient}
-              value={homeQuoterData?.typeOfClient}
+              value={homeQuoterData?.wayToSecure}
               sx={{ height: '55px' }}
             >
-              {Array.isArray(typeOfClienteOptions) ? typeOfClienteOptions.map((typeOfClienteOption,index) => (
+              {Array.isArray(wayToSecureOptions) ? wayToSecureOptions.map((wayToSecureOption,index) => (
 
-                <MenuItem key={index} value={typeOfClienteOption}>{typeOfClienteOption}</MenuItem>
+                <MenuItem key={index} value={wayToSecureOption}>{wayToSecureOption}</MenuItem>
               )) : []}
 
 
@@ -181,9 +184,9 @@ function StepOneHome({ activeStep, completed, setActiveStep,
               value={homeQuoterData?.typeOfHousing}
               sx={{ height: '55px' }}
             >
-              {Array.isArray(typeOfClienteOptions) ? typeOfClienteOptions.map((typeOfClienteOption,index) => (
+              {Array.isArray(typeOfHousingOptions) ? typeOfHousingOptions.map((typeOfHousingOption,index) => (
 
-                <MenuItem key={index} value={typeOfClienteOption}>{typeOfClienteOption}</MenuItem>
+                <MenuItem key={index} value={typeOfHousingOption}>{typeOfHousingOption}</MenuItem>
               )) : []}
 
 
@@ -211,9 +214,9 @@ function StepOneHome({ activeStep, completed, setActiveStep,
               value={homeQuoterData?.currency}
               sx={{ height: '55px' }}
             >
-              {Array.isArray(typeOfClienteOptions) ? typeOfClienteOptions.map((typeOfClienteOption,index) => (
+              {Array.isArray(currencies) ? currencies.map((currency,index) => (
 
-                <MenuItem key={index} value={typeOfClienteOption}>{typeOfClienteOption}</MenuItem>
+                <MenuItem key={index} value={currency}>{currency}</MenuItem>
               )) : []}
 
 

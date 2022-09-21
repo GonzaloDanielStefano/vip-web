@@ -13,9 +13,10 @@ const Header = () => {
             <Contact title={'Mantente en'} title_strong={'Contacto'}
             message={'Para obtener más información, comuníquese con uno de nuestros expertos.Llámenos para obtener más información.'} 
             second_message={''}/>
-
-            <Grid item xs={6}>
-                <Image src='/backgroundContacto.png' width={816} height={546}/>
+            
+            <Grid item xs={6} lg={6}
+            display={{ xs:'none',sm:'none',md:'block',lg:'block'}}>
+                <Image src='/backgroundContacto.png' width={816} height={581}/>
             </Grid>
 
             <Grid container xs={12} height={662} marginTop={-0.5}
@@ -26,7 +27,7 @@ const Header = () => {
             }}>
 
                 <Grid item xs={6} minHeight={457}>
-                    <Image src='/contactoMap.png' width={600} height={457}
+                    <Image src='/contactoMap.png' width={600} height={505}
                     style={{
                       minHeight:'457px'  
                     }}/>

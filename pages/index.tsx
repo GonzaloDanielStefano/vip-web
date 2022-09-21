@@ -128,7 +128,7 @@ function Home({ useTypes, vehicles, brands, departments, fuelTypes }: Props) {
         </Grid>
       </div>
 
-      <Grid container lg={12} sx={{ position: 'absolute', top: '145%' }}>
+      <Grid container lg={12} sx={{ position: 'absolute', top: '160%' }}>
         <CarouselInsurance />
       </Grid>
 

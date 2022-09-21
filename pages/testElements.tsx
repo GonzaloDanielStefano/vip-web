@@ -1,15 +1,13 @@
 import { Grid } from "@mui/material";
 import QuoteHeaderFloat from "../components/cotizador/quoteHeaderFloat";
+import { HomeLayout } from "../components/layouts";
 
 const testElements = () =>{
 
     return(
-        <Grid container>
-            <Grid item>
-            <QuoteHeaderFloat/>
-            </Grid>
+        <HomeLayout title={""} pageDescription={""}>
         
-        </Grid>
+        </HomeLayout>
     )
 }
 export default testElements;

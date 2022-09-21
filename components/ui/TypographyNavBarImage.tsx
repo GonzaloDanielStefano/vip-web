@@ -24,8 +24,9 @@ const TypographyNavBarImage = ({title,src,color,id}:Props) => {
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }} color={color}
                 fontWeight={500} fontStyle="normal" fontFamily="Montserrat" style={{fontSize:"15px",margin:"14px",
                 marginRight:"1%"}} id={id}>
-                {title} <Image src={src} width={11.67} height={6.67}/>
+                {title} 
         </Typography>
+        <Image src={src} width={11.67} height={6.67}/>
         </ThemeProvider>
     )
 }

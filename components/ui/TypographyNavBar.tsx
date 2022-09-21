@@ -1,6 +1,6 @@
 import { createTheme, ThemeProvider } from "@mui/material";
 import Typography from "@mui/material/Typography";
-import Image from 'next/image'
+import "@fontsource/montserrat";
 interface Props {
     
     title: string
@@ -21,8 +21,8 @@ const TypographyNavBar = ({title,color}:Props) => {
         
     return(
         <ThemeProvider theme={colortheme}>
-        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }} color={color}
-                fontWeight={500} fontStyle="normal" fontFamily="Montserrat" style={{fontSize:"15px",margin:"14px"}}>
+        <Typography variant="h6" component="div"  color={color}
+                fontWeight={500} fontStyle="normal" fontFamily="Montserrat" style={{fontSize:"15px",margin:"0.2px"}}>
                 {title}
         </Typography>
         </ThemeProvider>

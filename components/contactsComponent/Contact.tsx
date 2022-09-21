@@ -15,10 +15,10 @@ const Contact = ({title,title_strong,message,second_message}:Props) =>{
 
     
     return(
-        <Grid container xs={6}>
-            <Grid container marginLeft={7} marginTop={9}>
+        <Grid item xs={12} lg={6}>
+            <Grid container marginLeft={7} marginTop={9} xs={12} sx={{display:'flex',alignItems:'center'}}>
                     { title_strong == 'Contacto' ?
-                    <Grid item xs={5.1} flexDirection='row' direction={'row'}>
+                    <Grid item xs={12} lg={10} alignItems='center' display='flex' >
                         <Typography sx={{
                             fontFamily:'Montserrat',
                             fontWeight:400,
@@ -29,18 +29,30 @@ const Contact = ({title,title_strong,message,second_message}:Props) =>{
                             
                                     }}>
 
-                            {title}
+                            {title} </Typography>
                         
-                            
+                            <Typography 
+                            style={{
+                                fontFamily:'Montserrat',
+                                fontWeight:700,
+                                fontStyle:'normal',
+                                color:'#151F6D',
+                                fontSize:'40px',
+                                lineHeight:'102.7%',
+                                textAlign:'center',
+                                marginLeft:'8px'
+                            }}>
+                                {title_strong}
+                                </Typography>
                         
-                        </Typography>
+                       
 
                         
                         
                     </Grid>
                     :''}
                     { title_strong == 'nosotros' ?
-                    <Grid item xs={4.6} flexDirection='row' direction={'row'}>
+                    <Grid item xs={1} lg={4.6} flexDirection='row' direction={'row'}>
                         <Typography sx={{
                             fontFamily:'Montserrat',
                             fontWeight:400,
@@ -61,7 +73,7 @@ const Contact = ({title,title_strong,message,second_message}:Props) =>{
                         
                     </Grid>
                     :''}
-                    <Grid item xs={3}>
+                    {/* <Grid item xs={3}>
                         <Typography
                             sx={{
                                 fontFamily:'Montserrat',
@@ -75,10 +87,10 @@ const Contact = ({title,title_strong,message,second_message}:Props) =>{
                             }}>
                                 {title_strong}
                             </Typography>
-                    </Grid>
+                    </Grid> */}
                 </Grid>
 
-                <Grid item xs={9} marginLeft={7} marginTop={4}>
+                <Grid item xs={12} lg={9} marginLeft={7} marginTop={4}>
                     <Typography
                     sx={{
                         fontFamily:'Montserrat',

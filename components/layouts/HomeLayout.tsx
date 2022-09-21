@@ -12,15 +12,16 @@ export const HomeLayout:FC<Props> = ({children,title,pageDescription}) => {
         <>
             <Head>
                 <title>{title}</title>
+                <meta name="description" content="content"/>
+                <meta name="og:title" content="content" />
+
             </Head>
 
             <nav>
                 <Navbar/>
             </nav>
 
-            <main style={{
-               
-            }}>
+            <main className="layout-main" style={{margin:'50px auto'}}>
                 {children}
             </main>
 

@@ -6,9 +6,9 @@ const CarouselInsurance = () =>{
     return(
         <Box
         sx={{
-            width:'1200px',
-            marginLeft:'auto',
-            marginRight:'auto', 
+            width:'90%',
+            marginLeft:'10%',
+            marginRight:'5% ', 
            
            
         }}>

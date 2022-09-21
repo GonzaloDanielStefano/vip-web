@@ -5,7 +5,7 @@ const HomeImage = () =>{
 
     return(
         <Grid container>
-            <Grid item lg={9} paddingTop={10} paddingLeft={8} display='inline-block'>
+            <Grid item lg={9.9} paddingTop={10} paddingLeft={8} display='inline-block'>
                 <Typography variant="h1"
                 sx={{
                     fontFamily:'Montserrat',
