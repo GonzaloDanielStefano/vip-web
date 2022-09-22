@@ -31,23 +31,29 @@ function StepOneHome({ activeStep, completed, setActiveStep,
   const wayToSecureOptions = ['A primer riesgo absoluto', 'A valor total'];
   const typeOfHousingOptions = ['Casa','Departamento'];
   const currencies = ['USD','Soles'];
+
   async function handleChangeTypeOfClient(event: SelectChangeEvent) {
-    setHomeQuoterData({ ...homeQuoterData, typeOfClient: event.target.value });
+    setHomeQuoterData({ ...homeQuoterData, type_of_client: event.target.value });
   }
 
   async function handleChangeWantToQuote(event:SelectChangeEvent){
-    setHomeQuoterData({...homeQuoterData, wantToQuote: event.target.value});
+    setHomeQuoterData({...homeQuoterData, want_to_quote: event.target.value});
   }
+
+  async function handleChangeWayToSecure(event:SelectChangeEvent){
+    setHomeQuoterData({...homeQuoterData, way_to_secure: event.target.value});
+  }
+
   async function handleChangeValueOfHouse(event: any) {
-    setHomeQuoterData({ ...homeQuoterData, valueOfHouse: event.target.value });
+    setHomeQuoterData({ ...homeQuoterData, value_of_house: event.target.value });
   }
 
   async function handleChangeContentValue(event: any) {
-    setHomeQuoterData({ ...homeQuoterData, contentValue: event.target.value });
+    setHomeQuoterData({ ...homeQuoterData, content_value: event.target.value });
   }
 
   async function handleChangeTypeOfHousing(event:SelectChangeEvent){
-    setHomeQuoterData({...homeQuoterData, typeOfHousing:event.target.value});
+    setHomeQuoterData({...homeQuoterData, type_of_housing:event.target.value});
   }
 
   async function handleChangeCurrency(event:SelectChangeEvent){
@@ -83,7 +89,7 @@ function StepOneHome({ activeStep, completed, setActiveStep,
               id="typeOfClient"
               label="typeOfClient"
               onChange={handleChangeTypeOfClient}
-              value={homeQuoterData?.typeOfClient}
+              value={homeQuoterData?.type_of_client}
               sx={{ height: '55px' }}
             >
               {Array.isArray(typeOfClienteOptions) ? typeOfClienteOptions.map((typeOfClienteOption,index) => (
@@ -119,7 +125,7 @@ function StepOneHome({ activeStep, completed, setActiveStep,
               id="wantToQuoteOptions"
               label="wantToQuoteOptions"
               onChange={handleChangeWantToQuote}
-              value={homeQuoterData?.wantToQuote}
+              value={homeQuoterData?.want_to_quote}
               sx={{ height: '55px' }}
             >
               {Array.isArray(wantToQuoteOptions) ? wantToQuoteOptions.map((wanToQuoteOption,index) => (
@@ -144,11 +150,11 @@ function StepOneHome({ activeStep, completed, setActiveStep,
 
               }}>Modo a asegurar</InputLabel>
             <Select
-              labelId="typeOfClient"
-              id="typeOfClient"
-              label="typeOfClient"
-              onChange={handleChangeTypeOfClient}
-              value={homeQuoterData?.wayToSecure}
+              labelId="wayToSecure"
+              id="wayToSecure"
+              label="wayToSecure"
+              onChange={handleChangeWayToSecure}
+              value={homeQuoterData?.way_to_secure}
               sx={{ height: '55px' }}
             >
               {Array.isArray(wayToSecureOptions) ? wayToSecureOptions.map((wayToSecureOption,index) => (
@@ -181,7 +187,7 @@ function StepOneHome({ activeStep, completed, setActiveStep,
               id="typeOfHousing"
               label="typeOfHousing"
               onChange={handleChangeTypeOfHousing}
-              value={homeQuoterData?.typeOfHousing}
+              value={homeQuoterData?.type_of_housing}
               sx={{ height: '55px' }}
             >
               {Array.isArray(typeOfHousingOptions) ? typeOfHousingOptions.map((typeOfHousingOption,index) => (
@@ -230,7 +236,7 @@ function StepOneHome({ activeStep, completed, setActiveStep,
             marginTop: '2%'
           }}>
           <TextField className="homeField" id="outlined-basic" label="Valor del inmueble"
-            value={homeQuoterData?.valueOfHouse}
+            value={homeQuoterData?.value_of_house}
             variant="outlined" multiline={false}
             sx={{
               alignItem: 'center',
@@ -251,7 +257,7 @@ function StepOneHome({ activeStep, completed, setActiveStep,
             marginLeft: '4.7%'
           }}>
           <TextField className="homeField" id="outlined-basic" label="Valor del contenido"
-            value={homeQuoterData?.contentValue}
+            value={homeQuoterData?.content_value}
             variant="outlined" multiline={false}
             sx={{
               alignItem: 'center',

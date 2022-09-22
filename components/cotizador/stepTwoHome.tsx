@@ -7,6 +7,7 @@ import QuoteButtonNext from "../button/quoteButtonNext";
 import "@fontsource/montserrat";
 import { HomeQuoteRequest, UseType } from "../../interfaces";
 import QuoteButtonNextHome from "../button/quoteButtonNextHome";
+import QuoteButtonHome from "../button/quoteButtonHome";
 
 
 
@@ -38,16 +39,16 @@ function StepTwoHome({ activeStep, completed, setActiveStep,
     }
 
 
-    async function handleChangeProvince(event: SelectChangeEvent) {
+    async function handleChangeProvince(event: any) {
         setHomeQuoterData({ ...homeQuoterData, province: event.target.value });
     }
 
-    async function handleChangeDistrict(event: SelectChangeEvent) {
+    async function handleChangeDistrict(event: any) {
         setHomeQuoterData({ ...homeQuoterData, district: event.target.value });
     }
 
 
-    const typeOfClienteOptions = ['Opcion 1', 'Opcion 2'];
+    
 
 
     return (
@@ -58,67 +59,44 @@ function StepTwoHome({ activeStep, completed, setActiveStep,
 
             <Grid container direction={'row'}>
 
-                <Grid item xs={12} lg={5.1}
+            <Grid item xs={12} lg={4.6}
                     sx={{
-
-                        marginLeft: '8.8%',
+                        marginLeft: '8.5%',
                         marginTop: '2%'
                     }}>
-                    <FormControl className="homeField" sx={{
-                        width: '88%',
-
-                    }} size="small">
-                        <InputLabel
-                            id="typeOfClient"
-                            sx={{
-                                marginTop: '2%',
-
-                            }}>Provincia</InputLabel>
-                        <Select
-                            labelId="province"
-                            id="province"
-                            label="Provincia"
-                            onChange={handleChangeProvince}
-                            value={homeQuoterData?.province}
-                            sx={{ height: '55px' }}
-                        >
-                            {Array.isArray(typeOfClienteOptions) ? typeOfClienteOptions.map((typeOfClienteOption,index) => (
-
-                                <MenuItem key={index} value={typeOfClienteOption}>{typeOfClienteOption}</MenuItem>
-                            )) : []}
-
-
-                        </Select>
-                    </FormControl>
+                    <TextField className="province" id="province" label="Provincia"
+                        value={homeQuoterData?.province}
+                        variant="outlined" multiline={false}
+                        sx={{
+                            alignItem: 'center',
+                            wordBreak: 'break-all',
+                            "& .MuiInputBase-root": {
+                                height: "100%",
+                                display: "flex",
+                                alignItems: "start"
+                            }
+                        }}
+                        onChange={handleChangeProvince} />
                 </Grid>
 
-                <Grid item xs={12} lg={5.15}
+                <Grid item xs={12} lg={4.6}
                     sx={{
+                        marginLeft: '4.5%',
                         marginTop: '2%'
                     }}>
-                    <FormControl className="homeFieldCurrency" >
-                        <InputLabel
-                            id="typeOfClient"
-                            sx={{
-                                marginTop: '2%',
-
-                            }}>Distrito</InputLabel>
-                        <Select
-                            labelId="district"
-                            id="district"
-                            label="Distrito"
-                            onChange={handleChangeDistrict}
-                            value={homeQuoterData?.district}
-                            sx={{ height: '55px' }}
-                        >
-                            {Array.isArray(typeOfClienteOptions) ? typeOfClienteOptions.map((typeOfClienteOption,index) => (
-
-                                <MenuItem key={index} value={typeOfClienteOption}>{typeOfClienteOption}</MenuItem>
-                            )) : []}
-
-
-                        </Select>
-                    </FormControl>
+                    <TextField className="district" id="district" label="Distrito"
+                        value={homeQuoterData?.district}
+                        variant="outlined" multiline={false}
+                        sx={{
+                            alignItem: 'center',
+                            wordBreak: 'break-all',
+                            "& .MuiInputBase-root": {
+                                height: "100%",
+                                display: "flex",
+                                alignItems: "start"
+                            }
+                        }}
+                        onChange={handleChangeDistrict} />
                 </Grid>
 
                 <Grid item xs={12} lg={4.6}
@@ -193,8 +171,8 @@ function StepTwoHome({ activeStep, completed, setActiveStep,
 
 
 
-                <QuoteButtonNextHome setActiveStep={setActiveStep} quoterData={homeQuoterData}
-                    activeStep={activeStep} completed={[]} isFieldComplete={false} />
+                <QuoteButtonHome setActiveStep={setActiveStep} quoterData={homeQuoterData}
+                    activeStep={activeStep}  />
             </Grid>
 
             <Box sx={{ width: '40%', margin: 'auto', marginTop: '5%' }} >

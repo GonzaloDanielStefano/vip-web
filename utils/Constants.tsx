@@ -44,6 +44,12 @@ export const REACT_APP_PRODUCT = {
     GET_ALL: LOCAL + '/products'
 }
 
+export const REACT_APP_HOME_QUOTE = {
+    BASE_URL: LOCAL + '/home_quote',
+    GET_BY_ID: LOCAL + '/home_quote/',
+    GET_ALL: LOCAL + '/home_quotes'
+}
+
 export const REACT_APP_FACTOR = {
     BASE_URL: LOCAL + '/factor',
     GET_BY_ID: LOCAL + '/factor/',

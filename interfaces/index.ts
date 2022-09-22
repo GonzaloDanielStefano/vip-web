@@ -295,18 +295,20 @@ export type Dependent = {
 
 export type HomeQuoteRequest ={
   id: number | null
-  typeOfClient: string
-  wantToQuote: string
-  wayToSecure: string
-  typeOfHousing: string
+  type_of_client: string
+  want_to_quote: string
+  way_to_secure: string
+  type_of_housing: string
   currency: string
-  valueOfHouse: number
-  contentValue: number
+  value_of_house: number
+  content_value: number
   province: string
   district: string
   name: string
   phone: string
   email: string
+  created_at: string | null
+  updated_at: string | null
 }
 
 

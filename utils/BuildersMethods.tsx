@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Brand, Category, Coverage, CoverageCategory, CoverageType, Currency, Department, ExceptionMessage, Factor, FuelType, Insurance, Model, Product, QuoteData, Rate, RoleType, User, UseType, Vehicle, VehicularQuoterRequest, QuoteResult, Funding, Installment, Deductible, DeductibleType, DeductibleCategory, HealthDependent, RiskFactor, HealthFactor, VehicularProduct, HealthProduct, Benefit, Clinic, Promotion } from "../interfaces";
+import { Brand, Category, Coverage, CoverageCategory, CoverageType, Currency, Department, ExceptionMessage, Factor, FuelType, Insurance, Model, Product, QuoteData, Rate, RoleType, User, UseType, Vehicle, VehicularQuoterRequest, QuoteResult, Funding, Installment, Deductible, DeductibleType, DeductibleCategory, HealthDependent, RiskFactor, HealthFactor, VehicularProduct, HealthProduct, Benefit, Clinic, Promotion, HomeQuoteRequest } from "../interfaces";
 
 export abstract class BuildersMethods {
     static buildCategories(theCategories: Category[]) {
@@ -51,7 +51,32 @@ export abstract class BuildersMethods {
         return department;
     }
 
+    static buildHomeQuote(theId: number | null, theTypeOfClient: string, theWantToQuote: string,
+        theWayToSecure: string, theTypeOfHousing: string, theCurrency: string,
+        theValueOfHouse: number | null, theContentValue: number | null, theProvince: string,
+        theDistrict: string, theName: string, thePhone: string, theEmail: string,
+        theCreated_at: string | null, theUpdated_at: string | null): HomeQuoteRequest {
+        let homeQuote: HomeQuoteRequest = {
+            id: theId,
+            type_of_client: theTypeOfClient,
+            want_to_quote: theWantToQuote,
+            way_to_secure: theWayToSecure,
+            type_of_housing: theTypeOfHousing,
+            currency: theCurrency,
+            value_of_house: theValueOfHouse,
+            content_value: theContentValue,
+            province: theProvince,
+            district: theDistrict,
+            name: theName,
+            phone: thePhone,
+            email: theEmail,
+            created_at: theCreated_at,
+            updated_at: theUpdated_at
+        }
 
+        return homeQuote;
+
+        }
     static buildFuelTypes(theFuelTypes: FuelType[]) {
         let fuelTypes: FuelType[] = [];
         if (theFuelTypes?.length > 0) {

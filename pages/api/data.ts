@@ -1,6 +1,6 @@
 import axios from "axios";
 import Cookies from "js-cookie";
-import { Brand, Category, CoverageCategory, Currency, Department, Factor, FuelType, HealthFactor, HealthProduct, Insurance, Model, Product, QuoteResult, RiskFactor, User, UseType, Vehicle, VehicularProduct, VehicularQuoterRequest } from "../../interfaces";
+import { Brand, Category, CoverageCategory, Currency, Department, Factor, FuelType, HealthFactor, HealthProduct, HomeQuoteRequest, Insurance, Model, Product, QuoteResult, RiskFactor, User, UseType, Vehicle, VehicularProduct, VehicularQuoterRequest } from "../../interfaces";
 import { BuildersMethods } from "../../utils/BuildersMethods";
 import {
   REACT_APP_AUTH_URL,
@@ -22,7 +22,8 @@ import {
   REACT_APP_MODELS,
   REACT_APP_QUOTE,
   REACT_APP_HEALTH_FACTOR,
-  REACT_APP_RISK_FACTOR
+  REACT_APP_RISK_FACTOR,
+  REACT_APP_HOME_QUOTE
 } from "../../utils/Constants";
 
 
@@ -807,8 +808,22 @@ export async function getBrandById(id: number) {
 }
 
 
-
-
+/******************************************************
+*                                                     *
+*                       HOMEQUOTE                     *
+*                                                     *
+******************************************************/
+export async function saveHomeQuote(quoteData: HomeQuoteRequest) {
+  try {
+    const response = await axios.post<HomeQuoteRequest>(REACT_APP_HOME_QUOTE.BASE_URL, quoteData);
+    if (response.status === 201) {
+      return true;
+    }
+    return false;
+  } catch (error) {
+    return BuildersMethods.buildError(error);
+  }
+}
 
 
 /******************************************************
