@@ -1,4 +1,4 @@
-import { Grid } from '@mui/material';
+import { Divider, Grid } from '@mui/material';
 import { HomeLayout } from '../components/layouts'
 import "@fontsource/montserrat";
 import React, { useState } from 'react';
@@ -18,6 +18,12 @@ import StepOneHealth from '../components/cotizador/stepOneHealth';
 import StepTwoHealth from '../components/cotizador/stepTwoHealth';
 import StepOneHome from '../components/cotizador/stepOneHome';
 import StepTwoHome from '../components/cotizador/stepTwoHome';
+import BlogHome from '../components/home/BlogHome';
+import HomeAnalytics from '../components/home/HomeAnalytics';
+import Information from '../components/home/Information';
+import Footer from '../components/ui/footer';
+import BeaforeFooter from '../components/ui/beforeFooter';
+import OtherQuoters from '../components/home/OtherQuoters';
 
 interface Props {
   vechiularQuoterRequest?: VehicularQuoterRequest
@@ -128,14 +134,38 @@ function Home({ useTypes, vehicles, brands, departments, fuelTypes }: Props) {
         </Grid>
       </div>
 
-      <Grid container lg={12} sx={{ position: 'absolute', top: '160%' }}>
+      <Grid container lg={12} sx={{ position: 'absolute', top: '140%' }}>
         <CarouselInsurance />
       </Grid>
 
+      <Grid container lg={12} mt={5}>
+        <BlogHome/>
+      </Grid>
 
+      <Grid container lg={12} mt={70}>
+        <HomeAnalytics/>
+      </Grid>
+
+      <Grid container lg={12} sx={{background:'grey',border:'0.5px solid grey',mt:10,ml:15,width:'80%'}}/>
+        
+
+
+      <Grid container lg={12}>
+        <Information/>
+      </Grid>
+
+      <Grid container lg={12} sx={{background:'grey',border:'0.5px solid grey',mt:10,ml:15,width:'80%'}}/>
+
+      <Grid container lg={12}>
+        <OtherQuoters/>
+      </Grid>
       <QuoteHeaderFloat />
-
-
+        
+      <Grid container lg={12}>
+      <BeaforeFooter/>
+      <Footer/>
+      </Grid>
+              
     </HomeLayout>
   )
 }

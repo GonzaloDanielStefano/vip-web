@@ -1,5 +1,5 @@
-const LOCAL = 'https://seguros-vip-be.herokuapp.com';
-//const LOCAL = 'http://localhost:8080';
+//const LOCAL = 'https://seguros-vip-be.herokuapp.com';
+const LOCAL = 'http://localhost:8080';
 
 export const AUTH = {
     REFRESH_TOKEN: 'REFRESH_TOKEN',
