@@ -1,5 +1,5 @@
-//const LOCAL = 'https://seguros-vip-be.herokuapp.com';
-const LOCAL = 'http://localhost:8080';
+const LOCAL = 'https://seguros-vip-be.herokuapp.com';
+//const LOCAL = 'http://localhost:8080';
 
 export const AUTH = {
     REFRESH_TOKEN: 'REFRESH_TOKEN',
@@ -35,6 +35,14 @@ export const REACT_APP_API_URL = {
 export const REACT_APP_INSURANCE = {
     BASE_URL: LOCAL + '/insurance',
     GET_ALL: LOCAL + '/insurances'
+}
+
+export const REACT_APP_INSURANCE_PEOPLE = {
+    BASE_URL: LOCAL + '/personal_insurance',
+    GET_BY_ID: LOCAL + '/personal_insurance/',
+    DELETE: LOCAL + '/personal_insurance/',
+    PUT: LOCAL + '/personal_insurance/',
+    GET_ALL: LOCAL + '/personal_insurances'
 }
 
 export const REACT_APP_PRODUCT = {

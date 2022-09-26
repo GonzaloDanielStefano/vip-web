@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Brand, Category, Coverage, CoverageCategory, CoverageType, Currency, Department, ExceptionMessage, Factor, FuelType, Insurance, Model, Product, QuoteData, Rate, RoleType, User, UseType, Vehicle, VehicularQuoterRequest, QuoteResult, Funding, Installment, Deductible, DeductibleType, DeductibleCategory, HealthDependent, RiskFactor, HealthFactor, VehicularProduct, HealthProduct, Benefit, Clinic, Promotion, HomeQuoteRequest } from "../interfaces";
+import { Brand, Category, Coverage, CoverageCategory, CoverageType, Currency, Department, ExceptionMessage, Factor, FuelType, Insurance, Model, Product, QuoteData, Rate, RoleType, User, UseType, Vehicle, VehicularQuoterRequest, QuoteResult, Funding, Installment, Deductible, DeductibleType, DeductibleCategory, HealthDependent, RiskFactor, HealthFactor, VehicularProduct, HealthProduct, Benefit, Clinic, Promotion, HomeQuoteRequest, InsurancePeople } from "../interfaces";
 
 export abstract class BuildersMethods {
     static buildCategories(theCategories: Category[]) {
@@ -95,6 +95,55 @@ export abstract class BuildersMethods {
         return fuelTypes;
     }
 
+    static buildInsurancesPeople(theInsurancesPeople: InsurancePeople[]): InsurancePeople[] {
+        let insurancesPeople: InsurancePeople[] = [];
+        if (theInsurancesPeople?.length > 0) {
+            for (let insurancePeople of theInsurancesPeople) {
+                insurancesPeople.push(this.buildInsurancePeople(
+                    insurancePeople.id,
+                    insurancePeople.name,
+                    insurancePeople.title,
+                    insurancePeople.slug,
+                    insurancePeople.content,
+                    insurancePeople.priority,
+                    insurancePeople.image,
+                    insurancePeople.quoter,
+                    insurancePeople.seo_description,
+                    insurancePeople.seo_keyword,
+                    insurancePeople.created_at,
+                    insurancePeople.updated_at
+                ));
+            }
+        }
+
+        return insurancesPeople;
+    }
+    
+    static buildInsurancePeople(theId:number,theName:string, theTitle:string, theSlug:string,
+        theContent:string, thePriority:number, theImage:string, theQuoter:string,
+        theSeoDescription:string, theSeoKeyword:string,
+        theCreated_at: string,
+        theUpdated_at: string):InsurancePeople{
+        
+        let insurancePeople: InsurancePeople ={
+            id:theId,
+            name:theName,
+            title:theTitle,
+            slug: theSlug,
+            content: theContent,
+            priority:thePriority,
+            image: theImage,
+            quoter: theQuoter,
+            seo_description: theSeoDescription,
+            seo_keyword: theSeoKeyword,
+            created_at: theCreated_at,
+            updated_at: theUpdated_at
+        }
+
+        return insurancePeople;
+        }
+
+        
     static buildFuelType(theId: string | null, theName: string, theDescription: string, theAmount: number,
         thePercentage: number, theCreated_at: string | null, theUpdated_at: string | null): FuelType {
 

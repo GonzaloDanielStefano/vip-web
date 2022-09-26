@@ -317,6 +317,21 @@ export type QuoteResult = {
   quote: number
 }
 
+export type InsurancePeople = {
+  id: number | null
+  name: string
+  title: string
+  slug: string
+  content: string
+  priority: number | null
+  image: string
+  quoter: string | null
+  seo_description: string | null
+  seo_keyword: string | null
+  created_at: string | null
+  updated_at: string | null
+}
+
 export type ExceptionMessage = {
   causeExceptionClass: string
   causeExceptionMsg: string

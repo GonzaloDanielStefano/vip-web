@@ -1,6 +1,6 @@
 import axios from "axios";
 import Cookies from "js-cookie";
-import { Brand, Category, CoverageCategory, Currency, Department, Factor, FuelType, HealthFactor, HealthProduct, HomeQuoteRequest, Insurance, Model, Product, QuoteResult, RiskFactor, User, UseType, Vehicle, VehicularProduct, VehicularQuoterRequest } from "../../interfaces";
+import { Brand, Category, CoverageCategory, Currency, Department, Factor, FuelType, HealthFactor, HealthProduct, HomeQuoteRequest, Insurance, InsurancePeople, Model, Product, QuoteResult, RiskFactor, User, UseType, Vehicle, VehicularProduct, VehicularQuoterRequest } from "../../interfaces";
 import { BuildersMethods } from "../../utils/BuildersMethods";
 import {
   REACT_APP_AUTH_URL,
@@ -23,7 +23,8 @@ import {
   REACT_APP_QUOTE,
   REACT_APP_HEALTH_FACTOR,
   REACT_APP_RISK_FACTOR,
-  REACT_APP_HOME_QUOTE
+  REACT_APP_HOME_QUOTE,
+  REACT_APP_INSURANCE_PEOPLE
 } from "../../utils/Constants";
 
 
@@ -807,7 +808,62 @@ export async function getBrandById(id: number) {
   }
 }
 
+/******************************************************
+*                                                     *
+*                     PERSONAL INSURANCE              *
+*                                                     *
+******************************************************/
 
+export async function saveInsaurancePeople(insurancePeople: InsurancePeople) {
+  try {
+    const response = await axios.post<InsurancePeople>(REACT_APP_INSURANCE_PEOPLE.BASE_URL, insurancePeople);
+    if (response.status === 201) {
+      return true;
+    }
+
+    return response.data;
+  } catch (error) {
+    return BuildersMethods.buildError(error);
+  }
+}
+
+export async function getInsurancesPeople() {
+  try {
+    const { data } = await axios.get<Array<InsurancePeople>>(REACT_APP_INSURANCE_PEOPLE.GET_ALL);
+    if (data !== undefined) {
+      return BuildersMethods.buildInsurancesPeople(data);
+    }
+  } catch (error) {
+    return BuildersMethods.buildError(error);
+  }
+}
+
+export async function getInsurancePeople(slug: string) {
+  try {
+    const { data } = await axios.get<InsurancePeople>(REACT_APP_INSURANCE_PEOPLE.BASE_URL + `/slug/${slug}`);
+    
+    if (data !== undefined) {
+      return BuildersMethods.buildInsurancePeople(data.id, data.name, data.title, data.slug,
+        data.content, data.priority, data.image, data.quoter, data.seo_description,
+        data.seo_keyword, data.created_at, data.updated_at);
+    }
+  } catch (error) {
+    return BuildersMethods.buildError(error);
+  }
+}
+
+export async function getInsurancePeopleById(id: number) {
+  try {
+    const { data } = await axios.get<InsurancePeople>(REACT_APP_INSURANCE_PEOPLE.GET_BY_ID + `${id}`);
+    if (data !== undefined) {
+      return BuildersMethods.buildInsurancePeople(1, data.name, data.title, data.slug,
+        data.content, 1, data.image, data.quoter, data.seo_description,
+        data.seo_keyword, data.created_at, data.updated_at);
+    }
+  } catch (error) {
+    return BuildersMethods.buildError(error);
+  }
+}
 /******************************************************
 *                                                     *
 *                       HOMEQUOTE                     *
